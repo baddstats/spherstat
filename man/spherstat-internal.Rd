@@ -18,6 +18,7 @@
 \alias{runif.wedge}
 % \alias{sphsincos.vert} DOES NOT EXIST
 \alias{intcircs}
+\alias{Kiso}
 \alias{Kisoband}
 \alias{Kisobc}
 \alias{Kisocap}
@@ -50,6 +51,7 @@ runif.quadrangle(n, win)
 runif.sphere(n, win)
 runif.wedge(n, win)
 intcircs(n1, n2, h1, h2, tol)
+Kiso(X, win, r, rad, Dmat, nrX, denom)
 Kisoband(X, win, r, nrX, Dmat, disc, rad)
 Kisobc(X, win, r, nrX, Dmat, disc, verbose, rad)
 Kisocap(X, win, r, nrX, Dmat, disc, rad)

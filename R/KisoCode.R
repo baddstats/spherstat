@@ -11,8 +11,8 @@
 ## n2 and h2 take the corresponding meaning for the second circle.
 ## tol is the tolerance for deciding when lambda2==0 (and hence lambda==0)
 
-InfiniteSet <- matrix(Inf, nrow=1, ncol=1)
-EmptySet    <- matrix(NA, nrow=1, ncol=1)
+.InfiniteSet <- matrix(Inf, nrow=1, ncol=1)
+.EmptySet    <- matrix(NA, nrow=1, ncol=1)
 
 intcircs <- function(n1, n2, h1, h2, tol=1e-12) {
 
@@ -40,9 +40,9 @@ intcircs <- function(n1, n2, h1, h2, tol=1e-12) {
 		## Either n1==n2 or n1==-n2
 
 		if((dn > 0 && abs(h1-h2) < 1e-12) || (dn < 0 && abs(h1+h2) < 1e-12) ) {
-			output <- InfiniteSet
+			output <- .InfiniteSet
 		} else {
-			output <- EmptySet
+			output <- .EmptySet
 		}
 	} else {
 		## Finite number of intersection points
@@ -64,7 +64,7 @@ intcircs <- function(n1, n2, h1, h2, tol=1e-12) {
 			output <- matrix(const, nrow=1, ncol=3, byrow=TRUE)
 		} else 	
 
-			output <- EmptySet
+			output <- .EmptySet
 
 	}
 	return(output)
@@ -93,7 +93,7 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 
 	rad <- win$rad
   	if(ncol(X)==3) {
-    		X <- convert2(X=X, rad=rad)
+    		X <- convert2(points=X, rad=rad)
   	}
 	type <- win$type
 
@@ -173,7 +173,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad
 
 				## Cases C1, C2 and C3
 
-				if(identical(ints, InfiniteSet) || identical(ints, EmptySet) || nrow(ints)==1) {
+				if(identical(ints, .InfiniteSet) || identical(ints, .EmptySet) || nrow(ints)==1) {
 					wmat[i,j] <- 1
 				} else {
 
@@ -304,8 +304,8 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 	stopifnot(win$type=="band" || win$param[1]!=0 || win$param[2]!=pi)
 	lat1 <- win$param[1]
 	lat2 <- win$param[2]
-	clat1 <- cos(lat[1])
-	clat2 <- cos(lat[2])
+	clat1 <- cos(lat1)
+	clat2 <- cos(lat2)
 
 	## Extract the two bounding circles as separate windows
 
@@ -425,7 +425,7 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 	clat2 <- cos(lat2)
 	
 	winref <- win$ref
-	winref3 <- convert(winref)
+	winref3 <- convert3(winref)
 	## If we want the discretized estimator, this calls that object	
 
 	if(disc==TRUE) {
@@ -492,13 +492,13 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 
 					wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win, ints=rbind(ints1, ints2), cdij=cdij, verbose)
 					
-				} else if(identical(ints1, EmptySet) && !identical(ints2, EmptySet) && !identical(ints2, EmptySet) && nr2==1) {
+				} else if(identical(ints1, .EmptySet) && !identical(ints2, .EmptySet) && !identical(ints2, .EmptySet) && nr2==1) {
 					
 					## Case BC2 (1 crossing point in ints2 but none in ints1, bij is within or (aside from the tangent point) entirely outside the window)
 					
 					wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win2, ints=ints2, cdij=cdij, verbose)
 
-				} else if(identical(ints2, EmptySet) && !identical(ints1, EmptySet) && !identical(ints1, EmptySet) && nr1==1) {
+				} else if(identical(ints2, .EmptySet) && !identical(ints1, .EmptySet) && !identical(ints1, .EmptySet) && nr1==1) {
 					
 					## Case BC2 (1 crossing point in ints2 but none in ints1, bij is within or (aside from the tangent point) entirely outside the window)
 					
@@ -612,7 +612,7 @@ if(verbose){print(ints2)}
 
  					## If both arcs have two intersection points, we use Kisowedgeengine to find wij.  Otherwise wij=1.
 
-					if(((identical(InfiniteSet, ints1) && nr2==2) || (identical(InfiniteSet, ints2) && nr1==2)) && lon < pi) {
+					if(((identical(.InfiniteSet, ints1) && nr2==2) || (identical(.InfiniteSet, ints2) && nr1==2)) && lon < pi) {
 
 						## Case 1.3
 if(verbose){print(1)}
@@ -631,7 +631,7 @@ if(verbose){print(2.1)}
 						}
 
 						
-						if(!identical(ints2, EmptySet)) {
+						if(!identical(ints2, .EmptySet)) {
 if(verbose){print(2.11)}
 							## If the points in ints2 are crossing points, then we use Kisoengine to find wij.
 
@@ -655,7 +655,7 @@ if(verbose){print(3)}
 if(verbose){print(3.1)}
 							ints1 <- Kisowedgeengine(xi=xi3, xj=xj3, ints=ints1, nr=nr1, c1=c13, c2=c23, ref=ref1, win=win, verbose)
 						}
-						if(!identical(ints1, EmptySet)) {
+						if(!identical(ints1, .EmptySet)) {
 							
 							## If the points in ints1 are crossing points, then we use Kisoengine to find wij.
 if(verbose){print(3.11)}
@@ -670,22 +670,22 @@ if(verbose){print(3.12)}
 
 						## Case W1.5, W2.4
 if(verbose){print(4)}
-						keptints <- EmptySet
+						keptints <- .EmptySet
 						keptints1 <- Kisowedgeengine(xi=xi3, xj=xj3, ints=ints1, nr=nr1, c1=c13, c2=c23, ref=ref1, win=win, verbose)
 if(verbose){print(keptints1)}
 						## If any intersection points in ints2 are crossing point, they are retained in keptints
 
-						if(!identical(keptints1, EmptySet)) {
+						if(!identical(keptints1, .EmptySet)) {
 if(verbose){print(4.11)}
 							keptints <- keptints1
 						}
 						keptints2 <- Kisowedgeengine(xi=xi3, xj=xj3, ints=ints2, nr=nr2, c1=c23, c2=c13, ref=ref2, win=win, verbose)
 if(verbose){print(keptints2)}
-						if(!identical(keptints2, EmptySet)) {
+						if(!identical(keptints2, .EmptySet)) {
 
 						## If any intersection points in ints2 are crossing point, they are retained in keptints.
 if(verbose){print(4.12)}
-							if(!identical(keptints, EmptySet)) {
+							if(!identical(keptints, .EmptySet)) {
 if(verbose){print(4.121)}
 								keptints <- rbind(keptints, keptints2)
 							} else {
@@ -694,7 +694,7 @@ if(verbose){print(4.122)}
 							}
 if(verbose){print(keptints)}
 						}
-						if(!identical(keptints, EmptySet)) {
+						if(!identical(keptints, .EmptySet)) {
 							
 							## If intersection points are retained, use Kisoengine to find wij, otherwise wij=1
 if(verbose){print(4.1)}
@@ -703,7 +703,7 @@ if(verbose){print(4.1)}
 if(verbose){print(4.2)}
 							wmat[i,j] <- 1
 						}
-					} else if((identical(EmptySet, ints1) && nr2 == 1) || (identical(EmptySet, ints2) && nr1 == 1) || ((identical(InfiniteSet, ints1) || identical(InfiniteSet, ints2)) && lon >= pi)) {
+					} else if((identical(.EmptySet, ints1) && nr2 == 1) || (identical(.EmptySet, ints2) && nr1 == 1) || ((identical(.InfiniteSet, ints1) || identical(.InfiniteSet, ints2)) && lon >= pi)) {
 if(verbose){print(5)}					
 					## Cases W1.1, W1.2, W2.1, W2.2
         
@@ -790,7 +790,7 @@ if(verbose){
 	}
 	nri <- nrow(intsfinal)
 	if(nri==1) {
-		intsfinal <- EmptySet
+		intsfinal <- .EmptySet
 	} else {
 		intsfinal <- intsfinal[2:nri,]
 	}
@@ -884,16 +884,16 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 					if(nr==2) {
 						cv2n <- cvmatn[k+1,]
 						retpoints <- Kisopolyengine(xi3=xi3, xj3=xj3, vk03=vk03, vk13=vk13, win=win1, ints=ints, cdij=cdij, cvn=cvn, cv2n=cv2n, nr=nr)
-						if(!identical(retpoints, EmptySet)) {
+						if(!identical(retpoints, .EmptySet)) {
 							bijints <- rbind(bijints, retpoints)
 						}
 
-					} else if(identical(ints, InfiniteSet)) {
+					} else if(identical(ints, .InfiniteSet)) {
 
 					## Case P2
 
 					bijints <- rbind(bijints, vk03, vk13)
-					} else if(identical(ints, EmptySet) || nr==1) {
+					} else if(identical(ints, .EmptySet) || nr==1) {
 
 					## Case P1 (no action needed as no points are retained)
 
@@ -969,7 +969,7 @@ Kisopolyengine <- function(xi3, xj3, vk03, vk13, win, ints, cdij=gcdist(xi3, xj3
 	}
 	nri <- nrow(intsfinal)
 	if(nri==1) {
-		intsfinal <- EmptySet
+		intsfinal <- .EmptySet
 	} else {
 		intsfinal <- intsfinal[2:nri,]
 	}

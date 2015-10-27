@@ -1,6 +1,5 @@
 \name{Jsphere}
 \alias{Jsphere}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Estimate the J-function 
 }
@@ -10,7 +9,6 @@ Estimates the summary function \code{J(r)} for a point pattern in a window of ar
 \usage{
 Jsphere(X, refpoints, rvals = seq(from = 0, to = pi, length = 512), ..., eps = NULL, r = rvals, breaks=NULL, correction=NULL)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{
 The observed point pattern, from which an estimate of \code{J(r)} will be computed.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of points in spherical coordinates.
@@ -104,21 +102,31 @@ the output of \code{Gsphere} for this point pattern, containing three estimates 
 \section{Note}{
 Sizeable amounts of memory may be needed during the calculation
 }
-
 \references{
-%% ~put references to the literature/web site here ~
+  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+  Van Lieshout, M.N.M. and Baddeley, A.J. (1996)
+  A nonparametric measure of spatial interaction in point patterns.
+  \emph{Statistica Neerlandica} \bold{50}, 344--361.
 }
 \author{
-Tom Lawrence tjlawrence@bigpond.com
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
-This function is the analogue for point processes on the sphere of the function \code{\link{Jest}} in \code{\link{spatstat}}, which is the corresponding function for point processes in R^2.  Hence elements of the code for \code{Jsphere} and help page have been taken from \code{\link{Jest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link{Jest}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
+  This function is the analogue for point processes on the sphere of the
+  function \code{\link[spatstat]{Jest}} in \pkg{spatstat}, which is the
+  corresponding function for point processes in \code{R^2}.  Hence
+  elements of the code for \code{Jsphere} and help page have been taken
+  from \code{\link[spatstat]{Jest}} with the permission of
+  A. J. Baddeley.  This enables the code to be highly efficient and give
+  corresponding output to, and for the information on this help page to
+  be consistent with that for the function \code{\link[spatstat]{Jest}}.
+  It is hoped that this will minimise or remove any confusion for users
+  of both \pkg{spatstat} and \pkg{spherstat}. 
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link[spatstat]{Jest}},
+  \code{\link{Fsphere}}, \code{\link{Gsphere}}.
 }
 \examples{
 sph <- sphwin(type="sphere")
@@ -126,7 +134,6 @@ sph.pp <- rpoispp.sp2(win=sph, lambda=10)
 sph.ref <- rpoispp.sp2(win=sph, lambda=150)
 sph.Jest <- Jsphere(X=sph.pp, refpoints=sph.ref)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{spatial}
+\keyword{nonparametric}
+

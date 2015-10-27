@@ -1,8 +1,6 @@
 \name{Hsphere}
 \alias{Hsphere}
 \alias{Hstab.sph}
-
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 The Empty Space Function H 
 }
@@ -13,7 +11,6 @@ Estimates the empty space function \code{H}(r) from a point pattern in a window 
 Hsphere(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
 Hstab.sph(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{
 The observed point pattern, from which an estimate of \code{H(r)} will be computed.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of points in spherical coordinates.
@@ -77,19 +74,16 @@ The estimate of \code{lambda(r)} returned by the algorithm is an approximately u
 
 }
 \references{
-%% ~put references to the literature/web site here ~
+  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
 }
 \author{
-Tom Lawrence tjlawrence@bigpond.com
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
 This function is the analogue for point processes on the sphere of the function \code{\link{Hest}} in \code{\link{spatstat}}, which is the corresponding function for point processes in R^2.  Hence elements of the code for \code{Hsphere} and help page have been taken from \code{\link{Hest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link{Hest}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{Fsphere}}
 }
 \examples{
 sph <- sphwin(type="sphere")
@@ -98,7 +92,5 @@ sph.ref <- rpoispp.sp2(win=sph, lambda=150)
 sph.Hest <- Hsphere(X=sph.pp, refpoints=sph.ref)
 sph.Hstab <- Hstab.sph(X=sph.pp, refpoints=sph.ref)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{spatial}
+\keyword{nonparametric}

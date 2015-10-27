@@ -1,15 +1,16 @@
-\name{Kiso}
-\alias{Kiso}
+\name{Ksphere}
+\alias{Ksphere}
 \title{
   Estimate of Spherical K Function
 }
 \description{
-  Given a point pattern on a region of the sphere,
-  compute an estimate of the \eqn{K}-function using isotropic edge correction.
+  Given a point pattern on the sphere, or on a region of the sphere,
+  compute an estimate of the \eqn{K}-function.
 }
 \usage{
-  Kiso(X, win, r, rad = win$rad, Dmat = pairdistsph(X),
-       nrX = nrow(X), denom = (nrX * (nrX - 1))/area.sphwin(X))
+  Ksphere(X, win=sphwin(), rvals,
+          correction=c("un", "iso", "rs", "rsm"),
+          ratio=FALSE)
 }
 \arguments{
   \item{X}{
@@ -22,22 +23,18 @@
     The window; an object of type \code{sphwin}.  Only required if
     \code{X} is an object of class \code{matrix}. 
   }
-  \item{r}{
+  \item{rvals}{
     Optional.  Numeric vector. The values of the argument \eqn{r} at
     which \code{K(r)} should be evaluated.  
   }
-  \item{rad}{
-    Sphere radius. A positive numeric value.
+  \item{correction}{
+    Character string or character vector specifying the choice of
+    edge corrections.
   }
-  \item{Dmat}{
-    Optional. Matrix of distances between all pairs of points in \code{X}.
-    Distances are measured by great circle distance.
-  }
-  \item{nrX}{
-    Optional. The number of points in \code{X}.
-  }
-  \item{denom}{
-   Optional. The denominator for the \eqn{K} function.
+  \item{ratio}{
+    Logical value specifying whether to store information about the
+    numerator and denominator of the estimator, for use by
+    other functions.
   }
 }
 \details{

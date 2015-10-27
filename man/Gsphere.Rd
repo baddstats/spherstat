@@ -88,19 +88,16 @@ The spatial Kaplan-Meier estimator of \code{G} is always nondecreasing but its m
 
 }
 \references{
-%% ~put references to the literature/web site here ~
+  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
 }
 \author{
-Tom Lawrence tjlawrence@bigpond.com
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
 This function is the analogue for point processes on the sphere of the function \code{\link{Gest}} in \code{\link{spatstat}}, which is the corresponding function for point processes in R^2.  Hence elements of the code for \code{\link{Gest}} and this help page have been taken from \code{\link{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link{Fsphere}}
 }
 \examples{
 sph <- sphwin(type="sphere")
@@ -108,7 +105,5 @@ sph.pp <- rpoispp.sp2(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp)
 sph.Gstab <- Gstab.sph(X=sph.pp)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{spatial}
+\keyword{nonparametric}
