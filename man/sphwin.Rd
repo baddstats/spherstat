@@ -71,13 +71,6 @@ sphband
 sphwedge <- sphwin(type="wedge", param=c(pi/3, 0), ref=c(0,0))
 sphwedge
 
-x <- matrix(nrow=4, ncol=2)
-x[1,] <- c(0,0)
-x[2,] <- c(pi/2, 0)
-x[3,] <- c(pi/2, pi/2)
-x[4,] <- c(0,0)
-sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, times=4))
-sphpoly
 
 # The following call to sphwin at the end of the sequence of code below generates an error because the second and third
 # vertices are diametrically opposite, so there are infinitely many arcs between them and hence insufficient information 
@@ -88,15 +81,13 @@ x[1,] <- c(0,0)
 x[2,] <- c(pi/2, 0)
 x[3,] <- c(pi/2, pi)
 x[4,] <- c(0,0)
-# sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, times=4))
+# sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, 3))
 
-# The way to overcome this is to use code like that below, to add an additonal vertex between the diametrically opposite
+# The way to overcome this is to use code like that below, to add an additional vertex between the diametrically opposite
 # vertices
 x <- rbind(x[1:2,], c(pi/2, pi/2), x[3:4,])
-sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, times=4))
+sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, 4))
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{"spatial"}
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{spatial}
+\keyword{datagen}

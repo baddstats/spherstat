@@ -38,8 +38,9 @@ x[1,] <- c(0,0)
 x[2,] <- c(pi/2, 0)
 x[3,] <- c(pi/2, pi/2)
 x[4,] <- c(0,0)
-sphpoly <- sphwin(type="polygon", param=x, ref=c(pi/4, pi/4))
-sph.angles(win=sphpoly, rad=1)
+# sphpoly <- sphwin(type="polygon", param=x, ref=c(pi/4, pi/4))
+sphpoly <- sphwin(type="polygon", param=x, ref=rep(0, 3))
+sph.angles(win=sphpoly)
 }
 \keyword{spatial}
 \keyword{math}
