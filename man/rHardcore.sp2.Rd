@@ -114,7 +114,7 @@ will minimise or remove any confusion for users of both
 \code{\link{rThomas.sp2}} 
 }
 \examples{
-rH1 <- rHardcore.sp2(beta=50, gamma=5, R=0.04*pi, p=0.5, m=100, win=sphwin())
+rH1 <- rHardcore.sp2(beta=5, R=0.04*pi, p=0.5, m=100, win=sphwin())
 rH1
 }
 \keyword{spatial}

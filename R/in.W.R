@@ -30,6 +30,11 @@ in.W <- function(points, win) {
 	
 	## Next, we perform the relevant check: for the sphere no checks are needed, for the band and quadrangle we need to check whether the colatitudes of points are within the correct range, ditto for longitudes of the rotated points for the wedge and quadrangle.  The polygon is a more complicated situation - the function in.W.poly performs the check for us.
 
+        #' hack inserted by Adrian
+        if(inherits(points1, c("sp2", "sp3")))
+          points1 <- points1$X
+        #' end hack
+           
 	m <- nrow(points1)
 	colats <- points1[,1]
 	lons <- points1[,2]

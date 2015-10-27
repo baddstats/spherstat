@@ -1,45 +1,47 @@
 \name{gcdist}
 \alias{gcdist}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Great circle distances
+  Great Circle Distances
 }
 \description{
-Calculate the minimum great circle distance between two points on a sphere
+  Calculate the minimum great circle distance between two points on a sphere
 }
 \usage{
 gcdist(x, y, rad = 1)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x,y}{
-The locations of the two points for which the distance is to be calculated.  Each must be a matrix with 2 columns (with location in spherical coordinates) or or 3 (location in Cartesian coordinates), or objects of class \code{\link{sp2}} or \code{\link{sp3}}.  Note \code{x} and \code{y} need not be in the same format.
-}
+    The locations of the two points for which the distance is to be
+    calculated.  Each must be a matrix with 2 columns (with location in
+    spherical coordinates) or or 3 (location in Cartesian coordinates),
+    or objects of class \code{\link{sp2}} or \code{\link{sp3}}.  Note
+    \code{x} and \code{y} need not be in the same format. 
+  }
   \item{rad}{
-Optional.  The radius of the sphere, default is 1.
-}
+    Optional.  The radius of the sphere, default is 1.
+  }
 }
 \details{
-For any two points on a sphere, the shortest path (also on the sphere) is the minor arc of a great circle (that is, a circle that is concentric with the sphere, and is a subset of the sphere).  This function calculates that distance.
+  For any two points on a sphere, the shortest path (also on the sphere)
+  is the minor arc of a great circle (that is, a circle that is concentric
+  with the sphere, and is a subset of the sphere).  This function
+  calculates that distance. 
 }
 \value{
-A numeric giving the minimum great circle distance between the given points
+  A numeric giving the minimum great circle distance between the given points
 }
-
 \author{
 Tom Lawrence
 }
-
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-\code{\link{nndistsph}} (nearest neighbour distances), \code{\link{pairdistsph}} (pairwise distances), \code{\link{bdist.sphwin}} (boundary distances)
+\code{\link{nndistsph}} (nearest neighbour distances),
+\code{\link{pairdistsph}} (pairwise distances),
+\code{\link{bdist.sphwin}} (boundary distances) 
 }
 \examples{
-x1 <- c(pi/2, 0)
-y1 <- c(pi/2, pi/4)
-gcdist(x=x1, y=y1, rad=1)
+x1 <- matrix(c(pi/2, 0), ncol=2)
+y1 <- matrix(c(pi/2, pi/4), ncol=2)
+gcdist(x=x1, y=y1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

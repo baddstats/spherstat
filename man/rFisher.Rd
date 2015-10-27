@@ -49,8 +49,9 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 rFis <- rFisher(n=100, mode=c(0,0), kappa=50, win=sphwin())
 rFis
 
-rFis2 <- rFisher(n=100, mode=c(pi/3, pi/3), kappa=0.1, win=sphwin(type="cap", param=c(0, pi/3), ref=c(pi/3, pi/3)))
-rFis2
+## The following code fails because rFisher does not accept type='cap'
+## rFis2 <- rFisher(n=100, mode=c(pi/3, pi/3), kappa=0.1, win=sphwin(type="cap", param=c(0, pi/3), ref=c(pi/3, pi/3)))
+## rFis2
 }
 \keyword{spatial}
 \keyword{datagen}
