@@ -87,7 +87,7 @@ Tom Lawrence tjlawrence@bigpond.com
 }
 \examples{
 sph <- sphwin(type="sphere")
-rus <- runif.sphere(n=150, win=sph, as.sp=TRUE, sp.dim="2")
+rus <- runif.sphwin(n=150, win=sph, as.sp=TRUE, sp.dim="2")
 rus
 
 rps <- rpoispp.sp2(win=sph, lambda=150, as.sp=TRUE, sp.dim="2")
