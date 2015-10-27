@@ -72,7 +72,7 @@
   \code{\link{rThomas.sp2}} 
 }
 \examples{
-rM1 <- rMatClust(250, 0.04*pi, 5, win=sphwin(), parents=FALSE)
+rM1 <- rMatClust.sp2(250, 0.04*pi, 5, win=sphwin(), parents=FALSE)
 rM1
 }
 \keyword{spatial}
