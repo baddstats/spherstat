@@ -42,7 +42,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
   Kdf <- data.frame(r = r, theo = 2*pi *rad*(1-cos(r/rad)))
   desc <- c("distance argument r", "theoretical Poisson %s")
   K <- ratfv(Kdf, NULL, denom, "r", quote(K(r)), "theo",
-             NULL, range(r), c("r", "%s[pois](r)"),
+             . ~ r, range(r), c("r", "%s[pois](r)"),
              desc, fname = "K", ratio = ratio)
 
   ## The un, rs and rsm estimates require similar calculations
@@ -55,7 +55,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
 
     xdij <- matrix(ncol=lr, nrow=nrX)
     for(i in 1:lr) {
-      xdij[,i] <- colSums(Dmat >= r[i]) - 1
+      xdij[,i] <- colSums(Dmat <= r[i]) - 1
     }
     if(any(correction=="un")) {
 			
@@ -68,6 +68,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
                  desc=c("distance argument r", "uncorrected estimate of %s"),
                  fname="K")
       K <- bind.fv(K, Kraw)
+      fvnames(K, ".y") <- "un"
     }
 
     if(any(correction=="rs") || any(correction=="rsm")) {
@@ -108,6 +109,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
                   desc=c("distance argument r",
                     "border-corrected estimate of %s"), fname="K")
         K <- bind.fv(K, Krs)
+        fvnames(K, ".y") <- "border"
       }
       if(any(correction=="rsm")) {
 
@@ -122,6 +124,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
                    desc=c("distance argument r",
                      "modified border-corrected estimate of %s"), fname="K")
         K <- bind.fv(K, Krsm)
+        fvnames(K, ".y") <- "bord.modif"
       }
     }
   }
@@ -137,6 +140,7 @@ Ksphere <- function(X, win=sphwin(), rvals,
                desc=c("distance argument r",
                  "isotropic-corrected estimate of %s"), fname="K")
     K <- bind.fv(K, Kiso)
+    fvnames(K, ".y") <- "iso"
   }
   return(K)
 }
