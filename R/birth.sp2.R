@@ -8,6 +8,6 @@ xs <- ifelse(gcdist(x,y) <= R, 1, 0)
 birthcheck <- beta*(gamma^(sum(xs)))*((1-p)/(n+1))*(4*pi*rad^2)/p
 probbirth <- min(1, birthcheck)
 y <- runif(1,0,1)
-if(y < probbirth) {Xfinal <- X} else {Xfinal <- rbind(X, w)}
+if(y >= probbirth) {Xfinal <- X} else {Xfinal <- rbind(X, w)}
 Xfinal
 }
