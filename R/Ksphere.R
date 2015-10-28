@@ -32,8 +32,8 @@ Ksphere <- function(X, win=sphwin(), rvals,
   nrX <- nrow(X)
   lr <- length(r)
   areaX <- area.sphwin(win)
-  lambda <- nrow(X)
-  lambda2 <- lambda*(lambda-1)/areaX
+  lambda <- nrX/areaX
+  lambda2 <- nrX*(nrX-1)/areaX^2
   denom <- lambda2 * areaX
   Dmat <- pairdistsph(X)
 

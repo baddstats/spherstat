@@ -51,8 +51,12 @@
   \code{\link{Fsphere}}
 }
 \examples{
-   42
-   # No examples for now - under development!
+   win <- sphwin()
+   X <- runif.sphwin(50, win)
+   rv <- seq(0, pi/2, length=512)
+   K <- Ksphere(X, win, rv)
+   K
+   plot(K)
 }
 \keyword{spatial}
 \keyword{nonparametric}
