@@ -65,7 +65,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 \examples{
 sphsin(d1=pi/2, d2=NULL, theta1=pi/2, theta2=pi/3, rad=1)
 
-sphsin(d1=pi/2, d2=pi/3, theta1=pi/2, theta2=NULL, rad=1)}
+sphsin(d1=pi/2, d2=pi/3, theta1=pi/2, theta2=NULL, rad=1)
 }
 \keyword{spatial}
 \keyword{math}

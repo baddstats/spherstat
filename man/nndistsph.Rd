@@ -28,7 +28,7 @@ nndistsph(X)
   computed by \code{\link{Gsphere}}.  
 
   To find the nearest neighbour distances from one point pattern to
-  another point pattern, use \code{\link{nncross.sph}}.
+  another point pattern, use \code{\link{nncrosssph}}.
 
   If \code{X} is an object of class \code{\link{sp2}} or
   \code{\link{sp3}}, then its radius will be used rather than that
