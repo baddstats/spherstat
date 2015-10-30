@@ -43,7 +43,5 @@ x1 <- matrix(c(pi/2, 0), ncol=2)
 y1 <- matrix(c(pi/2, pi/4), ncol=2)
 gcdist(x=x1, y=y1)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{spatial}
+\keyword{math}
