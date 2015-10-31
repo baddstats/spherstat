@@ -5,8 +5,10 @@ Jsphere <- function (X, refpoints, rvals=seq(from=0, to=pi, length=512), ..., ep
     G <- Gsphere(X, win=W, rvals=rvals, ...)
     rvals <- FF$r
     rad <- W$rad
+# ajb: 'rad' is assigned but never used    
     rmax <- max(rvals)
     Fvals <- FF[[attr(FF, "valu")]]
+# ajb: 'Fvals' is assigned but never used    
     Z <- fv(data.frame(r = rvals, theo = 1), "r", substitute(J(r), 
         NULL), "theo", . ~ r, c(0, rmax), c("r", "%s[pois](r)"), 
         c("distance argument r", "theoretical Poisson %s"), fname = "J")

@@ -167,6 +167,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad
 				xj <- X[j,]
 				xj3 <- convert3(xj)
 				dij <- Dmat[i,j]
+# ajb: 'dij' is defined but never used                                
 				cdij <- CD[i,j]
 				## Calculate the intersection points between the cap and \partial bij
 				ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
@@ -219,7 +220,8 @@ Kisoengine <- function(xi3, xj3, win, ints, verbose=FALSE, cdij=dot(xi3, xj3)) {
 	vi <- wi/sqrt(sum(wi^2))
 	si <- cross(xi3, vi)
 	nri <- nrow(ints)
-
+# ajb: 'nri' is defined but never used in this function
+        
 
        if(verbose) { cat("ints=\n"); print(ints); cat("vi=\n"); print(vi); cat("si=\n"); print(si) }
 
@@ -345,6 +347,7 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 				## Get data for the distance between and dot product of xi and xj
 
 				dij <- Dmat[i,j]
+# ajb: 'dij' is defined but never used                                
 				cdij <- CD[i,j]
 
 				## find all crossing points
@@ -463,6 +466,7 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 				## Get data for the distance between and dot product of xi and xj
 
 				dij <- Dmat[i,j]
+# ajb: 'dij' is defined but never used                                
 				cdij <- CD[i,j]
 
 				## find all crossing points
@@ -552,11 +556,13 @@ Kisowedge <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, v
 	londiv <- win$param[2]
 	slon <- sround(cround(sin(lon)))
 	clon <- sround(cround(cos(lon)))
+# ajb: 'slon' and 'clon' defined but not used
 	wmat <- matrix(nrow=nrX, ncol=nrX)
 	ref1 <- win$ref
 	ref2 <- c(pi-ref1[1], pi+ref1[2]) %% (2*pi)
 	diag(wmat) <- 1
 	output <- cbind(0,0)
+# ajb: 'output' defined but not used        
 	if(disc==TRUE) {
 		circs.disc <- matrix(nrow=nrX, ncol=nrX)
 		diag(circs.disc) <- 1
@@ -585,6 +591,7 @@ Kisowedge <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, v
 
 		  xi <- X[i,]
 		  ximat <- matrix(xi, nrow=1, ncol=2, byrow=TRUE)
+# ajb: 'ximat' defined but not used.                  
 		  xi3 <- convert3(xi)
 ##		  print(xi)
 ##		  print(xi3)
@@ -597,6 +604,7 @@ Kisowedge <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, v
 					## Get dij and its cosine as objects
 
 					dij <- Dmat[i,j]
+# ajb: 'dij' is defined but never used                                
 					cdij <- CD[i,j]
 					
 					## Calculate the centres of the caps for which the semicircles from the bases make up the boundary of the wedge
@@ -832,9 +840,11 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 	ref2 <- win$ref2
 	cref2 <- sround(cos(ref2))
 	sref22 <- (sround(sin(ref2)))^2
+# ajb: 'sref22' defined but not used        
 	param <- win$param
 	nv <- nrow(param)-1
 	param1 <- param[c(1:nv,1:2),]
+# ajb: 'param1' defined but not used        
 	Drad <- Dmat/rad
 	CD <- sround(cround(cos(Drad)))
 	nv <- nrow(param)-1
@@ -865,12 +875,14 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 
 
 				dij <- Dmat[i,j]
+# ajb: 'dij' is defined but never used                                
 				cdij <- CD[i,j]
 				bijints <- matrix(c(0,0,1), nrow=1, ncol=3, byrow=TRUE)
 				for(k in 1:nv) {
 					vk03 <- param3[k,]
 					vk13 <- param3[k+1,]
 					vk23 <- param3[k+2,]
+# ajb: 'vk23' defined but not used                                        
 					cvn <- cvmatn[k,]	
 
 					## find all crossing points
@@ -1013,6 +1025,8 @@ quadtopoly <- function(X=NULL, win=NULL) {
 		XX <- X
 	}
 	isnX <- ifelse(is.null(X), TRUE, FALSE)
+# ajb: 'isnX' is defined but not used.
+# ajb: why not just 'isnX <- is.null(X)'        
 	rad <- win$rad
 	stopifnot(win$type=="quadrangle")
 	wp1 <- win$param[1]

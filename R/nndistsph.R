@@ -3,6 +3,7 @@ function(X) {
 stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
 if(inherits(X, "matrix")) {X <- X} else {
 rad <- X$win$rad
+# ajb: 'rad' assigned but not used: should it be used in 'convert2'??
 X <- X$X}
 nrX <- nrow(X)
 if(ncol(X)==3) {X <- convert2(X)}

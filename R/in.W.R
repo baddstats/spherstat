@@ -23,6 +23,7 @@ in.W <- function(points, win) {
 
 	if(win$type=="polygon" || win$type=="sphere" || identical(win$ref, c(0,0))) {points1 <- points} else { points1 <- rot.sphere(points=points, northpole=win$ref, inverse=FALSE)}
 	rad <- win$rad
+# ajb: 'rad' is defined but not used
 
 	## If the window is a wedge, then the previous rotation may result in the left-hand edge of the wedge not being at longitude 0, so we rotate again to achieve that characteristic.  This ## simplifies significantly the check we need to do to determine whether the point or points are in the window.
 
