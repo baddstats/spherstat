@@ -14,6 +14,7 @@ n <- nrow(points1)
 # ajb: The expression points1[,3]/rad is re-evaluated several times.
 theta <- ifelse(1-(points1[,3]/rad) <= 0,  0, ifelse(1+(points1[,3]/rad) <= 0, pi, acos(cround(points1[,3]/rad))))
 stheta <- sin(theta)
+# ajb: 10^-15 is re-evaluated each time. Use 1e-15 instead.
 phi <- ifelse(abs(stheta)<10^-15, 0, atan2((points1[,2]/stheta), (points1[,1]/stheta))%%(2*pi))
 output <- cbind(theta, phi)
 if(inherits(X, "sp3")) {output <- sp2(X=output, win=X$win)}
