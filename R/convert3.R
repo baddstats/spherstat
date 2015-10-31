@@ -7,6 +7,7 @@ if(inherits(points, "sp2")) {
 rad <- points$win$rad
 points <- points$X
 }
+# ajb: next line coul generate an error: class(points) could be a vector
 if(class(points) != "matrix") {points <- matrix(points, ncol=2, byrow=TRUE)} else {points <- points}
 stopifnot(ncol(points)==2)
 # ajb: 'n' is defined but not used
