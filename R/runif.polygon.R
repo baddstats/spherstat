@@ -1,16 +1,14 @@
-runif.polygon <-
-function(n, win) {
-stopifnot(inherits(win, "sphwin") && win$type=="polygon")
-rad <- win$rad
-# ajb: 'rad' is defined but not used
-# ajb: Query correctness of code when rad != 1
-output <- t(matrix(0, nrow=2, ncol=1))
-while(nrow(output) < (n+1)) {
-point.test <- t(matrix(runif.sphere(1, win=sphwin(type="sphere", rad=1))))
-if(in.W(points=point.test, win=win)) {
-output <- rbind(output, point.test)
-}
-}
-output <- output[2:n+1,]
-output
+runif.polygon <- function(n, win) {
+  stopifnot(inherits(win, "sphwin") && win$type=="polygon")
+  esphere <- sphwin(type="sphere", rad=win$rad)
+  output <- matrix(, nrow=0, ncol=2)
+  while((need <- (n - nrow(output))) > 0) {
+    proposed <- runif.sphere(need, win=esphere)
+    accept <- in.W(points=proposed, win=win)
+    if(any(accept)) 
+      output <- rbind(output, proposed[accept, , drop=FALSE])
+  }
+  if(nrow(output) > n) 
+    output <- output[seq_len(nrow), , drop=FALSE]
+  return(output)
 }

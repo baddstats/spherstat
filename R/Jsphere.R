@@ -1,17 +1,17 @@
-Jsphere <- function (X, refpoints, rvals=seq(from=0, to=pi, length=512), ..., eps = NULL, r = rvals, breaks = NULL, correction = NULL) 
+Jsphere <- function(X, refpoints, rvals=seq(from=0, to=pi, length=512),
+                    ..., eps = NULL, r = rvals, breaks = NULL,
+                    correction = NULL) 
 {
     W <- X$win
     FF <- Fsphere(X, refpoints=refpoints, win=W, rvals=rvals, ...)
     G <- Gsphere(X, win=W, rvals=rvals, ...)
     rvals <- FF$r
-    rad <- W$rad
-# ajb: 'rad' is assigned but never used    
+##     rad <- W$rad  # not used
     rmax <- max(rvals)
-    Fvals <- FF[[attr(FF, "valu")]]
-# ajb: 'Fvals' is assigned but never used    
-    Z <- fv(data.frame(r = rvals, theo = 1), "r", substitute(J(r), 
-        NULL), "theo", . ~ r, c(0, rmax), c("r", "%s[pois](r)"), 
-        c("distance argument r", "theoretical Poisson %s"), fname = "J")
+##     Fvals <- FF[[attr(FF, "valu")]] ## not used
+    Z <- fv(data.frame(r = rvals, theo = 1), "r", quote(J(r)), 
+            "theo", . ~ r, c(0, rmax), c("r", "%s[pois](r)"), 
+            c("distance argument r", "theoretical Poisson %s"), fname = "J")
     ratio <- function(a, b) {
         result <- a/b
         result[b == 0] <- NA

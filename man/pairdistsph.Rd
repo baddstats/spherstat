@@ -15,12 +15,12 @@ pairdistsph(X, rad = 1)
     \code{\link{sp3}}, or a 2 column matrix, with locations in spherical
     coordinates, or a 3 column matrix, with locations in Cartesian
     coordinates. 
-}
+  }
   \item{rad}{
     Optional.  The radius of the sphere, default value 1.  Not required
     if \code{X} is an object of class \code{\link{sp2}} or
     \code{\link{sp3}}. 
-}
+  }
 }
 \details{
   Given a dataset (representing a point pattern on a sphere, or a subset

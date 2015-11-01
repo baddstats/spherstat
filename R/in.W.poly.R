@@ -14,7 +14,7 @@ if(ncol(points) !=3) {points <- convert3(points)}
 polyangs1 <- p3[1:(lp-1),]
 polyangs2 <- p3[2:lp,]
 polyangs3 <- rbind(p3[3:lp, ], p3[2,])
-gc <- diag(gcdist(x=polyangs1, y=polyangs2, rad=rad))
+gc <- gcdistPaired(x=polyangs1, y=polyangs2, rad=rad)
 gc1 <- gc[1:(lp-1)]
 gc2 <- c(gc[2:(lp-1)], gc[1])
 sphang <- sph.angles(win)

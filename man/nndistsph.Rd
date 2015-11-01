@@ -8,7 +8,7 @@
   point pattern on (a subset of) a sphere. 
 }
 \usage{
-nndistsph(X)
+nndistsph(X, rad=1)
 }
 \arguments{
   \item{X}{
@@ -16,6 +16,11 @@ nndistsph(X)
     \code{\link{sp3}}, a 2 column matrix, with locations in spherical
     coordinates, or a 3 column matrix, with locations in Cartesian
     coordinates. 
+  }
+  \item{rad}{
+    Optional.  The radius of the sphere, default value 1.  Not required
+    if \code{X} is an object of class \code{\link{sp2}} or
+    \code{\link{sp3}}. 
   }
 }
 \details{
