@@ -289,12 +289,14 @@ Kisoengine <- function(xi3, xj3, win, ints, verbose=FALSE, cdij=dot(xi3, xj3)) {
   if(verbose) { cat("sortintdiffs=\n"); print(sortintdiffs) }
 
   wij <- 0
-  for(j in 1:nints) {
+  sdij <- sqrt(1 - cdij^2)
+  for(j in seq_len(nints)) {
     ## find the Cartesian coordinate of each midpoint,
     ## test whether it is in W, and if a midpoint is in W
     ## add the length of its arc to wij.  This corresponds to equation (0.9).
 
-    qadd <-  sqrt(1-(cdij^2))*(vi*cos(alphas[j]) + si*sin(alphas[j])) + xdij
+#    qadd <-  sqrt(1-(cdij^2))*(vi*cos(alphas[j]) + si*sin(alphas[j])) + xdij
+    qadd <-  sdij * (vi*cos(alphas[j]) + si*sin(alphas[j])) + xdij
 		
     if(verbose) { cat("qadd=\n"); print(qadd) }
 
