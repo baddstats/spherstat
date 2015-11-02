@@ -52,11 +52,15 @@ Ksphere <- function(X, win=sphwin(), rvals,
 
     ## We create a matrix xdij, for which the [j,i]th cell of xdij
     ## gives the number of points within distance r[i] of point X[j]
+    xdij <- neighbourcount(Dmat, r)
 
-    xdij <- matrix(ncol=lr, nrow=nrX)
-    for(i in 1:lr) {
-      xdij[,i] <- colSums(Dmat <= r[i]) - 1
-    }
+    ## WAS:
+    ## xdij <- matrix(ncol=lr, nrow=nrX)
+    ## for(i in 1:lr) {
+    ##  xdij[,i] <- colSums(Dmat <= r[i]) - 1
+    ## }
+
+
     if(any(correction=="un")) {
 			
       ## The uncorrected estimator is simply xdij divided by the
@@ -144,3 +148,23 @@ Ksphere <- function(X, win=sphwin(), rvals,
   }
   return(K)
 }
+
+
+neighbourcount <- function(Dmat, r) {
+  ## Dmat is a matrix of pairwise distances
+  nD <- nrow(Dmat)
+  ## don't count identical pairs
+  diag(Dmat) <- Inf
+  ## rvals is a vector of distance thresholds
+  nr <- length(r)
+  ## For each distance value, find the r interval (r[k-1], r[k]] containing it
+  rindex <- nr-findInterval(-Dmat, -rev(r))
+  rindex <- matrix(rindex, nrow=nD, ncol=nD)
+  ## Cumulative count of distance values in each r interval 
+  nc <- apply(rindex, 1, cumtab, m=0:(nr-1))
+  ## Return a matrix whose [i,j] entry equals the number
+  ## of points lying within distance r[j] of point i.
+  return(t(nc))
+}
+
+cumtab <- function(z, m) { cumsum(table(factor(z, levels=m))) }

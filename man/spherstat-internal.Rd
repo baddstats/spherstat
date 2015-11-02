@@ -29,6 +29,8 @@
 \alias{Kisowedge}
 \alias{Kisowedgeengine}
 \alias{quadtopoly}
+\alias{neighbourcount}
+\alias{cumtab}
 \title{
 Internal Spherstat Functions
 }
@@ -62,6 +64,8 @@ Kisoquad(X, win, r, nrX, Dmat, disc)
 Kisowedge(X, win, r, nrX, Dmat, disc, verbose, rad)
 Kisowedgeengine(xi, xj, ints, nr, c1, c2, ref, win, verbose)
 quadtopoly(X, win)
+neighbourcount(Dmat, r)
+cumtab(z, m)
 }
 \description{
 Internal spherstat functions

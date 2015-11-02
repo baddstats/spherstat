@@ -308,7 +308,8 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 	lat2 <- win$param[2]
 	clat1 <- cos(lat1)
 	clat2 <- cos(lat2)
-
+        winref <- win$ref
+        
 	## Extract the two bounding circles as separate windows
 
 	win1 <- sphwin(type="band", param=c(lat1, pi), ref=winref)
