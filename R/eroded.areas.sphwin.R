@@ -38,20 +38,20 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
            band = {
              ea <- c()
              if(win$param[1]==0) {
-               if(max(r) > win$param[2]) {
+               if(max(r) > rad * win$param[2]) {
                  stop("r range too wide for window")
                } else {
-                 ea <- 2*pi*(1-cos(win$param[2]-r/rad))
+                 ea <- 2*pi*(rad^2)*(1-cos(win$param[2]-r/rad))
                }
              } else {
                if(win$param[2]==pi) {
-                 if(max(r) > pi-win$param[1]) {
+                 if(max(r) > rad * (pi-win$param[1])) {
                    stop("r range too wide for window")
                  } else {
-                   ea <- 2*pi*(1-cos((pi-win$param[1])-r/rad))
+                   ea <- 2*pi*(rad^2)*(1-cos((pi-win$param[1])-r/rad))
                  }
                } else {
-                 if(max(r) > sround((win$param[2]-win$param[1])/2)) {
+                 if(max(r) > rad * sround((win$param[2]-win$param[1])/2)) {
                    stop("r range too wide for window")
                  } else {
                    sbp1 <- win$param[1]+(r/rad)

@@ -15,59 +15,59 @@
 .EmptySet    <- matrix(NA, nrow=1, ncol=1)
 
 intcircs <- function(n1, n2, h1, h2, tol=1e-12) {
-
-	## Validate the input data
+  ## Validate the input data
+  stopifnot(length(n1) == 3)
+  stopifnot(length(n2) == 3)
+  stopifnot(length(h1)==1 && length(h2)==1)
 	
-	stopifnot(length(n1) == 3 && length(n2) == 3 && length(h1)==1 && length(h2)==1)
-	
-	## Form cross product
+  ## Form cross product
+  cn <- sround(cross(n1, n2))
 
-	cn <- sround(cross(n1, n2))
+  ## The squared modulus of cross product
+  scn2 <- sround(sum(cn^2))
 
-	## The squared modulus of cross product
+  ## The dot product of the normals
+  dn <- sround(dot(n1, n2))
 
-	scn2 <- sround(sum(cn^2))
+  ## Now the cross product, its modulus and the dot product
+  ## have been calculated, we find c1, c2 (see equation above (0.3) )
+  ## and from that we can find lambda2 (=lambda^2)
+  ## We first consider only cases where the length of the cross product
+  ## is nonzero
 
-	## The dot product of the normals
+  if(scn2==0) {
+    ## Intersection is either empty or infinite;
+    ## output is a 1 cell matrix, containing Inf if the intersection
+    ## is infinite or NA if the intersection is empty.
+    ## Either n1==n2 or n1==-n2
+    if((dn > 0 && abs(h1-h2) < 1e-12) || (dn < 0 && abs(h1+h2) < 1e-12) ) {
+      output <- .InfiniteSet
+    } else {
+      output <- .EmptySet
+    }
+  } else {
+    ## Finite nonzero number of intersection points
+    c1 <- sround((h1 - (h2*dn))/scn2)
+    c2 <- sround((h2 - (h1*dn))/scn2)
+    const <- sround((c1*n1) + (c2*n2))
 
-	dn <- sround(dot(n1, n2))
-
-	## Now the cross product, its modulus and the dot product have been calculated we find c1, c2 (see equation above (0.3) ) and from that we can find lambda2 (=lambda^2)
-	## We first consider only cases where the length of the cross product is nonzero
-
-	if(scn2==0) {
-		## Intersection is either empty or infinite; output is a 1 cell matrix, containing Inf if the intersection is infinite or NA if the intersection is empty.
-		## Either n1==n2 or n1==-n2
-
-		if((dn > 0 && abs(h1-h2) < 1e-12) || (dn < 0 && abs(h1+h2) < 1e-12) ) {
-			output <- .InfiniteSet
-		} else {
-			output <- .EmptySet
-		}
-	} else {
-		## Finite number of intersection points
-	     
-		c1 <- sround((h1 - (h2*dn))/scn2)
-		c2 <- sround((h2 - (h1*dn))/scn2)
-		const <- sround((c1*n1) + (c2*n2))
-
-		## The next line is equation (0.7) in the appendix
+    ## The next line is equation (0.7) in the appendix
 		
-		t2 <- sround((1-(c1^2)-(c2^2)-(2*c1*c2*dn))/scn2)
+    t2 <- sround((1-(c1^2)-(c2^2)-(2*c1*c2*dn))/scn2)
 		
-		## To avoid numerical problems, we treat lambda <= 10^-4 as being lambda ==0.  If lambda2 >= 0 we can find the intersection point(s)
+    ## To avoid numerical problems, we treat lambda <= 10^-4
+    ## as being lambda ==0.  If lambda2 >= 0 we can find the
+    ## intersection point(s)
 
-		if(t2 >= tol) {
-			t1 <- sqrt(t2)*c(-1, 1)
-			output <- rbind(sround(const + t1[1]*cn), sround(const+t1[2]*cn))
-		} else if(t2 < tol) {
-			output <- matrix(const, nrow=1, ncol=3, byrow=TRUE)
-		} else 	
-
-			output <- .EmptySet
-
-	}
-	return(output)
+    if(t2 >= tol) {
+      t1 <- sqrt(t2)*c(-1, 1)
+      output <- rbind(sround(const + t1[1]*cn), sround(const+t1[2]*cn))
+    } else if(t2 < tol) {
+      output <- matrix(const, nrow=1, ncol=3, byrow=TRUE)
+    } else 	
+      output <- .EmptySet
+  }
+  return(output)
 }
 
 # Functions: Kiso
@@ -123,7 +123,7 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 
 
 ## Function: Kisocap
-## Calculate: Kiso for the cape (called by Kiso, rather than directly by the user)
+## Calculate: Kiso for the cap (called by Kiso, rather than directly by the user)
 ## Arguments: X is a two column matrix giving the spherical coordinates of points in the point pattern
 ##            win is an object of type sphwin
 ##            r is the vector of distances at which the estimator is calculated
@@ -131,78 +131,97 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 ##            rad is the radius of the sphere (it is an element of sphwin but having it separately below is more efficient)
 ##            disc is a logical, if it is TRUE then the discretizes estimation of the weight matrix is performes]d
 
-Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad=win$rad) {
+Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
+                    disc=FALSE, rad=win$rad) {
 
-	## Preliminary checks, and setting up objects that are required later
-
-	stopifnot(win$type=="band" && (win$param[1]==0 || win$param[2]==pi))
-	if(win$param[1]==0) {
-		caprad <- win$param[2]} else {caprad <- win$param[1]
-	}
-	wmat <- matrix(nrow=nrX, ncol=nrX)
-	diag(wmat) <- 1
+  ## Preliminary checks, and setting up objects that are required later
+  stopifnot(win$type=="band" && (win$param[1]==0 || win$param[2]==pi))
+  if(win$param[1]==0) {
+    caprad <- win$param[2]
+  } else {
+    caprad <- win$param[1]
+  }
+  ## Initialise all weights to 1
+  wmat <- matrix(1, nrow=nrX, ncol=nrX)
+  diag(wmat) <- 1
 	
-	## In the event we want the discretized estimator calculated, this creates the matrix of values of it
+  Drad <- Dmat/rad
+  CD <- sround(cround(cos(Drad)))
+  winref <- win$ref
 
-	if(disc==TRUE) {
-			circs.disc <- matrix(nrow=nrX, ncol=nrX)
-			diag(circs.disc) <- 1
-			lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
-	}
-	Drad <- Dmat/rad
-	CD <- sround(cround(cos(Drad)))
-	winref <- win$ref
+  ## X is in spherical coordinates; convert to Cartesian coordinates
+  X3 <- convert3(X)
 
-	for(i in 1:nrX) {
+  if(disc) {
+    ## Also calculate the discretized estimator.
+    circs.disc <- matrix(nrow=nrX, ncol=nrX)
+    diag(circs.disc) <- 1
+    lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
 
-	## Create objects for X[i,] in spherical and Cartesian coordinates
+    for(i in 1:nrX) {
+      ## Create objects for X[i,] in spherical and Cartesian coordinates
+      xi <- X[i,]
+      xi3 <- X3[i,]
+      for(j in setdiff(1:nrX, i)) {
+        ## Create objects for X[j,] in spherical and Cartesian coordinates
+        xj <- X[j,]
+        xj3 <- X3[j, ]
+        ## cosine of distance between xi and xj
+        cdij <- CD[i,j]
+        ## Calculate the intersection points between the cap and \partial bij
+        ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
+      
+        ## ..... redundant ..........
+        ## Cases C1, C2 and C3
+        ## if(identical(ints, .InfiniteSet) ||
+        ##   identical(ints, .EmptySet) ||
+        ##   nrow(ints)==1) {
+        ##  wmat[i,j] <- 1
+        ## } else {
+        ## ............................
+      
+        ## Case C4
+        if(nrow(ints)==2) {
+          wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win,
+                                  ints=ints, cdij=cdij)
+        }
 
-		xi <- X[i,]
-		xi3 <- convert3(xi)
-		for(j in 1:nrX) {
-			if(i !=j) {
-				
-				## Create objects for X[i,] in spherical and Cartesian coordinates, also extract the distance between xi and xj from Dmat
-				
-				xj <- X[j,]
-				xj3 <- convert3(xj)
-				dij <- Dmat[i,j]
-# ajb: 'dij' is defined but never used                                
-				cdij <- CD[i,j]
-				## Calculate the intersection points between the cap and \partial bij
-				ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
-
-				## Cases C1, C2 and C3
-
-				if(identical(ints, .InfiniteSet) || identical(ints, .EmptySet) || nrow(ints)==1) {
-					wmat[i,j] <- 1
-				} else {
-
-				## Case C4
-
-					if(nrow(ints)==2) {
-						wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win, ints=ints, cdij=cdij)
-					}
-				}
-
-				## If we want the discretized estimator, we calculate it now
-
-				if(disc==TRUE) {
-					ints.disc.ij <- rot.sphere(cbind(rep(Drad[i,j], times=100), lons), northpole=xi, inverse=TRUE)
-					circs.disc[i,j] <- sum(in.W(points=ints.disc.ij, win=win))/100
-				}
-			}
-		}
-	}
-
-## In the event we want the discretized estimator calculated, the code below turns the output into a list containing the weights matrices
-## (each of which could be provided to compileK the argument \code{weights}) for the actual and discretized estimators of Kiso
-
-	if(disc==TRUE) {
-		attr(wmat, "discrete") <- circs.disc
-	}
-	if(any(is.na(wmat))) {stop("NA in weight matrix")}
-	return(wmat)
+        ints.disc.ij <- rot.sphere(cbind(rep(Drad[i,j], times=100), lons),
+                                   northpole=xi, inverse=TRUE)
+        circs.disc[i,j] <- sum(in.W(points=ints.disc.ij, win=win))/100
+      }
+    }
+    ## The code below turns the output into a list containing the
+    ## weights matrices (each of which could be provided to compileK
+    ## the argument \code{weights}) for the actual and discretized estimators
+    ## of Kiso
+    if(disc) {
+      attr(wmat, "discrete") <- circs.disc
+    }
+  } else {
+    ## SAME AS ABOVE, BUT WITHOUT DISCRETISED ESTIMATES
+    for(i in 1:nrX) {
+      ## Create objects for X[i,] in spherical and Cartesian coordinates
+      xi <- X[i,]
+      xi3 <- X3[i,]
+      for(j in setdiff(1:nrX, i)) {
+        ## Create objects for X[j,] in spherical and Cartesian coordinates
+        xj <- X[j,]
+        xj3 <- X3[j, ]
+        ## cosine of distance between xi and xj
+        cdij <- CD[i,j]
+        ## Calculate the intersection points between the cap and \partial bij
+        ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
+        ## Case C4
+        if(nrow(ints)==2) {
+          wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win,
+                                  ints=ints, cdij=cdij)
+        }
+      }
+    }
+  }
+  if(anyNA(wmat)) {stop("NA in weight matrix")}
+  return(wmat)
 }
 
 ## Function: Kisoengine
@@ -213,79 +232,84 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad
 ##	      ints is a matrix containing the intersection points, in Cartesian coordinates
 
 Kisoengine <- function(xi3, xj3, win, ints, verbose=FALSE, cdij=dot(xi3, xj3)) {
+  ## define the orthonormalised vectors wi, vi, si as in (0.5)
+  wi  <- xj3 - cdij*xi3
+  vi <- wi/sqrt(sum(wi^2))
+  si <- cross(xi3, vi)
+#  nri <- nrow(ints) # never used
+
+  if(verbose) {
+    cat("ints=\n"); print(ints);
+    cat("vi=\n"); print(vi);
+    cat("si=\n"); print(si)
+  }
+
+  ## find the intersection points in the coordinates of the orthonormalization,
+  ## and in the final angular coordinate
+
+  thetaint <- c()
+
+  ## This matrix below contains the u.vi and u.si values defined in (0.7),
+  ## and theta as defined in (0.8)
+
+  visi <- cbind(ints %*% matrix(vi, ncol=1, nrow=3),
+                ints %*% matrix(si, ncol=1, nrow=3))
+
+  if(verbose) { cat("visi=\n"); print(visi) }
+  thetaint <- atan2(visi[,2], visi[,1]) %% (2*pi)
+  nints <- length(thetaint)
+
+  if(verbose) { cat("thetaint=\n"); print(thetaint) }
+
+  ## If nints=1, we need a second intersection point,
+  ## so we include the point that is diametrically opposite
+  ## the point thetaint in the cap
+
+  ## We order the intersection points, and put the first one
+  ## at the end of the vector for use in the code that follows
+
+  sortints <- sort(thetaint)
+  sortints <- c(sortints, sortints[1] + 2*pi)
+  
+  if(verbose) { cat("sortints=\n"); print(sortints) }
 	
-	## define the orthonormalised vectors wi, vi, si as in (0.5)
+  ## We find the points halfway between each pair of intersection points
+  ## in terms of the angular coordinate, then the orthonormalized coordinates
 
-	wi  <- xj3 - cdij*xi3
-	vi <- wi/sqrt(sum(wi^2))
-	si <- cross(xi3, vi)
-	nri <- nrow(ints)
-# ajb: 'nri' is defined but never used in this function
-        
+  if(nints > 1) {
+    alphas <- ((sortints[2:(nints+1)] + sortints[1:nints])/2) %% (2*pi)
+    sortintdiffs <- diff(sortints)
+  } else if (nints==1) {
+    alphas <- (thetaint + pi) %% (2*pi)
+    sortintdiffs <- 1
+  }
+  xdij <- xi3*as.numeric(cdij)
 
-       if(verbose) { cat("ints=\n"); print(ints); cat("vi=\n"); print(vi); cat("si=\n"); print(si) }
+  if(verbose) { cat("alphas=\n"); print(alphas) }
+  if(verbose) { cat("sortintdiffs=\n"); print(sortintdiffs) }
 
-	## find the intersection points in the coordinates of the orthonormalization, and in the final angular coordinate
+  wij <- 0
+  for(j in 1:nints) {
+    ## find the Cartesian coordinate of each midpoint,
+    ## test whether it is in W, and if a midpoint is in W
+    ## add the length of its arc to wij.  This corresponds to equation (0.9).
 
-	thetaint <- c()
-
-	## This matrix below contains the u.vi and u.si values defined in (0.7), and theta as defined in (0.8)
-
-	visi <- cbind(ints %*% matrix(vi, ncol=1, nrow=3), ints %*% matrix(si, ncol=1, nrow=3))
-
-	if(verbose) { cat("visi=\n"); print(visi) }
-	thetaint <- atan2(visi[,2], visi[,1]) %% (2*pi)
-	nints <- length(thetaint)
-
-	if(verbose) { cat("thetaint=\n"); print(thetaint) }
-
-	## If nints=1, we need a second intersection point, so we include the point that is diametrically opposite the point thetaint in the cap
-
-	## We order the intersection points, and put the first one at the end of the vector for use in the code that follows
-
-	sortints <- sort(thetaint)
-	sortints <- c(sortints, sortints[1] + 2*pi)
-	
-
-	if(verbose) { cat("sortints=\n"); print(sortints) }
-	
-	## We find the points halfway between each pair of intersection points in terms of the angular coordinate, then the orthonormalized coordinates
-
-	if(nints > 1) {
-		alphas <- ((sortints[2:(nints+1)] + sortints[1:nints])/2) %% (2*pi)
-		sortintdiffs <- diff(sortints)
-	} else if (nints==1) {
-		alphas <- (thetaint + pi) %% (2*pi)
-		sortintdiffs <- 1
-	}
-	xdij <- xi3*as.numeric(cdij)
-
-	if(verbose) { cat("alphas=\n"); print(alphas) }
-	if(verbose) { cat("sortintdiffs=\n"); print(sortintdiffs) }
-
-	wij <- 0
-	for(j in 1:nints) {
-
-		## find the Cartesian coordinate of each midpoint, test whether it is in W, and if a midpoint is in W add the length of its arc to wij.  This corresponds to equation (0.9).
-
-		qadd <-  sqrt(1-(cdij^2))*(vi*cos(alphas[j]) + si*sin(alphas[j])) + xdij
+    qadd <-  sqrt(1-(cdij^2))*(vi*cos(alphas[j]) + si*sin(alphas[j])) + xdij
 		
-		if(verbose) { cat("qadd=\n"); print(qadd) }
+    if(verbose) { cat("qadd=\n"); print(qadd) }
 
-		if(in.W(convert2(qadd), win)) {
+    if(in.W(convert2(qadd), win)) {
+      
+      if(verbose) { cat("in.W="); print(TRUE) }
 
-			if(verbose) { cat("in.W="); print(TRUE) }
+      wij <- wij+sortintdiffs[j]
+    } else { if(verbose) { cat("in.W="); print(FALSE) } }
+  }
 
-			wij <- wij+sortintdiffs[j]
-		} else { if(verbose) { cat("in.W="); print(FALSE) } }
-	}
-
-	## Normalize wij (i.e. convert it to wij)	
-
-	wij <- wij/(2*pi)
-	return(wij)
+  ## Normalize wij (i.e. convert it to wij)	
+  wij <- wij/(2*pi)
+  return(wij)
 }
-
 
 
 ## Function: Kisoband
@@ -317,7 +341,7 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 	
 	## If we want the discretized estimator, this calls that object	
 
-	if(disc==TRUE) {
+	if(disc) {
 			circs.disc <- matrix(nrow=nrX, ncol=nrX)
 			diag(circs.disc) <- 1
 			lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
@@ -386,7 +410,7 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 					wmat[i,j] <- 1
 				}
 
-				if(disc==TRUE) {
+				if(disc) {
 
 					## Also calculate discretized approximation of the same quantity
 
@@ -400,7 +424,7 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 ## In the event we want the discretized estimator calculated, the code below turns the output into a data.frame containing the weights matrices
 ## (each of which could be provided to compileK the argument \code{weights}) for the actual and discretizedt estimators of Kiso
 
-	if(disc==TRUE) {
+	if(disc) {
 		attr(wmat, "discrete") <- circs.disc
 	}
 	if(any(is.na(wmat))) {stop("NA in weight matrix")}
@@ -432,7 +456,7 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 	winref3 <- convert3(winref)
 	## If we want the discretized estimator, this calls that object	
 
-	if(disc==TRUE) {
+	if(disc) {
 			circs.disc <- matrix(nrow=nrX, ncol=nrX)
 			diag(circs.disc) <- 1
 			lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
@@ -516,7 +540,7 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 					wmat[i,j] <- 1
 				}
 
-				if(disc==TRUE) {
+				if(disc) {
 
 					## Also calculate discretized approximation of the same quantity
 
@@ -530,7 +554,7 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
 ## In the event we want the discretized estimator calculated, the code below turns the output into a data.frame containing the weights matrices
 ## (each of which could be provided to compileK the argument \code{weights}) for the actual and discretized estimators of Kiso
 
-	if(disc==TRUE) {
+	if(disc) {
 		attr(wmat, "discrete") <- circs.disc
 	}
 	if(any(is.na(wmat))) {stop("NA in weight matrix")}
@@ -564,7 +588,7 @@ Kisowedge <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, v
 	diag(wmat) <- 1
 	output <- cbind(0,0)
 # ajb: 'output' defined but not used        
-	if(disc==TRUE) {
+	if(disc) {
 		circs.disc <- matrix(nrow=nrX, ncol=nrX)
 		diag(circs.disc) <- 1
 		lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
@@ -723,7 +747,7 @@ if(verbose){print(6)}
 					}
 					## If we want the discretized estimator, we calculate it now.
 
-					if(disc==TRUE) {
+					if(disc) {
 						ints.disc.ij <- rot.sphere(cbind(rep(Drad[i,j], times=100), lons), northpole=xi, inverse=TRUE)
 						circs.disc[i,j] <- sum(in.W(points=ints.disc.ij, win=win))/100
 					}
@@ -733,7 +757,7 @@ if(verbose){print(6)}
 
 	## In the event we want the discretized estimator calculated, the code below turns the output into a data.frame containing the weights matrices
 	## (each of which could be provided to compileK the argument ##{weights}) for the actual and discretized estimators of Kiso
-	if(disc==TRUE) {
+	if(disc) {
 		attr(wmat, "discrete") <- circs.disc
 	}
 
@@ -825,7 +849,7 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 
 	## If we want the discretized estimator, this calls that object	
 
-	if(disc==TRUE) {
+	if(disc) {
 			circs.disc <- matrix(nrow=nrX, ncol=nrX)
 			diag(circs.disc) <- 1
 			lons <- seq(0, 2*pi*(1-(100^-1)), length=100)
@@ -925,7 +949,7 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 					
 				}
 
-				if(disc==TRUE) {
+				if(disc) {
 
 					## Also calculate discretized approximation of the same quantity
 
@@ -943,7 +967,7 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 ## In the event we want the discretized estimator calculated, the code below turns the output into a data.frame containing the weights matrices
 ## (each of which could be provided to compileK the argument \code{weights}) for the actual and discretized estimators of Kiso
 
-	if(disc==TRUE) {
+	if(disc) {
 		attr(wmat, "discrete") <- circs.disc
 	}
 	if(any(is.na(wmat))) {stop("NA in weight matrix")}

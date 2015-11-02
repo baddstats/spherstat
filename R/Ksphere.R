@@ -77,28 +77,23 @@ Ksphere <- function(X, win=sphwin(), rvals,
 
     if(any(correction=="rs") || any(correction=="rsm")) {
 
-      ## We create rmat, which in each row lists all value of r.
-      ## Then we create bX, a matrix where all the values in the jth row are
-      ## the minimum distance from X[j] to the boundary of the window.
-
-      rmat <- matrix(rep(r, each=nrX), nrow=nrX, ncol=lr, byrow=FALSE)
-      bX <- matrix(rep(bdist.sphwin(X=X, win=win), each=lr),
-                   nrow=nrX, ncol=lr, byrow=TRUE)
-
-      ## xinWr is a matrix where the [j,i]th cell takes value 1
-      ## if X[j] is in W_-r[i] and 0 otherwise.
+      ## xinWr is a matrix where the [i,j]th cell takes value TRUE
+      ## if X[i] is in W_(-r[j]) and FALSE otherwise.
+      bdX <- bdist.sphwin(X=X, win=win)
+      xinWr <- outer(bdX, r, ">=")
+      
       ## The ith value nXwr is the number of points
-      ## in W_-r[i].
+      ## in W_(-r[i]).
+      nXwr <- colSums(xinWr)
+
       ## Kbnum a matrix where the [j,i]th cell takes value 0
       ## if X[j] is not in W_-r[i], and the number of points with distance r[i]
       ## of X[j] otherwise.
       ## Kbcolsum is the list of values of the numerator of the border
       ## and modified border corrected estimates of K for all r.
-
-      xinWr <- (bX >= rmat)
-      nXwr <- colSums(xinWr)
       Kbnum <- xinWr * xdij
       Kbcolsum <- colSums(Kbnum)
+
       if(any(correction=="rs")) {
 				
         ## We find the denominator of the border-corrected estimator,
