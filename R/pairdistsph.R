@@ -8,6 +8,7 @@ pairdistsph <- function(X, rad=1) {
   if(nrX == 0) return(matrix(, nrow=0, ncol=0))
   if(ncol(X)==2) {X <- convert3(X, rad)}
   Y <- X %*% t(X)
+  diag(Y) <- 1
   if(rad == 1) {
     d <- acos(pmin(1, pmax(-1, Y))) }
   else {
