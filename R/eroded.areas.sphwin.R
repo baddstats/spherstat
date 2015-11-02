@@ -101,8 +101,7 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
            },
            {stop("Unrecognised window type")}
            )
-  eroded.area <- as.numeric(eroded.area)
-  eroded.area
+  return(as.numeric(eroded.area))
 }
-## if((win$param[1]==0 & max(r) > win$param[2]) || (win$param[2]==pi & max(r) > pi-win$param[1]) || (win$param!=0
-## if(min(sround(((win$param[2]-win$param[1])/2)-r)) < 0) {
+
+
