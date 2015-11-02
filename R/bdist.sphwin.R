@@ -9,16 +9,23 @@ bdist.sphwin <- function(X, win=sphwin(type="sphere")) {
   n <- nrow(X)
   if(n == 0) return(numeric(0))
   rad <- win$rad
-  radpar <- rad * win$param
+  param <- win$param
+  radpar <- rad * param
   switch(win$type,
          sphere = {
            bdists <- rep(Inf, n)
          },
-         bandcomp =,
-         band = {
+         bandcomp = {
            centre <- matrix(win$ref, nrow=1)
            dcentre <- as.vector(gcdist(X, centre, rad=rad))
            bdists <- pmin(abs(dcentre - radpar[1]), abs(dcentre - radpar[2]))
+         },
+         band = {
+           centre <- matrix(win$ref, nrow=1)
+           dcentre <- as.vector(gcdist(X, centre, rad=rad))
+           bdists <- if(param[1] == 0) abs(dcentre - radpar[2]) else
+                     if(param[2] == pi) abs(dcentre - radpar[1]) else 
+                     pmin(abs(dcentre - radpar[1]), abs(dcentre - radpar[2]))
          },
          wedge = {
            mat <- matrix(c(0,0, pi/2, 0, pi, 0, pi/2, win$param[1], 0, 0),
