@@ -57,6 +57,12 @@
    K <- Ksphere(X, win, rv)
    K
    plot(K)
+
+   sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
+   Xcap <- runif.sphwin(30, sphcap)
+   rcap <- seq(0, pi/3, length=512)
+   Kcap <- Ksphere(Xcap, rvals=rcap)
+   plot(Kcap, xlim=c(0, pi/4))
 }
 \keyword{spatial}
 \keyword{nonparametric}
