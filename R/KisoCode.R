@@ -132,7 +132,7 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 ##            disc is a logical, if it is TRUE then the discretizes estimation of the weight matrix is performes]d
 
 Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
-                    disc=FALSE, rad=win$rad) {
+                    disc=FALSE, rad=win$rad, useC=TRUE) {
 
   ## Preliminary checks, and setting up objects that are required later
   stopifnot(win$type=="band" && (win$param[1]==0 || win$param[2]==pi))
@@ -142,6 +142,25 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
     caprad <- win$param[1]
   }
   capheight <- cos(caprad)
+
+  ## new C code
+  if(useC) {
+    centre <- convert3(win$ref)
+    X <- X$X
+    if(ncol(X) != 3) X <- convert3(X)
+    n <- nrow(X)
+    zz <- .C("kisocapweights",
+             n = as.integer(n),
+             x1 = as.double(X[,1]),
+             x2 = as.double(X[,2]),
+             x3 = as.double(X[,3]),
+             Dmat = as.double(Dmat),
+             centre = as.double(centre),
+             height = as.double(capheight),
+             wmat = as.double(numeric(n * n)))
+    return(matrix(zz$wmat, n, n))
+  }
+  
   ## Initialise all weights to 1
   wmat <- matrix(1, nrow=nrX, ncol=nrX)
   diag(wmat) <- 1
