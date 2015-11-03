@@ -141,6 +141,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
   } else {
     caprad <- win$param[1]
   }
+  capheight <- cos(caprad)
   ## Initialise all weights to 1
   wmat <- matrix(1, nrow=nrX, ncol=nrX)
   diag(wmat) <- 1
@@ -148,6 +149,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
   Drad <- Dmat/rad
   CD <- sround(cround(cos(Drad)))
   winref <- win$ref
+  winref3 <- convert3(win$ref)
 
   ## X is in spherical coordinates; convert to Cartesian coordinates
   X3 <- convert3(X)
@@ -169,7 +171,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
         ## cosine of distance between xi and xj
         cdij <- CD[i,j]
         ## Calculate the intersection points between the cap and \partial bij
-        ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
+        ints <- intcircs(xi3, winref3, cdij, capheight)
       
         ## ..... redundant ..........
         ## Cases C1, C2 and C3
@@ -211,7 +213,7 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
         ## cosine of distance between xi and xj
         cdij <- CD[i,j]
         ## Calculate the intersection points between the cap and \partial bij
-        ints <- intcircs(xi3, convert3(winref), cdij, cos(caprad))
+        ints <- intcircs(xi3, winref3, cdij, capheight)
         ## Case C4
         if(nrow(ints)==2) {
           wmat[i,j] <- Kisoengine(xi3=xi3, xj3=xj3, win=win,
