@@ -1,7 +1,9 @@
 import(spatstat)
 import(globe)
 
-useDynLib(spherstat, "kisocapweights")
+useDynLib(spherstat,
+          "kisocapweights",
+          "kisobandweights")
 
 export("area.sphwin")
 export("bdist.sphwin")
