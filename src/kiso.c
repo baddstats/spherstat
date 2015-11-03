@@ -38,8 +38,10 @@ void kisocap(n, x1, x2, x3, Dmat, centre, height, wmat)
 
   for(i = 1; i < N; i++) {
     for(j = 0; j < N; j++) {
-      if(i != j) {
-	ijpos = N * j + i;
+      ijpos = N * j + i;
+      if(i == j) {
+	wmat[ijpos] = 1.0; 
+      } else {
 	dij = Dmat[ijpos];
 	cosdij = cos(dij);
 	ncut = IntersectCircles(c1, c2, c3, h, 
@@ -49,7 +51,7 @@ void kisocap(n, x1, x2, x3, Dmat, centre, height, wmat)
 	  wmat[ijpos] = kisocapweight(x1[i], x2[i], x3[i], 
 				      x1[j], x2[j], x3[j],
 				      cosdij,
-				      centre, h,
+				      c1, c2, c3, h,
 				      cutA, cutB);
 	} else wmat[ijpos] = 1.0;
       } 
