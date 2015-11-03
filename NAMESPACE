@@ -1,4 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 import(spatstat)
 import(globe)
-useDynLib(spherstat, "kisocap")
+useDynLib(spherstat, "kisocapweights")

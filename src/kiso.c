@@ -11,15 +11,15 @@
         angles are in radians
 */
 
-double kisocapweight();
+double kisocapijweight();
 int IntersectCircles();
 
-void kisocap(n, x1, x2, x3, Dmat, centre, height, wmat) 
+void kisocapweights(n, x1, x2, x3, Dmat, centre, height, wmat) 
      int *n;               /* number of points */
      double *x1, *x2, *x3; /* Cartesian coordinates of points */
      double *Dmat;         /* matrix of distances between each pair of points */
      double *centre;       /* Cartesian coords of centre of cap */
-     double *height;       /* cap height */
+     double *height;       /* height of plane defining cap */
      double *wmat;         /* output - (inverse) weight matrix */
 {
   int N;
@@ -48,22 +48,22 @@ void kisocap(n, x1, x2, x3, Dmat, centre, height, wmat)
 				x1[i], x2[i], x3[i], cosdij,
 				1e-8, cutA, cutB);
 	if(ncut == 2) {
-	  wmat[ijpos] = kisocapweight(x1[i], x2[i], x3[i], 
-				      x1[j], x2[j], x3[j],
-				      cosdij,
-				      c1, c2, c3, h,
-				      cutA, cutB);
+	  wmat[ijpos] = kisocapijweight(x1[i], x2[i], x3[i], 
+					x1[j], x2[j], x3[j],
+					cosdij,
+					c1, c2, c3, h,
+					cutA, cutB);
 	} else wmat[ijpos] = 1.0;
       } 
     }
   }
 }
 
-double kisocapweight(xi1, xi2, xi3, 
-		     xj1, xj2, xj3,
-		     cosdij,
-		     c1, c2, c3, h,
-		     y, z) 
+double kisocapijweight(xi1, xi2, xi3, 
+		       xj1, xj2, xj3,
+		       cosdij,
+		       c1, c2, c3, h,
+		       y, z) 
      double xi1, xi2, xi3;
      double xj1, xj2, xj3;
      double cosdij;
