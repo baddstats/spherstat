@@ -132,7 +132,11 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 ##            disc is a logical, if it is TRUE then the discretizes estimation of the weight matrix is performes]d
 
 Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
-                    disc=FALSE, rad=win$rad, useC=TRUE) {
+                    disc=FALSE, rad=win$rad, useC) {
+
+  if(missing(useC)) useC <- getOption("sphwin.useC")
+  if(is.null(useC)) useC <- TRUE
+        
 
   ## Preliminary checks, and setting up objects that are required later
   stopifnot(win$type=="band" && (win$param[1]==0 || win$param[2]==pi))
@@ -345,16 +349,38 @@ Kisoengine <- function(xi3, xj3, win, ints, verbose=FALSE, cdij=dot(xi3, xj3)) {
 
 
 
-Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad=win$rad) {
+Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad=win$rad, useC) {
 
-	## Checking that win is actually a band, and making the bounding circles of colatitude objects
+  if(missing(useC)) useC <- getOption("sphwin.useC")
+  if(is.null(useC)) useC <- TRUE
+        
+  ## Checking that win is actually a band,
+  ## and making the bounding circles of colatitude objects
 
-	stopifnot(win$type=="band" || win$param[1]!=0 || win$param[2]!=pi)
-	lat1 <- win$param[1]
-	lat2 <- win$param[2]
-	clat1 <- cos(lat1)
-	clat2 <- cos(lat2)
-        winref <- win$ref
+  stopifnot(win$type=="band" && win$param[1]!=0 && win$param[2]!=pi)
+  lat1 <- win$param[1]
+  lat2 <- win$param[2]
+  clat1 <- cos(lat1)
+  clat2 <- cos(lat2)
+  winref <- win$ref
+
+  if(useC) {
+    centre <- convert3(winref)
+    if(ncol(X) != 3) X <- convert3(X)
+    n <- nrow(X)
+    zz <- .C("kisobandweights",
+             n = as.integer(n),
+             x1 = as.double(X[,1]),
+             x2 = as.double(X[,2]),
+             x3 = as.double(X[,3]),
+             Dmat = as.double(Dmat),
+             centre = as.double(centre),
+             height1 = as.double(clat1),
+             height2 = as.double(clat2),
+             iscomp = as.integer(0),
+             wmat = as.double(numeric(n * n)))
+    return(matrix(zz$wmat, n, n))
+  }
         
 	## Extract the two bounding circles as separate windows
 
@@ -464,18 +490,40 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 
 
 
-Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verbose=FALSE, rad=win$rad) {
+Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verbose=FALSE, rad=win$rad, useC) {
 
-	## Checking that win is actually a band, and making the bounding circles of colatitude objects
+  if(missing(useC)) useC <- getOption("sphwin.useC")
+  if(is.null(useC)) useC <- TRUE
+        
+  ## Checking that win is actually a band complement,
+  ## and making the bounding circles of colatitude objects
 
-	stopifnot(win$type=="bandcomp" || win$param[1]!=0 || win$param[2]!=pi)
-	lat1 <- win$param[1]
-	lat2 <- win$param[2]
-	clat1 <- cos(lat1)
-	clat2 <- cos(lat2)
+  stopifnot(win$type =="bandcomp" && win$param[1]!=0 && win$param[2]!=pi)
+  lat1 <- win$param[1]
+  lat2 <- win$param[2]
+  clat1 <- cos(lat1)
+  clat2 <- cos(lat2)
 	
-	winref <- win$ref
-	winref3 <- convert3(winref)
+  winref <- win$ref
+  winref3 <- convert3(winref)
+
+  if(useC) {
+    if(ncol(X) != 3) X <- convert3(X)
+    n <- nrow(X)
+    zz <- .C("kisobandweights",
+             n = as.integer(n),
+             x1 = as.double(X[,1]),
+             x2 = as.double(X[,2]),
+             x3 = as.double(X[,3]),
+             Dmat = as.double(Dmat),
+             centre = as.double(winref3),
+             height1 = as.double(clat1),
+             height2 = as.double(clat2),
+             iscomp = as.integer(1),
+             wmat = as.double(numeric(n * n)))
+    return(matrix(zz$wmat, n, n))
+  }
+
 	## If we want the discretized estimator, this calls that object	
 
 	if(disc) {
