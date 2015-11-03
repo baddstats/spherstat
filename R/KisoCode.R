@@ -146,7 +146,6 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
   ## new C code
   if(useC) {
     centre <- convert3(win$ref)
-    X <- X$X
     if(ncol(X) != 3) X <- convert3(X)
     n <- nrow(X)
     zz <- .C("kisocapweights",
