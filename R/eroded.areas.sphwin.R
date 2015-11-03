@@ -7,69 +7,38 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
     win <- win$win
   }
   rad <- win$rad
+  param <- win$param
   if(is.null(r)) {
-    r <- switch(win$type,
-                sphere = {seq(0, pi*rad, length=512)},
-                band = {seq(0, rad*sum(win$param)/2, length=512)},
-                bandcomp = {
-                  seq(0, rad*max(win$param[1], pi-win$param[2]), length=512)
-                },
-                wedge = {
-                  ifelse(win$param[1] < pi,
-                         seq(0, rad*win$param[1], length=512),
-                         seq(0, rad*pi/2, length=512)
-                         )
-                },
-                quadrangle = {
-                  stop("r needs to be specified for this window")
-                },
-                polygon = {
-                  stop("r needs to be specified for this window")
-                },
-                {stop("Unrecognised window type")}
-                )
+    rmax <- switch(win$type,
+                   sphere = pi,
+                   band = mean(param),
+                   bandcomp = max(param[1], pi - param[2]),
+                   wedge = if(param[1] < pi) param[1] else pi/2,
+                   quadrangle = ,
+                   polygon = stop("r needs to be specified for this window"),
+                   stop("Unrecognised window type")
+                   )
+    r <- seq(0, rmax, length=512)
   }
   eroded.area <-
     switch(win$type,
-           sphere = {
-             ea <- rep(area.sphwin(w=win), times=512)
-             ea
-           },
+           sphere = rep(area.sphwin(w=win), times=512),
            band = {
-             ea <- c()
-             if(win$param[1]==0) {
-               if(max(r) > rad * win$param[2]) {
-                 stop("r range too wide for window")
-               } else {
-                 ea <- 2*pi*(rad^2)*(1-cos(win$param[2]-r/rad))
-               }
+             if(param[1]==0) {
+               2*pi*(rad^2)*(1-cos(pmax(0, param[2]-r/rad)))
+             } else if(param[2]==pi) {
+               2*pi*(rad^2)*(1-cos(pmax(0, (pi-param[1])-r/rad)))
              } else {
-               if(win$param[2]==pi) {
-                 if(max(r) > rad * (pi-win$param[1])) {
-                   stop("r range too wide for window")
-                 } else {
-                   ea <- 2*pi*(rad^2)*(1-cos((pi-win$param[1])-r/rad))
-                 }
-               } else {
-                 if(max(r) > rad * sround((win$param[2]-win$param[1])/2)) {
-                   stop("r range too wide for window")
-                 } else {
-                   sbp1 <- win$param[1]+(r/rad)
-                   sbp2 <- win$param[2]-(r/rad)
-                   ea <- 2*pi*(rad^2)*(cos(sbp1)-cos(sbp2))
-                 }
-               }
+               sbp1 <- param[1]+(r/rad)
+               sbp2 <- param[2]-(r/rad)
+               2*pi*(rad^2)* pmax(cos(sbp1)-cos(sbp2), 0)
              }
-             ea
            },
            bandcomp = {
-             if(sround(max(r) - max(win$param[1], pi-win$param[2]))>0) {
-               stop("r range too wide for window")
-             } else {
-               ea <- pmax(0, 2*pi*(1-cos(win$param[1]-r/rad))) +
-                 pmax(0, 2*pi*(1-cos((pi-win$param[2])-r/rad)))
-             }
-             ea
+             2*pi*(rad^2)*(
+               (1-cos(pmax(0, param[1]-r/rad))) +
+               (1-cos(pmax(0, (pi-param[2])-r/rad)))
+               )
            },
            wedge = {
              switch(method,
@@ -77,7 +46,7 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
                     integral = {polysph.area.Wr.int(win=win, r=r)},
                     grid = {
                       gridsph <- gridmat.nlon(colats=c(0, pi),
-                                              lons=c(0, win$param[1]), ...)
+                                              lons=c(0, param[1]), ...)
                       ea <- polysph.area.Wr.grid(win=win,
                                                  points=gridsph$gridrefs,
                                                  nlon=gridsph$nlon, r=r)
@@ -86,15 +55,15 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
                     stop("method not recognised"))
            },
            polygon = {
-             gridsph <- gridmat.nlon(colats=range(win$param[,1]),
-                                     lons=range(win$param[,2]), ...)
+             gridsph <- gridmat.nlon(colats=range(param[,1]),
+                                     lons=range(param[,2]), ...)
              ea <- polysph.area.Wr.grid(win=win, points=gridsph$gridrefs,
                                         nlon=gridsph$nlon, r=r)
              ea
            },
            quadrangle = {
-             gridsph <- gridmat.nlon(colats=(win$param[1:2]),
-                                     lons=c(0, win$param[3]), ...)
+             gridsph <- gridmat.nlon(colats=(param[1:2]),
+                                     lons=c(0, param[3]), ...)
              ea <- polysph.area.Wr.grid(win=win, points=gridsph$gridrefs,
                                         nlon=gridsph$nlon, r=r)
              ea
