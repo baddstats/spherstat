@@ -60,9 +60,19 @@
 
    sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
    Xcap <- runif.sphwin(30, sphcap)
-   rcap <- seq(0, pi/3, length=512)
-   Kcap <- Ksphere(Xcap, rvals=rcap)
+   rv3 <- seq(0, pi/3, length=512)
+   Kcap <- Ksphere(Xcap, rvals=rv3)
    plot(Kcap, xlim=c(0, pi/4))
+
+   sphband <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
+   Xb <- runif.sphwin(30, sphband)
+   Kb <- Ksphere(Xb, correction="iso", rvals=rv3)
+   plot(Kb)
+
+   sphbc <- sphwin(type="bandcomp", param=c(pi/3, 2*pi/3), ref=c(0,0))
+   Xbc <- runif.sphwin(30, sphbc)
+   Kbc <- Ksphere(Xbc, correction="iso", rvals=rv3)
+   plot(Kbc)
 }
 \keyword{spatial}
 \keyword{nonparametric}
