@@ -1,5 +1,5 @@
-Hstab.sph <- function (X, refpoints, win=sphwin(type="sphere"), rvals=seq(from=0, to=pi, length=512), ...) {
-    HH <- Hsphere(X, refpoints=refpoints, win=win, rvals=rvals, ...)
+Hstab.sph <- function (X, refpoints, win=sphwin(type="sphere"), r=NULL, ...) {
+    HH <- Hsphere(X, refpoints=refpoints, win=win, r=r, ...)
     rad <- X$win$rad
     Hstab <- eval.fv(asin(sqrt(HH))/(pi/2))
     if (any(varcols <- colnames(HH) %in% c("rip", "ls"))) {

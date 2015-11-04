@@ -13,7 +13,7 @@
 ## Output: an fv object containing the chosen estimates of K for X.
 
 
-Ksphere <- function(X, win=sphwin(), rvals,
+Ksphere <- function(X, win=sphwin(), r=NULL,
                     correction=c("un", "iso", "rs", "rsm"),
                     ratio=FALSE) {
 
@@ -25,9 +25,17 @@ Ksphere <- function(X, win=sphwin(), rvals,
   }
   stopifnot(inherits(win, "sphwin"))
 
+  if(is.null(r)) {
+    rmax <- rmax.rule.sphwin(win)
+    r <- seq(0, rmax, length=512)
+  }
+
+  correction <- match.arg(correction,
+                          c("un", "iso", "rs", "rsm", "best"),
+                          several.ok=TRUE)
+  correction[correction == "best"] <- "iso"
+
   ## Create objects that will be used in later calculaations
-  
-  r <- rvals
   rad <- win$rad
   nrX <- nrow(X)
   lr <- length(r)
@@ -150,7 +158,7 @@ neighbourcount <- function(Dmat, r) {
   nD <- nrow(Dmat)
   ## don't count identical pairs
   diag(Dmat) <- Inf
-  ## rvals is a vector of distance thresholds
+  ## r is a vector of distance thresholds
   nr <- length(r)
   ## For each distance value, find the r interval (r[k-1], r[k]] containing it
   rindex <- nr-findInterval(-Dmat, -rev(r))

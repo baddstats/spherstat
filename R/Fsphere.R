@@ -1,6 +1,6 @@
 Fsphere <- function(X, refpoints,
                     win=sphwin(type="sphere"),
-                    rvals=seq(from=0, to=pi, length=512), ...) {
+                    r=NULL, ...) {
   stopifnot(inherits(X, c("sp2", "sp3", "matrix")) &&
             inherits(refpoints, c("sp2", "sp3", "matrix")))
   if(inherits(X, "matrix")) {
@@ -11,6 +11,10 @@ Fsphere <- function(X, refpoints,
     stopifnot(inherits(win, "sphwin"))
   }
   rad <- win$rad
+  if(is.null(r)) {
+    rmax <- rmax.rule.sphwin(win)
+    r <- seq(0, rmax, length=512)
+  }
   if(inherits(refpoints, c("sp2", "sp3")) &&
      refpoints$win$rad != rad) {
     stop("X and refpoints have different radii")
@@ -23,7 +27,6 @@ Fsphere <- function(X, refpoints,
   D <- nncrosssph(X=X, Y=refpoints)
   B <- bdist.sphwin(X=refpoints, win=win)
   lambda <- intensitysph(X=X, win=win)
-  r <- rad*rvals
   h <- eroded.areas.sphwin(win=win, r=r, ...)
   if(any(!is.finite(h))) {
     stop("Error: h not finite")

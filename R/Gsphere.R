@@ -1,5 +1,5 @@
 Gsphere <- function(X, win=sphwin(type="sphere"),
-                    rvals=seq(from=0, to=pi, length=512), ...) {
+                    r=NULL, ...) {
   stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
   if(inherits(X, "matrix")) {
     stopifnot(inherits(win, "sphwin"))
@@ -9,18 +9,21 @@ Gsphere <- function(X, win=sphwin(type="sphere"),
     stopifnot(inherits(win, "sphwin"))
   }
   rad <- win$rad
+  if(is.null(r)) {
+    rmax <- rmax.rule.sphwin(win)
+    r <- seq(0, rmax, length=512)
+  }
   if(length(X)==0) {
     stop("Cannot estimate G function of an empty set")
   } else {
     D <- nndistsph(X=X)
     B <- bdist.sphwin(X=X, win=win)
     lambda <- intensitysph(X=X, win=win)
-    r <- rad*rvals
     h <- eroded.areas.sphwin(win=win, r=r, ...)
     if(any(!is.finite(h))) {
       stop("Error: h not finite")
     }
-    f <- compileCDF(D=D,B=B, r=rvals, han.denom=h, check=FALSE)
+    f <- compileCDF(D=D,B=B, r=r, han.denom=h, check=FALSE)
     dn <- fvnames(f, ".")
     f <- rebadge.fv(f, new.fname="Gsphere")
     lr <- length(r)

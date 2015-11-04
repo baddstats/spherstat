@@ -1,5 +1,5 @@
-Gstab.sph <- function (X, win=sphwin(type="sphere"), rvals=seq(from=0, to=pi, length=512), ...) {
-    G <- Gsphere(X=X, win=win, rvals=rvals, ...)
+Gstab.sph <- function (X, win=sphwin(type="sphere"), r=NULL, ...) {
+    G <- Gsphere(X=X, win=win, r=r, ...)
     rad <- X$win$rad
     Gstab <- eval.fv(asin(sqrt(G))/(pi/2))
     if (any(varcols <- colnames(G) %in% c("rip", "ls"))) {

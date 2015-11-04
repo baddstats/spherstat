@@ -1,5 +1,5 @@
-Fstab.sph <- function (X, refpoints, win=sphwin(type="sphere"), rvals=seq(from=0, to=pi, length=512), ...) {
-    FF <- Fsphere(X, refpoints=refpoints, win=win, rvals=rvals, ...)
+Fstab.sph <- function (X, refpoints, win=sphwin(type="sphere"), r=NULL, ...) {
+    FF <- Fsphere(X, refpoints=refpoints, win=win, r=r, ...)
     rad <- X$win$rad
     Fstab <- eval.fv(asin(sqrt(FF))/(pi/2))
     if (any(varcols <- colnames(FF) %in% c("rip", "ls"))) {
