@@ -9,20 +9,12 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
   rad <- win$rad
   param <- win$param
   if(is.null(r)) {
-    rmax <- switch(win$type,
-                   sphere = pi,
-                   band = mean(param),
-                   bandcomp = max(param[1], pi - param[2]),
-                   wedge = if(param[1] < pi) param[1] else pi/2,
-                   quadrangle = ,
-                   polygon = stop("r needs to be specified for this window"),
-                   stop("Unrecognised window type")
-                   )
+    rmax <- rmax.rule.sphwin(win)
     r <- seq(0, rmax, length=512)
   }
   eroded.area <-
     switch(win$type,
-           sphere = rep(area.sphwin(w=win), times=512),
+           sphere = rep(area.sphwin(w=win), times=length(r)),
            band = {
              if(param[1]==0) {
                2*pi*(rad^2)*(1-cos(pmax(0, param[2]-r/rad)))
@@ -74,3 +66,17 @@ eroded.areas.sphwin <- function(win=sphwin(type="sphere"),
 }
 
 
+rmax.rule.sphwin <- function(win) {
+  stopifnot(inherits(win, "sphwin"))
+  param <- win$param
+  r1max <- switch(win$type,
+                   sphere = pi,
+                   band = mean(param),
+                   bandcomp = max(param[1], pi - param[2]),
+                   wedge = if(param[1] < pi) param[1] else pi/2,
+                   quadrangle = ,
+                   polygon = stop("r needs to be specified for this window"),
+                   stop("Unrecognised window type")
+                   )
+  return(r1max * win$rad)
+}
