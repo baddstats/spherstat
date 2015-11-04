@@ -1,7 +1,6 @@
 \name{Gsphere}
 \alias{Gsphere}
 \alias{Gstab.sph}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Nearest Neighbour Distance Function G 
 }
@@ -9,23 +8,30 @@ Nearest Neighbour Distance Function G
 Using a number of methods, this function estimates the nearest neighbour distance distribution function \code{G(r)} from a point pattern in a window of arbitrary shape on a sphere.  If the window is the entire sphere, one of the methods used gives the exact value of the \code{G} function.
 }
 \usage{
-Gsphere(X, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
-Gstab.sph(X, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
+Gsphere(X, win = sphwin(type = "sphere"), r = NULL, ...)
+Gstab.sph(X, win = sphwin(type = "sphere"), r = NULL, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{
-The observed point pattern, from which an estimate of \code{G(r)} will be computed.  A 2 column matrix giving the locations of points in spherical coordinates.
-}
+    The observed point pattern, from which an estimate of \code{G(r)}
+    will be computed.  An object of class \code{"sp2"} or
+    \code{"sp3"}, or a 2 column matrix giving the locations of points
+    in spherical coordinates.
+  }
   \item{win}{
-The window; an object of type \code{sphwin}.
+    The window; an object of type \code{sphwin}.
 }
-  \item{rvals}{
-Optional.  Numeric vector. The values of the argument \code{r} at which \code{G(r)} should be evaluated. There is a sensible default, which works well the window is either the sphere or contains a significant proportion of the sphere. First-time users are strongly advised not to specify this argument. See below for important conditions on \code{r}.
-}
+  \item{r}{
+    Optional.  Numeric vector. The values of the argument \code{r} at
+    which \code{G(r)} should be evaluated. There is a sensible default,
+    which works well the window is either the sphere or contains a
+    significant proportion of the sphere. First-time users are strongly
+    advised not to specify this argument. 
+  }
   \item{\dots}{
-Optional.  Extra detail that can be passed to \code{\link{eroded.areas.sphwin}}.
-}
+    Optional.  Extra detail that can be passed to
+    \code{\link{eroded.areas.sphwin}}. 
+  }
 }
 \details{
 The nearest neighbour distance distribution function (also called the "event-to-event", or the "inter-event" distribution) of a point process \code{X} is the cumulative distribution function \code{G} of the distance from a typical random point of \code{X} to the nearest other point of \code{X}. 

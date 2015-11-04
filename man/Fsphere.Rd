@@ -8,9 +8,9 @@ The Empty Space Function F
 Estimates the summary function \code{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
 }
 \usage{
-Fsphere(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
+Fsphere(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
 
-Fstab.sph(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
+Fstab.sph(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
 }
 \arguments{
   \item{X}{
@@ -29,13 +29,12 @@ Fstab.sph(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to 
     The window; an object of class \code{"sphwin"}.  Only required if
     \code{X} is an object of class \code{matrix}. 
   }
-  \item{rvals}{
+  \item{r}{
     Optional.  Numeric vector. The values of the argument \eqn{r} at
     which \eqn{F(r)} should be evaluated. There is a sensible default,
     which works well the window is either the sphere or contains a
     significant proportion of the sphere. First-time users are strongly
-    advised not to specify this argument. See below for important
-    conditions on \code{rvals}. 
+    advised not to specify this argument. 
   }
   \item{\dots}{
     Optional.  Extra detail that can be passed to

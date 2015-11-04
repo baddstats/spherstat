@@ -31,6 +31,7 @@
 \alias{quadtopoly}
 \alias{neighbourcount}
 \alias{cumtab}
+\alias{rmax.rule.sphwin}
 \title{
 Internal Spherstat Functions
 }
@@ -66,6 +67,7 @@ Kisowedgeengine(xi, xj, ints, nr, c1, c2, ref, win, verbose)
 quadtopoly(X, win)
 neighbourcount(Dmat, r)
 cumtab(z, m)
+rmax.rule.sphwin(win)
 }
 \description{
 Internal spherstat functions

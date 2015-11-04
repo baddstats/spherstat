@@ -8,7 +8,7 @@
   compute an estimate of the \eqn{K}-function.
 }
 \usage{
-  Ksphere(X, win=sphwin(), rvals,
+  Ksphere(X, win=sphwin(), r,
           correction=c("un", "iso", "rs", "rsm"),
           ratio=FALSE)
 }
@@ -23,7 +23,7 @@
     The window; an object of type \code{sphwin}.  Only required if
     \code{X} is an object of class \code{matrix}. 
   }
-  \item{rvals}{
+  \item{r}{
     Optional.  Numeric vector. The values of the argument \eqn{r} at
     which \code{K(r)} should be evaluated.  
   }
@@ -61,17 +61,17 @@
    sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
    Xcap <- runif.sphwin(100, sphcap)
    rv3 <- seq(0, pi/3, length=512)
-   Kcap <- Ksphere(Xcap, rvals=rv3)
+   Kcap <- Ksphere(Xcap, r=rv3)
    plot(Kcap, xlim=c(0, pi/4))
 
    sphband <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
    Xb <- runif.sphwin(100, sphband)
-   Kb <- Ksphere(Xb, rvals=rv3)
+   Kb <- Ksphere(Xb, r=rv3)
    plot(Kb)
 
    sphbc <- sphwin(type="bandcomp", param=c(pi/3, 2*pi/3), ref=c(0,0))
    Xbc <- runif.sphwin(100, sphbc)
-   Kbc <- Ksphere(Xbc, rvals=rv3)
+   Kbc <- Ksphere(Xbc, r=rv3)
    plot(Kbc)
 }
 \keyword{spatial}

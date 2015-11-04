@@ -2,32 +2,46 @@
 \alias{Hsphere}
 \alias{Hstab.sph}
 \title{
-The Empty Space Function H 
+  The Empty Space Function H 
 }
 \description{
-Estimates the empty space function \code{H}(r) from a point pattern in a window of on a sphere, or the variance-stabilised form of this function. If the window is the entire sphere, one of the methods used gives the exact value of the \code{H} function.
+  Estimates the empty space function \code{H}(r) from a point pattern in
+  a window of on a sphere, or the variance-stabilised form of this
+  function. If the window is the entire sphere, one of the methods used
+  gives the exact value of the \code{H} function. 
 }
 \usage{
-Hsphere(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
-Hstab.sph(X, refpoints, win = sphwin(type = "sphere"), rvals = seq(from = 0, to = pi, length = 512), ...)
+Hsphere(X, refpoints, win = sphwin(type = "sphere"), r=NULL, ...)
+Hstab.sph(X, refpoints, win = sphwin(type = "sphere"), r=NULL, ...)
 }
 \arguments{
   \item{X}{
-The observed point pattern, from which an estimate of \code{H(r)} will be computed.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of points in spherical coordinates.
-}
+    The observed point pattern, from which an estimate of \code{H(r)}
+    will be computed.  An object of class \code{\link{sp2}} or
+    \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of
+    points in spherical coordinates. 
+  }
    \item{refpoints}{
-The reference points in the window used to estimate the \code{H} function.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of points in spherical coordinates.
-}  
-\item{win}{
-The window; an object of type \code{sphwin}.  Only required if \code{X} is an object of class \code{matrix}.
-}
-  \item{rvals}{
-Optional.  Numeric vector. The values of the argument \code{r} at which \code{H(r)} should be evaluated. There is a sensible default, which works well the window is either the sphere or contains a significant proportion of the sphere. First-time users are strongly advised not to specify this argument. See below for important conditions on \code{rvals}.
-}
-
-  \item{\dots}{
-Optional.  Extra detail that can be passed to \code{\link{eroded.areas.sphwin}}.
-}
+     The reference points in the window used to estimate the \code{H}
+     function.  An object of class \code{\link{sp2}} or
+     \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations
+     of points in spherical coordinates. 
+   }  
+   \item{win}{
+     The window; an object of type \code{sphwin}.  Only required if
+     \code{X} is an object of class \code{matrix}. 
+   }
+   \item{r}{
+     Optional.  Numeric vector. The values of the argument \code{r} at
+     which \code{H(r)} should be evaluated. There is a sensible default,
+     which works well the window is either the sphere or contains a
+     significant proportion of the sphere. First-time users are strongly
+     advised not to specify this argument. 
+   }
+   \item{\dots}{
+     Optional.  Extra detail that can be passed to
+     \code{\link{eroded.areas.sphwin}}. 
+   }
 }
 \details{
 The spherical contact distribution function of a stationary random set \code{X} is the cumulative distribution function H of the distance from a fixed point in space to the nearest point of \code{X}, given that the point lies outside \code{X}. That is, H(r) equals the probability that \code{X} lies closer than \code{r} units away from the fixed point \code{x}, given that \code{X} does not cover \code{x}. 
