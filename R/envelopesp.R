@@ -5,7 +5,7 @@
 #'
 
 envelope.sp2 <-
-  function(Y, fun=Kest, nsim=99, nrank=1, ...,
+  function(Y, fun=Ksphere, nsim=99, nrank=1, ...,
            funargs=list(),
            simulate=NULL, fix.n=FALSE, 
            verbose=TRUE, 
