@@ -32,6 +32,7 @@
 \alias{neighbourcount}
 \alias{cumtab}
 \alias{rmax.rule.sphwin}
+\alias{ptinsphpoly}
 \title{
 Internal Spherstat Functions
 }
@@ -68,6 +69,7 @@ quadtopoly(X, win)
 neighbourcount(Dmat, r)
 cumtab(z, m)
 rmax.rule.sphwin(win)
+ptinsphpoly(X, win, P)
 }
 \description{
 Internal spherstat functions

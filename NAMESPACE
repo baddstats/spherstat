@@ -3,7 +3,8 @@ import(globe)
 
 useDynLib(spherstat,
           "kisocapweights",
-          "kisobandweights")
+          "kisobandweights",
+          "RcallPtInSphPoly")
 
 export("area.sphwin")
 export("bdist.sphwin")
@@ -17,6 +18,7 @@ export("cround")
 export("cumtab")
 export("death.sp2")
 export("eroded.areas.sphwin")  
+export("envelope.sp2")  
 export("Fsphere")
 export("Fstab.sph")
 export("gcdist")               
@@ -57,6 +59,7 @@ export("polysph.area.Wr.int")
 export("print.sp2")            
 export("print.sp3")
 export("print.sphwin")
+export("ptinsphpoly")
 export("quadtopoly")           
 export("rdiscunif")
 export("rFisher")
