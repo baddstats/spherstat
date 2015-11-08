@@ -6,7 +6,7 @@
 Analysis of spatial point pattern data on spheres and subsets of spheres
 }
 \description{
-This package allows a user to analyse point pattern data on a sphere, or a subset of a sphere.  Subsets of the sphere that are currently supported are the spherical cap, band, wedge, and polygon.  Currently this package allows pairwise, boundary and nearest neighbour distances to be calculated, the nearest neighbour (G) and empty space (F) functions to be estimated and various point processes and densities on the sphere simulated.  In addition, some spherical geometric and trigonometric functions are available.
+This package allows a user to analyse point pattern data on a sphere, or a subset of a sphere.  Subsets of the sphere that are currently supported are the spherical cap, band, wedge, and polygon.  Currently this package allows pairwise, boundary and nearest neighbour distances to be calculated, Ripley's K, the nearest neighbour (G) and empty space (F) functions to be estimated and various point processes and densities on the sphere simulated.  In addition, some spherical geometric and trigonometric functions are available.
 
 The preferred coordinate system for data given to functions in this package is the spherical coordinate system.  In other words, the coordinate of a point should be given as (theta, phi), where theta is the colatitude is between 0 and pi, and phi is longitude and is between 0 and 2*pi.  The north pole has colatitude 0 and arbitrary longitude (although for most cases, use phi=), and longitudes are measured in anticlockwise direction.  Somew functions allow data to be given using Cartesian coordinates (that is, (x,y,z)).
 }
@@ -14,8 +14,8 @@ The preferred coordinate system for data given to functions in this package is t
 \tabular{ll}{
 Package: \tab spherstat\cr
 Type: \tab Package\cr
-Version: \tab 1.0.4\cr
-Date: \tab 2014-03-17\cr
+Version: \tab 1.4-1\cr
+Date: \tab 2015-11-08\cr
 License: \tab GPL (>= 2.0) \cr
 LazyLoad: \tab yes\cr
 }
