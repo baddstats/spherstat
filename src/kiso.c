@@ -91,7 +91,7 @@ void dkisocap(n, x1, x2, x3, centre, height, nr, rmax, dk)
   double dij, cosdij, x1i, x2i, x3i, x1j, x2j, x3j;
   double cutA[3], cutB[3]; 
   int Nr, m;
-  double Rmax, dr, w;
+  double Rmax, dr, circfrac;
 
   N = *n;
 
@@ -123,13 +123,13 @@ void dkisocap(n, x1, x2, x3, centre, height, nr, rmax, dk)
 				  x1i, x2i, x3i, cosdij,
 				  1e-8, cutA, cutB);
 	  if(ncut == 2) {
-	    w = isoWcap(x1i, x2i, x3i, 
-			x1j, x2j, x3j,
-			cosdij,
-			c1, c2, c3, h,
-			cutA, cutB);
-	  } else w = 1.0;
-	  dk[m] += w;
+	    circfrac = isoWcap(x1i, x2i, x3i, 
+			       x1j, x2j, x3j,
+			       cosdij,
+			       c1, c2, c3, h,
+			       cutA, cutB);
+	    dk[m] += 1/circfrac;
+	  } else dk[m] += 1.0;
 	}
       } 
     }
@@ -239,7 +239,7 @@ void dkisoband(n, x1, x2, x3, centre, height1, height2, iscomp,
   double cutAup[3], cutBup[3], cutAlo[3], cutBlo[3]; 
   double cuts[12];  /* 3 x 4 matrix */
   int Nr, m;
-  double Rmax, dr, w;
+  double Rmax, dr, circfrac;
 
   N = *n;
   iscomplement = *iscomp;
@@ -269,7 +269,7 @@ void dkisoband(n, x1, x2, x3, centre, height1, height2, iscomp,
 	m = ceil(dij/dr);
 	if(m < Nr) {
 	  if(m < 0) m = 0;
-	  w = 1.0;
+	  circfrac = 1.0;
 	  /* find all crossing points */
 	  ncutup = IntersectCircles(c1, c2, c3, hup, 
 				    x1i, x2i, x3i, cosdij,
@@ -305,13 +305,13 @@ void dkisoband(n, x1, x2, x3, centre, height1, height2, iscomp,
 		cuts[freepos + 5] = cutBlo[2];
 	      }
 	    }
-	    w = isoWband(x1i, x2i, x3i, 
-			 x1j, x2j, x3j,
-			 cosdij,
-			 c1, c2, c3, hup, hlo, iscomplement, 
-			 cuts, ncuts);
+	    circfrac = isoWband(x1i, x2i, x3i, 
+				x1j, x2j, x3j,
+				cosdij,
+				c1, c2, c3, hup, hlo, iscomplement, 
+				cuts, ncuts);
 	  }
-	  dk[m] += w;
+	  dk[m] += 1/circfrac;
 	}
       }
     }
