@@ -4,7 +4,10 @@ import(globe)
 useDynLib(spherstat,
           "kisocapweights",
           "kisobandweights",
-          "RcallPtInSphPoly")
+          "dkisocap",
+          "dkisoband",
+          "RcallPtInSphPoly",
+          "Rpolyarea")
 
 export("area.sphwin")
 export("bdist.sphwin")

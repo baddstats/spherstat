@@ -79,46 +79,65 @@ intcircs <- function(n1, n2, h1, h2, tol=1e-12) {
 
 Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom=(nrX*(nrX-1))/area.sphwin(X)) {
 
-	## First, we ensure the variables are of the acceptable input type, and if X is of class sp2 or sp3, we save the locations of points, and the window as separate objects
+  ## First, we ensure the variables are of the acceptable input type,
+  ## and if X is of class sp2 or sp3, we save the locations of points,
+  ## and the window as separate objects 
 
-	stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
-	if(inherits(X, "matrix")) {
-    		stopifnot(inherits(win, "sphwin"))
-	} else {
-		win <- X$win
-		X <- X$X
-       	}
+  stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
+  if(inherits(X, "matrix")) {
+    stopifnot(inherits(win, "sphwin"))
+  } else {
+    win <- X$win
+    X <- X$X
+  }
 
-	## For efficiency, we save the radius as a separate object, and ensure the locations of points are in spherical coordinates
+  ## For efficiency, we save the radius as a separate object,
+  ## and ensure the locations of points are in spherical coordinates
 
-	rad <- win$rad
-  	if(ncol(X)==3) {
-    		X <- convert2(points=X, rad=rad)
-  	}
-	type <- win$type
+  rad <- win$rad
+  if(ncol(X)==3) {
+    X <- convert2(points=X, rad=rad)
+  }
+  type <- win$type
 
-	## We now calculate wmat (i.e. equation (0.1)
+  ## We now calculate wmat (i.e. equation (0.1)
 
-	wmat <- switch(type,
-		    "sphere" = {matrix(1, nrow=nrX, ncol=nrX)},
-		    "band" = {if(win$param[1]==0 || win$param[2]==pi) {
-					Kisocap(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)
-					} else {
-					Kisoband(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)
-					}
-			      },
-		    "bandcomp" = {Kisobc(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)},
-		    "wedge" = {Kisowedge(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)},
-		    "polygon" = {Kisopoly(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)},
-		    "quadrangle" = {Kisoquad(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)},
-		    stop("Unrecognised shape type")
-	)
-	if(any(is.na(wmat))) {stop("NA in weight matrix")}
+  wmat <- switch(type,
+                 sphere = {matrix(1, nrow=nrX, ncol=nrX)},
+                 band = {
+                   if(win$param[1]==0 || win$param[2]==pi) {
+                     Kisocap(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE,
+                             denom=denom)
+                   } else {
+                     Kisoband(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE,
+                              denom=denom)
+                   }
+                 },
+                 bandcomp = {
+                   Kisobc(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE,
+                          denom=denom)
+                 },
+                 wedge = {
+                   Kisowedge(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)
+                 },
+                 polygon = {
+                   Kisopoly(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)
+                 },
+		 quadrangle = {
+                   Kisoquad(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE)
+                 },
+                 stop("Unrecognised shape type")
+                 )
 
-	## Finally, we can make a call to compileK to calculate Kiso
+  ## shortcut
+  if(is.fv(wmat)) return(wmat)
 
-	Kisoout <- compileK(D=Dmat, r=r, weights=1/wmat, denom=denom)
-	return(Kisoout)
+  ## otherwise wmat is a matrix
+  if(any(is.na(wmat))) {stop("NA in weight matrix")}
+
+  ## Finally, we can make a call to compileK to calculate Kiso
+  Kisoout <- compileK(D=Dmat, r=r, weights=1/wmat, denom=denom)
+  return(Kisoout)
 }
 
 
@@ -132,11 +151,10 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
 ##            disc is a logical, if it is TRUE then the discretizes estimation of the weight matrix is performes]d
 
 Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
-                    disc=FALSE, rad=win$rad, useC) {
+                    disc=FALSE, rad=win$rad, denom, useC) {
 
   if(missing(useC)) useC <- getOption("sphwin.useC")
   if(is.null(useC)) useC <- TRUE
-        
 
   ## Preliminary checks, and setting up objects that are required later
   stopifnot(win$type=="band" && (win$param[1]==0 || win$param[2]==pi))
@@ -152,16 +170,41 @@ Kisocap <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X),
     centre <- convert3(win$ref)
     if(ncol(X) != 3) X <- convert3(X)
     n <- nrow(X)
-    zz <- .C("kisocapweights",
-             n = as.integer(n),
-             x1 = as.double(X[,1]),
-             x2 = as.double(X[,2]),
-             x3 = as.double(X[,3]),
-             Dmat = as.double(Dmat),
-             centre = as.double(centre),
-             height = as.double(capheight),
-             wmat = as.double(numeric(n * n)))
-    return(matrix(zz$wmat, n, n))
+    if(!is.null(Dmat)) {
+      ## calculate weight matrix
+      zz <- .C("kisocapweights",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               Dmat = as.double(Dmat),
+               centre = as.double(centre),
+               height = as.double(capheight),
+               wmat = as.double(numeric(n * n)))
+      return(matrix(zz$wmat, n, n))
+    } else {
+      ## calculate empirical K-function
+      nr <- length(r)
+      rmax <- max(r)
+      zz <- .C("dkisocap",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               centre = as.double(centre),
+               height = as.double(capheight),
+               nr = as.integer(nr),
+               rmax = as.double(rmax),
+               dk = as.double(numeric(nr)))
+      kval <- cumsum(zz$dk)/denom
+      df <- data.frame(r=r, est=kval)
+      K <- fv(df, "r", quote(K(r)), "est", . ~ r, c(0, rmax), 
+            c("r", "hat(%s)[iso](r)"),
+              c("distance argument r", 
+                "isotropic correction estimate of %s"),
+              fname = "K")
+      return(K)
+    }
   }
   
   ## Initialise all weights to 1
@@ -349,7 +392,7 @@ Kisoengine <- function(xi3, xj3, win, ints, verbose=FALSE, cdij=dot(xi3, xj3)) {
 
 
 
-Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad=win$rad, useC) {
+Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, rad=win$rad, denom, useC) {
 
   if(missing(useC)) useC <- getOption("sphwin.useC")
   if(is.null(useC)) useC <- TRUE
@@ -368,21 +411,48 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
     centre <- convert3(winref)
     if(ncol(X) != 3) X <- convert3(X)
     n <- nrow(X)
-    zz <- .C("kisobandweights",
-             n = as.integer(n),
-             x1 = as.double(X[,1]),
-             x2 = as.double(X[,2]),
-             x3 = as.double(X[,3]),
-             Dmat = as.double(Dmat),
-             centre = as.double(centre),
-             height1 = as.double(clat1),
-             height2 = as.double(clat2),
-             iscomp = as.integer(0),
-             wmat = as.double(numeric(n * n)))
-    return(matrix(zz$wmat, n, n))
+    if(!is.null(Dmat)) {
+      ## calculate weight matrix
+      zz <- .C("kisobandweights",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               Dmat = as.double(Dmat),
+               centre = as.double(centre),
+               height1 = as.double(clat1),
+               height2 = as.double(clat2),
+               iscomp = as.integer(0),
+               wmat = as.double(numeric(n * n)))
+      return(matrix(zz$wmat, n, n))
+    } else {
+      ## calculate empirical K-function
+      nr <- length(r)
+      rmax <- max(r)
+      zz <- .C("dkisoband",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               centre = as.double(centre),
+               height1 = as.double(clat1),
+               height2 = as.double(clat2),
+               iscomp = as.integer(0),
+               nr = as.integer(nr),
+               rmax = as.double(rmax),
+               dk = as.double(numeric(nr)))
+      kval <- cumsum(zz$dk)/denom
+      df <- data.frame(r=r, est=kval)
+      K <- fv(df, "r", quote(K(r)), "est", . ~ r, c(0, rmax), 
+            c("r", "hat(%s)[iso](r)"),
+              c("distance argument r", 
+                "isotropic correction estimate of %s"),
+              fname = "K")
+      return(K)
+    }
   }
         
-	## Extract the two bounding circles as separate windows
+  ## Extract the two bounding circles as separate windows
 
 	win1 <- sphwin(type="band", param=c(lat1, pi), ref=winref)
 	win2 <- sphwin(type="band", param=c(0, lat2), ref=winref)
@@ -490,7 +560,7 @@ Kisoband <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, ra
 
 
 
-Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verbose=FALSE, rad=win$rad, useC) {
+Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verbose=FALSE, rad=win$rad, denom, useC) {
 
   if(missing(useC)) useC <- getOption("sphwin.useC")
   if(is.null(useC)) useC <- TRUE
@@ -510,19 +580,47 @@ Kisobc <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, verb
   if(useC) {
     if(ncol(X) != 3) X <- convert3(X)
     n <- nrow(X)
-    zz <- .C("kisobandweights",
-             n = as.integer(n),
-             x1 = as.double(X[,1]),
-             x2 = as.double(X[,2]),
-             x3 = as.double(X[,3]),
-             Dmat = as.double(Dmat),
-             centre = as.double(winref3),
-             height1 = as.double(clat1),
-             height2 = as.double(clat2),
-             iscomp = as.integer(1),
-             wmat = as.double(numeric(n * n)))
-    return(matrix(zz$wmat, n, n))
+    if(!is.null(Dmat)) {
+      ## compute matrix of correction weights
+      zz <- .C("kisobandweights",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               Dmat = as.double(Dmat),
+               centre = as.double(winref3),
+               height1 = as.double(clat1),
+               height2 = as.double(clat2),
+               iscomp = as.integer(1),
+               wmat = as.double(numeric(n * n)))
+      return(matrix(zz$wmat, n, n))
+    } else {
+      ## compute empirical K-function
+      nr <- length(r)
+      rmax <- max(r)
+      zz <- .C("dkisoband",
+               n = as.integer(n),
+               x1 = as.double(X[,1]),
+               x2 = as.double(X[,2]),
+               x3 = as.double(X[,3]),
+               centre = as.double(winref3),
+               height1 = as.double(clat1),
+               height2 = as.double(clat2),
+               iscomp = as.integer(1),
+               nr = as.integer(nr),
+               rmax = as.double(rmax),
+               dk = as.double(numeric(nr)))
+      kval <- cumsum(zz$dk)/denom
+      df <- data.frame(r=r, est=kval)
+      K <- fv(df, "r", quote(K(r)), "est", . ~ r, c(0, rmax), 
+            c("r", "hat(%s)[iso](r)"),
+              c("distance argument r", 
+                "isotropic correction estimate of %s"),
+              fname = "K")
+      return(K)
+    }
   }
+  
 
 	## If we want the discretized estimator, this calls that object	
 

@@ -43,7 +43,10 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
   lambda <- nrX/areaX
   lambda2 <- nrX*(nrX-1)/areaX^2
   denom <- lambda2 * areaX
-  Dmat <- pairdistsph(X)
+
+  Dmat <-
+    if(all(correction == "iso") && win$type %in% c("band", "bandcomp")) 
+      NULL else pairdistsph(X)
 
   ## Create fv object that contains the theoretical value of K
 
