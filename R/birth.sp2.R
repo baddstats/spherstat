@@ -1,4 +1,4 @@
-birth.sp2 <- function(X, beta, gamma, R, p, n, rad=1, win) {
+birth.sp2 <- function(X, beta, gamma, R, p, n, rad=1, win=sphwin(type="sphere")) {
   rad <- win$rad
   w <- runif.sphwin(n=1,win=win, as.sp=FALSE)
   x <- convert3(w)

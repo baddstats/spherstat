@@ -1,5 +1,4 @@
-gridmat <-
-function(colats, lons, ncolat=100, nlon=100, cellarea=FALSE) {
+gridmat <- function(colats, lons, ncolat=100, nlon=100, cellarea=FALSE) {
 	stopifnot(colats[1] < colats[2] && lons[1] < lons[2])
 	ctheta <- seq(from=cos(colats[1]), to=cos(colats[2]), length=ncolat+1)
 	phi <- seq(from=lons[1], to=lons[2], length=nlon+1)

@@ -9,7 +9,7 @@
   analogue of the Matern Cluster Process on the sphere.  
 }
 \usage{
-  rMatClust.sp2(kappa, r, mu, win, parents=FALSE)
+  rMatClust.sp2(kappa, r, mu, win=sphwin(type="sphere"), parents=FALSE)
 }
 \arguments{
   \item{kappa}{

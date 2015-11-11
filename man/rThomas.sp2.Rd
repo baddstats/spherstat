@@ -9,15 +9,15 @@
   sphere. Includes CSR (complete spatial randomness).  
 }
 \usage{
-rThomas.sp2(kappa, sigma, mu, win, parents=FALSE)
+rThomas.sp2(alpha, scale, mu, win=sphwin(type="sphere"), parents=FALSE)
 }
 \arguments{
-  \item{kappa}{
+  \item{alpha}{
     Intensity of the Poisson process of cluster centres. A single
     positive number. 
   }
-  \item{sigma}{
-    The intensity of the point process to be simulated.
+  \item{scale}{
+    The concentration parameter of the Fisher distribution that is used the generate the daughter points about each cluster centre.
   }
   \item{mu}{
     Mean number of points per cluster (a single positive number)

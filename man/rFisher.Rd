@@ -7,7 +7,7 @@ Generate Fisher distribution on the sphere
 Generates variates of the Fisher distribution on the sphere. 
 }
 \usage{
-rFisher(n, mode, kappa, win=sphwin())
+rFisher(n, mode, kappa, win=sphwin(type="sphere"))
 }
 \arguments{
   \item{n}{
