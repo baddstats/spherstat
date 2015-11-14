@@ -15,6 +15,10 @@
 
   dkisoband:        compute increments of double sum of K for band [complement]
 
+  dwkisocap:         compute increments of double sum of Kinhom for cap
+
+  dwkisoband:        compute increments of double sum of Kinhom for band/comp
+
   Note: coordinates assumed to be normalised to unit radius
         angles are in radians
 */
@@ -130,6 +134,69 @@ void dkisocap(n, x1, x2, x3, centre, height, nr, rmax, dk)
 			       cutA, cutB);
 	    dk[m] += 1/circfrac;
 	  } else dk[m] += 1.0;
+	}
+      } 
+    }
+  }
+}
+
+void dwkisocap(n, x1, x2, x3, lambda, centre, height, nr, rmax, dk)
+     int *n;               /* number of points */
+     double *x1, *x2, *x3; /* Cartesian coordinates of points */
+     double *lambda;       /* intensity values for each data point */
+     double *centre;       /* Cartesian coords of centre of cap */
+     double *height;       /* height of plane defining cap */
+     int    *nr;           /* number of r values */
+     double *rmax;         /* maximum value of r */
+     double *dk;           /* output - increments of double sum in K(r) */
+{
+  int N;
+  double c1, c2, c3, h;
+  int i,j,ncut;
+  double dij, cosdij, x1i, x2i, x3i, x1j, x2j, x3j;
+  double cutA[3], cutB[3]; 
+  int Nr, m;
+  double Rmax, dr, circfrac, weight, invlami;
+
+  N = *n;
+
+  Nr = *nr;
+  Rmax = *rmax;
+  dr = Rmax/(Nr-1);
+
+  /* cap parameters */
+  c1 = centre[0];
+  c2 = centre[1];
+  c3 = centre[2];
+  h = *height;
+
+  for(i = 1; i < N; i++) {
+    x1i = x1[i];
+    x2i = x2[i];
+    x3i = x3[i];
+    invlami = 1.0/lambda[i];
+    for(j = 0; j < N; j++) {
+      if(i != j) {
+	x1j = x1[j];
+	x2j = x2[j];
+	x3j = x3[j];
+	cosdij = x1i * x1j + x2i * x2j + x3i * x3j;
+	dij = acos(cosdij);
+	m = ceil(dij/dr);
+	if(m < Nr) {
+	  weight = invlami/lambda[j];
+	  if(m < 0) m = 0;
+	  ncut = IntersectCircles(c1, c2, c3, h, 
+				  x1i, x2i, x3i, cosdij,
+				  1e-8, cutA, cutB);
+	  if(ncut == 2) {
+	    circfrac = isoWcap(x1i, x2i, x3i, 
+			       x1j, x2j, x3j,
+			       cosdij,
+			       c1, c2, c3, h,
+			       cutA, cutB);
+	    dk[m] += weight/circfrac;
+	  } else dk[m] += weight;
 	}
       } 
     }
@@ -312,6 +379,108 @@ void dkisoband(n, x1, x2, x3, centre, height1, height2, iscomp,
 				cuts, ncuts);
 	  }
 	  dk[m] += 1/circfrac;
+	}
+      }
+    }
+  }
+}
+
+void dwkisoband(n, x1, x2, x3, lambda, 
+		centre, height1, height2, iscomp, 
+		nr, rmax, dk)
+     int *n;               /* number of points */
+     double *x1, *x2, *x3; /* Cartesian coordinates of points */
+     double *lambda;       /* intensity values for each data point */
+     double *centre;       /* Cartesian coords of centre of band */
+     double *height1,
+            *height2;      /* heights of planes defining band */
+     int *iscomp;         /* 0 if window is a band, 1 if it's the complement */
+     int    *nr;           /* number of r values */
+     double *rmax;         /* maximum value of r */
+     double *dk;           /* output - increments of double sum in K(r) */
+{
+  int N;
+  double c1, c2, c3, hup, hlo;
+  int i,j, ncutup, ncutlo, ncuts, freepos, iscomplement;
+  double dij, cosdij, x1i, x2i, x3i, x1j, x2j, x3j;
+  double cutAup[3], cutBup[3], cutAlo[3], cutBlo[3]; 
+  double cuts[12];  /* 3 x 4 matrix */
+  int Nr, m;
+  double Rmax, dr, circfrac, weight, invlami;
+
+  N = *n;
+  iscomplement = *iscomp;
+
+  Nr = *nr;
+  Rmax = *rmax;
+  dr = Rmax/(Nr-1);
+
+  /* cap parameters */
+  c1 = centre[0];
+  c2 = centre[1];
+  c3 = centre[2];
+  hup = *height1;
+  hlo = *height2;
+
+  for(i = 1; i < N; i++) {
+    x1i = x1[i];
+    x2i = x2[i];
+    x3i = x3[i];
+    invlami = 1.0/lambda[i];
+    for(j = 0; j < N; j++) {
+      if(i != j) {
+	x1j = x1[j];
+	x2j = x2[j];
+	x3j = x3[j];
+	cosdij = x1i * x1j + x2i * x2j + x3i * x3j;
+	dij = acos(cosdij);
+	m = ceil(dij/dr);
+	if(m < Nr) {
+	  if(m < 0) m = 0;
+	  circfrac = 1.0;
+	  weight = invlami/lambda[j];
+	  /* find all crossing points */
+	  ncutup = IntersectCircles(c1, c2, c3, hup, 
+				    x1i, x2i, x3i, cosdij,
+				    1e-8, cutAup, cutBup);
+	  ncutlo = IntersectCircles(c1, c2, c3, hlo, 
+				    x1i, x2i, x3i, cosdij,
+				    1e-8, cutAlo, cutBlo);
+	  /* Treat infinite intersection as empty */
+	  if(ncutup > 2) ncutup == 0;
+	  if(ncutlo > 2) ncutlo == 0;
+	  ncuts = ncutup + ncutlo;
+	  if(ncuts > 0) {
+	    /* Pack coordinates of intersection points into array */
+	    freepos = 0; 
+	    if(ncutup >= 1) {
+	      cuts[0] = cutAup[0];
+	      cuts[1] = cutAup[1];
+	      cuts[2] = cutAup[2];
+	      if(ncutup == 2) {
+		cuts[3] = cutBup[0];
+		cuts[4] = cutBup[1];
+		cuts[5] = cutBup[2];
+	      }
+	      freepos = 3 * ncutup;
+	    }
+	    if(ncutlo >= 1) {
+	      cuts[freepos]     = cutAlo[0];
+	      cuts[freepos + 1] = cutAlo[1];
+	      cuts[freepos + 2] = cutAlo[2];
+	      if(ncutlo == 2) {
+		cuts[freepos + 3] = cutBlo[0];
+		cuts[freepos + 4] = cutBlo[1];
+		cuts[freepos + 5] = cutBlo[2];
+	      }
+	    }
+	    circfrac = isoWband(x1i, x2i, x3i, 
+				x1j, x2j, x3j,
+				cosdij,
+				c1, c2, c3, hup, hlo, iscomplement, 
+				cuts, ncuts);
+	  }
+	  dk[m] += weight/circfrac;
 	}
       }
     }

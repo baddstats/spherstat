@@ -6,6 +6,8 @@ useDynLib(spherstat,
           "kisobandweights",
           "dkisocap",
           "dkisoband",
+          "dwkisocap",
+          "dwkisoband",
           "RcallPtInSphPoly",
           "Rpolyarea")
 

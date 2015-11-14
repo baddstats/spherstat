@@ -15,7 +15,7 @@
 
 Ksphere <- function(X, win=sphwin(), r=NULL,
                     correction=c("un", "iso", "rs", "rsm"),
-                    ratio=FALSE) {
+                    ratio=FALSE, lambdavalues=NULL) {
 
   ## standard checks of the X and win arguments
   stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
@@ -35,14 +35,23 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
                           several.ok=TRUE)
   correction[correction == "best"] <- "iso"
 
+  if(!is.null(lambdavalues) && !all(correction == "iso")) {
+    warning("For inhomogeneous K, only the isotropic correction is available")
+    correction <- "iso"
+  }
+
   ## Create objects that will be used in later calculaations
   rad <- win$rad
   nrX <- nrow(X)
   lr <- length(r)
   areaX <- area.sphwin(win)
-  lambda <- nrX/areaX
-  lambda2 <- nrX*(nrX-1)/areaX^2
-  denom <- lambda2 * areaX
+  if(is.null(lambdavalues)) {
+    lambda <- nrX/areaX
+    lambda2 <- nrX*(nrX-1)/areaX^2
+    denom <- lambda2 * areaX
+  } else {
+    denom <- areaX
+  }
 
   Dmat <-
     if(all(correction == "iso") && win$type %in% c("band", "bandcomp")) 
@@ -143,7 +152,8 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
     ## If the isotropic corrected estimator is wanted,
     ## this code invokes the relevant code.
 
-    Kiso <- Kiso(X=X, win=win, r=r, Dmat=Dmat, nrX=nrX, denom=denom)
+    Kiso <- Kiso(X=X, win=win, r=r, Dmat=Dmat, nrX=nrX, denom=denom,
+                 lambda=lambdavalues)
     Kiso <- data.frame(r=r, iso=Kiso$est)
     Kiso <- fv(Kiso, "r", quote(hat(K(r))), "iso", NULL,
                range(r), c("r", "%s[iso](r)"),

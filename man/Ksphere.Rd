@@ -10,7 +10,7 @@
 \usage{
   Ksphere(X, win=sphwin(), r,
           correction=c("un", "iso", "rs", "rsm"),
-          ratio=FALSE)
+          ratio=FALSE, lambdavalues=NULL)
 }
 \arguments{
   \item{X}{
@@ -35,6 +35,11 @@
     Logical value specifying whether to store information about the
     numerator and denominator of the estimator, for use by
     other functions.
+  }
+  \item{lambdavalues}{
+    Optional. Numeric vector contain an estimate of the intensity
+    at each data point. If this argument is given, the inhomogeneous
+    \eqn{K} function is computed.
   }
 }
 \details{
