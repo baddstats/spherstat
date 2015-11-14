@@ -1,4 +1,4 @@
-rStrauss.sp2 <- function(beta, gamma, R=0, p=0.5, m=100, win=sphwin()) {
+rStrauss.sp2 <- function(beta, gamma, R=0, p=0.5, m=100, win=sphwin(type="sphere")) {
   stopifnot(inherits(win, "sphwin"))
   stopifnot(beta > 0)
   stopifnot(gamma >=0 && gamma <= 1)

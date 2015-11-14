@@ -1,4 +1,4 @@
-rHardcore.sp2 <- function(beta, R=0, p=0.5, m=100, win=sphwin(), proper=TRUE) {
+rHardcore.sp2 <- function(beta, R=0, p=0.5, m=100, win=sphwin(type="sphere"), proper=TRUE) {
   stopifnot(inherits(win, "sphwin"))
   X <- rpoispp.sp2(beta, as.sp=FALSE)
   n <- nrow(X)

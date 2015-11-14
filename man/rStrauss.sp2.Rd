@@ -8,7 +8,7 @@
   Strauss process, using the Metropolis-Hastings simulation algorithm.   
 }
 \usage{
-rStrauss.sp2(beta, gamma, R=0, p=0.5, m=100, win = sphwin())
+rStrauss.sp2(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"))
 }
 \arguments{
   \item{beta}{

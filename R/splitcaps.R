@@ -2,10 +2,10 @@ splitcaps <- function(X, win=sphwin(type="sphere"), upper=TRUE, lower=TRUE, as.s
 	stopifnot(inherits(X, c("sp2", "sp3", "matrix")) && (upper+lower)!=0)
 	X0 <- X
 	if(inherits(X, "matrix")) {stopifnot(inherits(win, "sphwin") && win$type=="bandcomp")} else {
-win <- X$win
-X <- X$X
-stopifnot(inherits(win, "sphwin") && win$type=="bandcomp")
-}
+		win <- X$win
+		X <- X$X
+		stopifnot(inherits(win, "sphwin") && win$type=="bandcomp")
+	}
 	Xrefdist1 <- acos(cround(convert3(X) %*% t(convert3(win$ref))))
 	Xrefdist2 <- acos(cround(convert3(X) %*% t(convert3(c(pi-win$ref[1], (win$ref[2]+pi)%%(2*pi))))))
 	if(upper) {
