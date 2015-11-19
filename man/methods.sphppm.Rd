@@ -44,7 +44,7 @@
 \examples{
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
    Z <- runif.sphwin(20, W)
-   model <- sphppm(Z ~ cos(colat) + sin(colat))
+   model <- sphppm(Z ~ cos(theta) + sin(phi))
   model
   fitted(model)
   anova(model)

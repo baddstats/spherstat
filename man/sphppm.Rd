@@ -42,7 +42,7 @@ sphppm(formula)
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
    Z <- runif.sphwin(100, W)
    sphppm(Z ~ 1)
-   sphppm(Z ~ cos(colat) + sin(colat))
+   sphppm(Z ~ cos(theta) + cos(phi))
    sphppm(Z ~ abs(x1))
 }
 \keyword{spatial}
