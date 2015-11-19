@@ -33,6 +33,7 @@
 \alias{cumtab}
 \alias{rmax.rule.sphwin}
 \alias{ptinsphpoly}
+\alias{allcoords}
 \title{
 Internal Spherstat Functions
 }
@@ -70,6 +71,7 @@ neighbourcount(Dmat, r)
 cumtab(z, m)
 rmax.rule.sphwin(win)
 ptinsphpoly(X, win, P)
+allcoords(X)
 }
 \description{
 Internal spherstat functions
