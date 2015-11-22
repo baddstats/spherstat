@@ -46,6 +46,10 @@ print.sphppm <- function(x, ...) {
   return(invisible(NULL))
 }
 
+coef.sphppm <- function(object, ...) {
+  return(coef(object$fit))
+}
+
 fitted.sphppm <- function(object, ...) {
   fit <- object$fit
   value <- with(fit$data,
@@ -54,7 +58,10 @@ fitted.sphppm <- function(object, ...) {
 }
 
 anova.sphppm <- function(object, ...) {
-  anova(object$fit, ...)
+  allargs <- list(object, ...)
+  ismodel <- sapply(dotargs, inherits, what="sphppm")
+  allargs[ismodel] <- lapply(allargs[ismodel], getElement, name="fit")
+  return(do.call(anova, allargs))
 }
 
 

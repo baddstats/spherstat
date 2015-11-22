@@ -1,10 +1,11 @@
 \name{methods.sphppm}
 \alias{methods.sphppm}
 \alias{anova.sphppm}
+\alias{coef.sphppm}
 \alias{fitted.sphppm}
 \alias{print.sphppm}
 \title{
-  Methods for Fitted Models
+  Methods for Fitted Models on a Sphere
 }
 \description{
   Methods for standard operations
@@ -12,6 +13,8 @@
 }
 \usage{
  \method{anova}{sphppm}(object, \dots)
+
+ \method{coef}{sphppm}(object, \dots)
 
  \method{fitted}{sphppm}(object, \dots)
 
@@ -28,7 +31,11 @@
 }
 \details{
   These are methods for the generic functions
-  \code{print}, \code{fitted} and \code{anova}
+  \code{\link[stats]{anova}},
+  \code{\link[stats]{coef}},
+  \code{\link[stats]{fitted}}
+  and 
+  \code{\link[base]{print}},
   for the class \code{"sphppm"} of fitted point process models
   on a sphere.
 }
@@ -48,6 +55,10 @@
   model
   fitted(model)
   anova(model)
+
+   # likelihood ratio test
+   model0 <- sphppm(Z ~ 1)
+   anova(model0, model, test="Chi")
 }
 \keyword{spatial}
 \keyword{models}
