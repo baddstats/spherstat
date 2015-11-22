@@ -1,6 +1,8 @@
 import(spatstat)
 import(globe)
 
+## C code entry points
+
 useDynLib(spherstat,
           "kisocapweights",
           "kisobandweights",
@@ -11,11 +13,14 @@ useDynLib(spherstat,
           "RcallPtInSphPoly",
           "Rpolyarea")
 
+# exported functions
+
 export("allcoords")
 export("anova.sphppm")
 export("area.sphwin")
 export("bdist.sphwin")
 export("birth.sp2")
+export("coef.sphppm")
 export("convert.globe")
 export("convert.sphereplot")
 export("convert2")             
@@ -98,15 +103,24 @@ export("sround")
 export("summary.sp2")          
 export("summary.sp3")
 export("summary.sphwin")       
+export("update.sphppm")       
 
-S3method("anova", "sphppm")
-S3method("area", "sphwin")
-S3method("fitted", "sphppm")
-S3method("print", "sp2")
-S3method("print", "sp3")
-S3method("print", "sphwin")
+## methods
+
 S3method("print", "sphppm")
-S3method("summary", "sp2")
-S3method("summary", "sp3")
+S3method("anova", "sphppm")
+S3method("coef", "sphppm")
+S3method("fitted", "sphppm")
+S3method("update", "sphppm")
+
+S3method("print", "sphwin")
 S3method("summary", "sphwin")
+S3method("area", "sphwin")
+
+S3method("print", "sp2")
+S3method("summary", "sp2")
 S3method("envelope", "sp2")
+
+S3method("print", "sp3")
+S3method("summary", "sp3")
+

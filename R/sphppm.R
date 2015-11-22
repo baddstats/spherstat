@@ -59,9 +59,14 @@ fitted.sphppm <- function(object, ...) {
 
 anova.sphppm <- function(object, ...) {
   allargs <- list(object, ...)
-  ismodel <- sapply(dotargs, inherits, what="sphppm")
+  ismodel <- sapply(allargs, inherits, what="sphppm")
   allargs[ismodel] <- lapply(allargs[ismodel], getElement, name="fit")
   return(do.call(anova, allargs))
+}
+
+update.sphppm <- function(object, ...) {
+  object$fit <- update(object$fit, ...)
+  return(object)
 }
 
 

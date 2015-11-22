@@ -3,6 +3,7 @@
 \alias{anova.sphppm}
 \alias{coef.sphppm}
 \alias{fitted.sphppm}
+\alias{update.sphppm}
 \alias{print.sphppm}
 \title{
   Methods for Fitted Models on a Sphere
@@ -17,6 +18,8 @@
  \method{coef}{sphppm}(object, \dots)
 
  \method{fitted}{sphppm}(object, \dots)
+
+ \method{update}{sphppm}(object, \dots)
 
  \method{print}{sphppm}(x, \dots)
 }
@@ -33,7 +36,8 @@
   These are methods for the generic functions
   \code{\link[stats]{anova}},
   \code{\link[stats]{coef}},
-  \code{\link[stats]{fitted}}
+  \code{\link[stats]{fitted}},
+  \code{\link[stats]{update}}
   and 
   \code{\link[base]{print}},
   for the class \code{"sphppm"} of fitted point process models
@@ -52,12 +56,14 @@
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
    Z <- runif.sphwin(20, W)
    model <- sphppm(Z ~ cos(theta) + sin(phi))
-  model
-  fitted(model)
-  anova(model)
+   model
+   coef(model)
+   fitted(model)
+   anova(model)
+   update(model, . ~ sin(theta))
 
    # likelihood ratio test
-   model0 <- sphppm(Z ~ 1)
+   model0 <- update(model, . ~ 1)
    anova(model0, model, test="Chi")
 }
 \keyword{spatial}
