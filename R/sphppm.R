@@ -16,6 +16,7 @@ allcoords <- function(X) {
 }
     
 sphppm <- function(formula) {
+  callingframe <- parent.frame()
   Xname <- formula[[2]]
   X <- eval(substitute(Xname), parent.frame())
   stopifnot(inherits(X, c("sp2", "sp3")))
@@ -28,9 +29,15 @@ sphppm <- function(formula) {
   df <- rbind(cbind(allcoords(X), isdata=TRUE),
               cbind(allcoords(dum), isdata=FALSE))
   df$rho <- rho
+  ## change the LHS of the formula, and modify its environment
   fmla <- formula
   fmla[[2]] <- as.name("isdata")
+  fenv <- new.env(parent=callingframe)
+  assign("df", df, envir=fenv)
+  environment(fmla) <- fenv
+  ## fit model
   fit <- glm(fmla, data=df, family=binomial, offset=-log(rho))
+  ## pack up
   result <- list(rho=rho,
                  fit=fit)
   class(result) <- c("sphppm", class(result))
@@ -65,7 +72,9 @@ anova.sphppm <- function(object, ...) {
 }
 
 update.sphppm <- function(object, ...) {
-  object$fit <- update(object$fit, ...)
+  newcall <- update(object$fit, ..., evaluate=FALSE)
+  newfit <- eval(substitute(newcall), envir=environment(formula(object$fit)))
+  object$fit <- newfit
   return(object)
 }
 
