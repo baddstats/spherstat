@@ -1,7 +1,7 @@
 Package: spherstat
 Type: Package
 Title: Spatial point pattern analysis, geometry and trigometry for the sphere
-Version: 1.5-1
+Version: 1.5-2
 Date: 2015-11-22
 Author: Tom Lawrence and Adrian Baddeley
 Depends: spatstat, globe

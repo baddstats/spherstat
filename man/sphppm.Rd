@@ -27,6 +27,11 @@ sphppm(formula)
   The right hand side of the formula may involve any of the variables
   \code{theta} (colatitude), \code{phi} (longitude)
   and \code{x1, x2, x3} representing three-dimensional spatial location.
+
+  The model is fitted by the logistic regression algorithm of
+  Baddeley et al (2014). This procedure uses a random pattern of
+  dummy points, so the fitted model coefficients may change slightly
+  if the model is re-fitted. 
 }
 \value{
   An object of class \code{sphppm}.
@@ -34,6 +39,11 @@ sphppm(formula)
 }
 \author{
   Adrian Baddeley.
+}
+\references{
+  Baddeley, A. and Coeurjolly, J.-F. and Rubak, E. and Waagepetersen, R. (2014)
+  Logistic regression for spatial Gibbs point processes.
+  \emph{Biometrika} \bold{101}, 377--392.
 }
 \seealso{
   \code{\link{methods.sphppm}}
