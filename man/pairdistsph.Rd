@@ -57,7 +57,7 @@ It is hoped that this will minimise or remove any confusion for users of both
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=1)
+rps <- rpoispp.sphwin(win=sph, lambda=1)
 pairdistsph(rps)
 }
 \keyword{spatial}

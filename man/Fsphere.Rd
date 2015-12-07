@@ -148,7 +148,26 @@ Sizeable amounts of memory may be needed during the calculation
 }
 
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
+
+Baddeley, A.J. and Gill, R.D. The empty space hazard of a spatial pattern. Research Report 1994/3, Department of Mathematics, University of Western Australia, May 1994. 
+
+Baddeley, A.J. and Gill, R.D. Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} (1997) 263--292. 
+
+Borgefors, G. Distance transformations in digital images. \emph{Computer Vision, Graphics and Image Processing} \bold{34} (1986) 344--371. 
+
+Chiu, S.N. and Stoyan, D. (1998) Estimators of distance distributions for spatial patterns. \emph{Statistica Neerlandica} \bold{52}, 239--246. 
+
+Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991. 
+
+Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
+
+Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applications}. 2nd edition. Springer Verlag, 1995. 
+
 }
 \author{
   Tom Lawrence <email:tjlawrence@bigpond.com>
@@ -171,8 +190,8 @@ Sizeable amounts of memory may be needed during the calculation
 }
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
-sph.ref <- rpoispp.sp2(win=sph, lambda=150)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
+sph.ref <- rpoispp.sphwin(win=sph, lambda=150)
 sph.Fest <- Fsphere(X=sph.pp, refpoints=sph.ref)
 }
 \keyword{spatial}

@@ -166,13 +166,6 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
 \section{Note}{
 Sizeable amounts of memory may be needed during the calculation
 }
-\references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
-
-  Van Lieshout, M.N.M. and Baddeley, A.J. (1996)
-  A nonparametric measure of spatial interaction in point patterns.
-  \emph{Statistica Neerlandica} \bold{50}, 344--361.
-}
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
 }
@@ -192,10 +185,36 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \code{\link[spatstat]{Jest}},
   \code{\link{Fsphere}}, \code{\link{Gsphere}}.
 }
+\references{
+Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
+
+Baddeley, A.J. and Gill, R.D. The empty space hazard of a spatial pattern. Research Report 1994/3, Department of Mathematics, University of Western Australia, May 1994. 
+
+Baddeley, A.J. and Gill, R.D. Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} (1997) 263--292. 
+
+Baddeley, A., Kerscher, M., Schladitz, K. and Scott, B.T. Estimating the J function without edge correction. \emph{Statistica Neerlandica} \bold{54} (2000) 315--328. 
+
+Borgefors, G. Distance transformations in digital images. \emph{Computer Vision, Graphics and Image Processing} \bold{34} (1986) 344--371. 
+
+Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991. 
+
+Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
+
+Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applications}. 2nd edition. Springer Verlag, 1995. 
+
+Thonnes, E. and Van Lieshout, M.N.M, A comparative study on the power of Van Lieshout and Baddeley's J-function. \emph{Biometrical Journal} \bold{41} (1999) 721--734. 
+
+Van Lieshout, M.N.M. and Baddeley, A.J. A nonparametric measure of spatial interaction in point patterns. \emph{Statistica Neerlandica} \bold{50} (1996) 344--361. 
+
+}
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
-sph.ref <- rpoispp.sp2(win=sph, lambda=150)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
+sph.ref <- rpoispp.sphwin(win=sph, lambda=150)
 sph.Jest <- Jsphere(X=sph.pp, refpoints=sph.ref)
 }
 \keyword{spatial}

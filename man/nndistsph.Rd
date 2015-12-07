@@ -64,7 +64,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=1)
+rps <- rpoispp.sphwin(win=sph, lambda=1)
 nndistsph(X=rps)
 }
 \keyword{spatial}

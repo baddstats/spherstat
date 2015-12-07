@@ -58,11 +58,11 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 sph <- sphwin(type="sphere")
-X <- rpoispp.sp2(win=sph, lambda=1)
-Y <- rpoispp.sp2(win=sph, lambda=1)
+X <- rpoispp.sphwin(win=sph, lambda=1)
+Y <- rpoispp.sphwin(win=sph, lambda=1)
 nncrosssph(X, Y)
-Xmat <- rpoispp.sp2(win=sph, lambda=1, as.sp=FALSE)
-Ymat <- rpoispp.sp2(win=sph, lambda=1, as.sp=FALSE)
+Xmat <- rpoispp.sphwin(win=sph, lambda=1, as.sp=FALSE)
+Ymat <- rpoispp.sphwin(win=sph, lambda=1, as.sp=FALSE)
 nncrosssph(Xmat, Ymat, rad=1)
 }
 \keyword{spatial}

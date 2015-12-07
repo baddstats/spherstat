@@ -49,11 +49,11 @@ Tom Lawrence
   \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link{rpoispp.sphere}}
+  \code{\link{rpoispp.sphwin}}
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=10)
+rps <- rpoispp.sphwin(win=sph, lambda=10)
 intensitysph(X=rps, win=sph)
 }
 \keyword{spatial}

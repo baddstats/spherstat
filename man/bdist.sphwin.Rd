@@ -46,7 +46,7 @@ function \code{\link[spatstat]{bdist.points}} in \pkg{spatstat}.
 }
 \examples{
 sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
-rpp.sc <- rpoispp.sp2(win=sphcap, lambda=10)
+rpp.sc <- rpoispp.sphwin(win=sphcap, lambda=10)
 bdist.sphwin(X=rpp.sc, win=sphcap)
 }
 \keyword{spatial}

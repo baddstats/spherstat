@@ -85,29 +85,52 @@ Essentially a data frame containing some or all of the following columns:
 \item{theo}{the theoretical value of \code{G(r)} for a stationary Poisson process of the same estimated intensity.}
 }
 
-\section{warnings }{The function \code{G} does not necessarily have a density. Any valid c.d.f. may appear as the nearest neighbour distance distribution function of a stationary point process. 
+\section{Warnings}{The function \code{G} does not necessarily have a density. Any valid c.d.f. may appear as the nearest neighbour distance distribution function of a stationary point process. 
 
 The reduced sample estimator of \code{G} is pointwise approximately unbiased, but need not be a valid distribution function; it may not be a nondecreasing function of \code{r}. Its range is always within \code{[0,1]}. 
 
 The spatial Kaplan-Meier estimator of \code{G} is always nondecreasing but its maximum value may be less than 1. 
-
-
 }
+
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
+
+Baddeley, A J. and Gill, R.D. Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} (1997) 263=-292. 
+Cressie, N.A.C. Statistics for spatial data. John Wiley and Sons, 1991. 
+
+Bahcall, J. N. and Soneira, R. M. (1981) The distribution of stars to $V=16$th magnitude near the north galactic pole: normalization, clustering properties and counts in various bands \emph{Astrophysical Journal}, \bold{246}, pp. 122--135.
+
+Diggle, P.J. Statistical analysis of spatial point patterns. Academic Press, 1983. 
+
+Hanisch, K.-H. (1984) Some remarks on estimators of the distribution function of nearest-neighbour distance in stationary spatial point patterns. \emph{Mathematische Operationsforschung und Statistik, series Statistics} \bold{15}, 409--412. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
+
+Robeson, S., Li, A., and Huang C. (2014) Point pattern analysis on the sphere \emph{Spatial Statistics}, \bold{10}, pp. 76--86.
+
+Scott, D. and Tout C. A. (1989) Nearest neighbour analysis of random distributions on a sphere. \emph{Mon. Not. R. astr. Soc.} \bold{241}, pp. 109--117.
+
+Stoyan, D, Kendall, W.S. and Mecke, J. Stochastic geometry and its applications. 2nd edition. Springer Verlag, 1995.
 }
+
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
 }
+
 \note{
 This function is the analogue for point processes on the sphere of the function \code{\link{Gest}} in \code{\link{spatstat}}, which is the corresponding function for point processes in R^2.  Hence elements of the code for \code{\link{Gest}} and this help page have been taken from \code{\link{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
 }
+
 \seealso{
   \code{\link{Fsphere}}
 }
+
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp)
 sph.Gstab <- Gstab.sph(X=sph.pp)
 }

@@ -45,7 +45,7 @@ Tom Lawrence
 \examples{
 sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
 sphband <- sphwin(type="band", param=c(pi/6, pi/2), ref=c(0,0))
-rpp.band <- rpoispp.sp2(win=sphband, lambda=10)
+rpp.band <- rpoispp.sphwin(win=sphband, lambda=10)
 in.W(points=rpp.band, win=sphcap)
 }
 \keyword{spatial}

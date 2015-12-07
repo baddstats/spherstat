@@ -54,8 +54,8 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps1 <- rpoispp.sp2(win=sph, lambda=1)
-rps2 <- rpoispp.sp2(win=sph, lambda=1)
+rps1 <- rpoispp.sphwin(win=sph, lambda=1)
+rps2 <- rpoispp.sphwin(win=sph, lambda=1)
 crossdistsph(X=rps1, Y=rps2)
 }
 \keyword{spatial}
