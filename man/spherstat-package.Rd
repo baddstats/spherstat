@@ -14,8 +14,8 @@ The preferred coordinate system for data given to functions in this package is t
 \tabular{ll}{
 Package: \tab spherstat\cr
 Type: \tab Package\cr
-Version: \tab 1.4-3\cr
-Date: \tab 2015-11-11\cr
+Version: \tab 1.6\cr
+Date: \tab 2015-12-07\cr
 License: \tab GPL (>= 2.0) \cr
 LazyLoad: \tab yes\cr
 }
@@ -32,6 +32,6 @@ Many functions in these package are the analogues for point processes on the sph
 
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp, win=sph)
 }
