@@ -48,7 +48,14 @@
   An object of class \code{"sp2"} giving the locations of the simulated points.
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Matern, B. (1960) \emph{Spatial Variation}. Meddelanden fraan Statens Skogsforskningsinstitut, volume 59, number 5. Statens Skogsforskningsinstitut, Sweden. 
+
+Matern, B. (1986) \emph{Spatial Variation}. Lecture Notes in Statistics 36, Springer-Verlag, New York. 
+
+Waagepetersen, R. (2007) An estimating function approach to inference for inhomogeneous Neyman-Scott processes. \emph{Biometrics} \bold{63}, 252--258. 
+
 }
 \author{
   Tom Lawrence <email:tjlawrence@bigpond.com>
