@@ -36,14 +36,14 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \examples{
 sphere <- sphwin(type="sphere")
-X <- rpoispp.sp2(win=sphere, lambda=150)
+X <- rpoispp.sphwin(win=sphere, lambda=150)
 X.sphereplot <- convert.sphereplot(X)
 if(require(sphereplot)) {
   rgl.sphgrid(longtype="D")
   rgl.sphpoints(long=X.sphereplot, radius=1)
 }
 # if(require(globe)) {
-# X <- rpoispp.sphere(win=sphere, lambda=150, rad=1)
+# X <- rpoispp.sphwin(win=sphere, lambda=150, rad=1)
 # X.globe <- convert.globe(X)
 # globeearth(eye=northpole, top=nedlands)
 # globepoints(loc=X.globe, eye=northpole, top=nedlands)

@@ -48,7 +48,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 sphere <- sphwin(type="sphere")
-X <- rpoispp.sp2(sphere, lambda=20)
+X <- rpoispp.sphwin(sphere, lambda=20)
 Y <- convert3(X)
 
 i3 <- matrix(c(1,0,0,0,1,0,0,0,1), nrow=3, ncol=3, byrow=TRUE)

@@ -23,7 +23,7 @@ A very brief description of the window \code{x} is printed.
 This is a method for the generic function \code{\link[base]{print}}. 
 }
 \author{
-Tom Lawrence
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for windows on the sphere of the function

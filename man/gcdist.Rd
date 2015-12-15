@@ -45,12 +45,13 @@ gcdistPaired(x, y, rad = 1)
   giving the minimum great circle distance between the given pairs of points.
 }
 \author{
-Tom Lawrence
+Tom Lawrence  <email:tjlawrence@bigpond.com>
 }
 \seealso{
 \code{\link{nndistsph}} (nearest neighbour distances),
 \code{\link{pairdistsph}} (pairwise distances),
-\code{\link{bdist.sphwin}} (boundary distances) 
+\code{\link{bdist.sphwin}} (boundary distances)
+\code{\link[stats]{dist}} (methods for measuring distance in R^d)
 }
 \examples{
 x1 <- matrix(c(pi/2, 0), ncol=2)

@@ -26,7 +26,7 @@
   \code{sphwin} object. 
 }
 \author{
-Tom Lawrence
+Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \seealso{
 \code{\link{sphcos}} (spherical cosine rule), \code{\link{sphsin}}

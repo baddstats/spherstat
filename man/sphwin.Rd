@@ -51,7 +51,7 @@ A one sentence description of the window.
 }
 
 \author{
-Tom Lawrence
+Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 
 
