@@ -83,3 +83,63 @@ envelope.sp2 <-
                  envir.user=envir.user, do.pwrong=do.pwrong,
                  foreignclass="sp2")
 }
+
+envelope.sphppm <- 
+  function(Y, fun=Ksphere, nsim=99, nrank=1, ..., 
+           funargs=list(),
+           simulate=NULL, fix.n=FALSE, 
+           verbose=TRUE, 
+           transform=NULL, global=FALSE, ginterval=NULL, use.theory=NULL, 
+           alternative=c("two.sided", "less", "greater"),
+           scale=NULL, clamp=FALSE, 
+           savefuns=FALSE, savepatterns=FALSE, nsim2=nsim,
+           VARIANCE=FALSE, nSD=2,
+           Yname=NULL, maxnerr=nsim, do.pwrong=FALSE,
+           envir.simul=NULL) {
+  cl <- short.deparse(sys.call())
+  if(is.null(Yname)) Yname <- short.deparse(substitute(Y))
+  if(is.null(fun)) fun <- Kest
+  envir.user <- if(!is.null(envir.simul)) envir.simul else parent.frame()
+  envir.here <- sys.frame(sys.nframe())
+
+  # Extract data pattern X from fitted model Y
+  X <- Y$X
+
+
+  if(is.null(simulate)) {
+    # ...................................................
+    # Simulated realisations of the fitted model Y
+    # will be generated
+    pois <- is.poisson(Y)
+    csr <- is.stationary(Y) && pois
+    type <- if(csr) "csr" else "rpoispp.sp2"
+    if(fix.n)
+      warning("fix.n = TRUE is not implemented; ignored")
+    # expression that will be evaluated
+    TheModel <- Y
+    simexpr <- expression(simulate(TheModel))
+    # evaluate in THIS environment
+    simrecipe <- simulrecipe(type  = type,
+                             expr  = simexpr,
+                             envir = envir.here,
+                             csr   = csr,
+                             pois  = pois,
+                             constraints = "")
+  } else {
+    # ...................................................
+    # Simulations are determined by 'simulate' argument
+    # Processing is deferred to envelopeEngine
+    simrecipe <- simulate
+  }
+  envelopeEngine(X=X, fun=fun, simul=simrecipe, 
+                 nsim=nsim, nrank=nrank, ..., funargs=funargs,
+                 verbose=verbose, clipdata=FALSE,
+                 transform=transform,
+                 global=global, ginterval=ginterval, use.theory=use.theory,
+                 alternative=alternative, scale=scale, clamp=clamp, 
+                 savefuns=savefuns, savepatterns=savepatterns, nsim2=nsim2,
+                 VARIANCE=VARIANCE, nSD=nSD,
+                 Yname=Yname, maxnerr=maxnerr, cl=cl,
+                 envir.user=envir.user, do.pwrong=do.pwrong,
+                 foreignclass="sp2")
+}

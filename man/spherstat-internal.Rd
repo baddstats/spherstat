@@ -34,6 +34,8 @@
 \alias{rmax.rule.sphwin}
 \alias{ptinsphpoly}
 \alias{allcoords}
+\alias{is.poisson.sphppm}
+\alias{is.stationary.sphppm}
 \title{
 Internal Spherstat Functions
 }
@@ -72,6 +74,8 @@ cumtab(z, m)
 rmax.rule.sphwin(win)
 ptinsphpoly(X, win, P)
 allcoords(X)
+\method{is.poisson}{sphppm}(x)
+\method{is.stationary}{sphppm}(x)
 }
 \description{
 Internal spherstat functions

@@ -39,7 +39,9 @@ sphppm <- function(formula) {
   fit <- glm(fmla, data=df, family=binomial, offset=-log(rho))
   ## pack up
   result <- list(rho=rho,
-                 fit=fit)
+                 fit=fit,
+                 X=X,
+                 dum=dum)
   class(result) <- c("sphppm", class(result))
   return(result)
 }
@@ -78,4 +80,80 @@ update.sphppm <- function(object, ...) {
   return(object)
 }
 
+predict.sphppm <- function(object, newdata=NULL,
+                           type=c("intensity", "link", "terms"), ...) {
+  fit <- object$fit
+  type <- match.arg(type)
+  if(is.null(newdata)) {
+    value <- with(fit$data,
+                  switch(type,
+                         link = {
+                           (log(rho) + predict(fit, type="link"))[isdata]
+                         },
+                         intensity = {
+                           (rho * exp(predict(fit, type="link")))[isdata]
+                         },
+                         terms = {
+                           tums <- predict(fit, type="terms")
+                           con <- attr(tums, "constant")
+                           val <- if(is.null(dim(tums))) tums[isdata] else 
+                                  tums[isdata, , drop=FALSE]
+                           attr(val, "constant") <- con
+                           val
+                         }))
+    return(value)
+  }
+  if(!inherits(newdata, c("sp2", "sp3", "data.frame")))
+    stop("newdata should be a data frame or a point pattern")
+  if(inherits(newdata, c("sp2", "sp3"))) {
+    newdata <- allcoords(newdata)
+  } else {
+    reqd <- c("theta", "phi", "x1", "x2", "x3") 
+    if(!all(reqd %in% colnames(newdata)))
+      stop(paste("newdata should have columns named", commasep(sQuote(reqd))))
+  }
+  rho1 <- with(fit$data, unique(rho))
+  if(length(rho1) > 1)
+    stop("Internal error: dummy intensity rho is not constant")
+  newdata$rho <- rho1
+  value <- with(fit$data,
+                switch(type,
+                       link = {
+                         log(rho1) + predict(fit, newdata=newdata, type="link")
+                         },
+                         intensity = {
+                           rho1 *
+                             exp(predict(fit, newdata=newdata, type="link"))
+                         },
+                         terms = {
+                           predict(fit, newdata=newdata, type="terms")
+                         }))
+  return(value)
+}
 
+simulate.sphppm <- function(object, nsim=1, ..., win, drop=TRUE) {
+  if(missing(win) || is.null(win))
+    win <- object$X$win
+  lmax <- max(fitted(object),
+              predict(object, newdata=object$dum, type="intensity"))
+  obj <- object
+  lambdafunction <- function(X, ..., fit=obj) {
+    X <- sp2(X)
+    predict(fit, newdata=X, type="intensity")
+  }
+  out <- replicate(nsim,
+                   rpoispp.sp2(lambda=lambdafunction,
+                               lmax=lmax,
+                               win = win),
+                   simplify=FALSE)
+  if(nsim == 1 && drop)
+    out <- out[[1]]
+  return(out)
+}
+
+is.poisson.sphppm <- function(x) TRUE
+
+is.stationary.sphppm <- function(x) {
+  trend <- rhs.of.formula(formula(x$fit))
+  identical.formulae(trend, ~1)
+}

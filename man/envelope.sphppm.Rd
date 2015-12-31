@@ -1,24 +1,26 @@
-\name{envelope.sp2}
-\alias{envelope.sp2}
-\title{Simulation Envelopes of Summary Function for Spherical Point Pattern}
+\name{envelope.sphppm}
+\alias{envelope.sphppm}
+\title{Simulation Envelopes for Spherical Point Process Model}
 \description{
-  Computes simulation envelopes of a summary function
-  for a point pattern on a sphere.
+  Computes simulation envelopes of a summary function,
+  based on a fitted point process model, for a point pattern on a sphere.
 }
 \usage{
-  \method{envelope}{sp2}(Y, fun=Ksphere, nsim=99, nrank=1, \dots, 
-  funargs=list(), simulate=NULL, fix.n=FALSE, verbose=TRUE, 
-  transform=NULL,global=FALSE,ginterval=NULL,use.theory=NULL,
-  alternative=c("two.sided", "less", "greater"),
-  scale=NULL, clamp=FALSE, 
-  savefuns=FALSE, savepatterns=FALSE,
-  nsim2=nsim, VARIANCE=FALSE, nSD=2, Yname=NULL, maxnerr=nsim,
-  do.pwrong=FALSE, envir.simul=NULL)
+\method{envelope}{sphppm}(Y, fun = Ksphere, nsim = 99, nrank = 1, \dots,
+                 funargs = list(), simulate = NULL, fix.n = FALSE,
+                 verbose = TRUE, transform = NULL, global = FALSE,
+                 ginterval = NULL, use.theory = NULL,
+                 alternative = c("two.sided", "less", "greater"),
+                 scale = NULL, clamp = FALSE,
+                 savefuns = FALSE, savepatterns = FALSE,
+                 nsim2 = nsim, VARIANCE = FALSE, nSD = 2,
+                 Yname = NULL, maxnerr = nsim, do.pwrong = FALSE,
+                 envir.simul = NULL)
 }
 \arguments{
   \item{Y}{
-    A spherical point pattern (object of class
-    \code{"sp2"}).
+    Fitted point process model on a sphere (object of class
+    \code{"sphppm"} usually obtained from \code{\link{sphppm}}).
   }
   \item{fun}{
     Function that computes the desired summary statistic
@@ -55,6 +57,7 @@
     Logical flag indicating whether to generate simulations with the
     same number of points as in \code{Y}.
     (Ignored if the argument \code{simulate} is given.)
+    (CURRENTLY IGNORED IN ALL CASES)
   }
   \item{verbose}{
     Logical flag indicating whether to print progress reports
@@ -155,11 +158,6 @@
     if not the current environment.
   }
 }
-\value{
-  A function value table (object of class \code{"fv"})
-  which can be plotted directly.
-  See \code{\link[spatstat]{envelope}} for further details.
-}
 \details{
   The \code{\link[spatstat]{envelope}} command performs simulations and
   computes envelopes of a summary statistic based on the simulations.
@@ -170,50 +168,32 @@
   The \code{\link[spatstat]{envelope}} function is generic, with methods for
   the classes \code{"ppp"}, \code{"ppm"} and \code{"kppm"}
   described in the help file for \code{\link[spatstat]{envelope}}.
-  This function \code{envelope.sp2} is the method for 
-  spherical point patterns (objects of class \code{"sp2"}).
-  
-  For the most basic use, if you have a spherical point pattern \code{X} and
-  you want to test Complete Spatial Randomness (CSR), type
-  \code{plot(envelope(X, Ksphere,nsim=39))} to see the spherical
-  \eqn{K} function for \code{X} plotted together with the envelopes of
-  the spherical \eqn{K} function for 39 simulations of CSR. 
-  
-  To create simulation envelopes, the command \code{envelope(Y, ...)} 
-  first generates \code{nsim} random point patterns
-  in one of the following ways. 
-  \itemize{
-    \item 
-    If \code{simulate=NULL},
-    then we generate \code{nsim} simulations of
-    Complete Spatial Randomness (i.e. \code{nsim} simulated point patterns
-    each being a realisation of the uniform Poisson point process)
-    with the same intensity as the pattern \code{Y}.
-    \item
-    If \code{simulate} is supplied, then it determines how the
-    simulated point patterns are generated.
-    See \code{\link{envelope}} for details.
-  }
-  
-  The summary statistic \code{fun} is applied to each of these simulated
-  patterns. Typically \code{fun} is one of the functions
-  \code{\link{Ksphere}}, \code{\link{Gsphere}},
-  \code{\link{Fsphere}} or \code{\link{Jsphere}}.
-  It may also be a character string
-  containing the name of one of these functions.
-  
-  For further information, see the documentation for
-  \code{\link[spatstat]{envelope}}.
+  This function \code{envelope.sphppm} is the method for 
+  point process models fitted to spherical point patterns
+  (objects of class \code{"sphppm"}).
+
+  For the most basic use, if you have fitted a model \code{M} to
+  spherical point pattern data and you want to test the goodness-of-fit
+  of the model, simply do \code{plot(envelope(M, nsim=39))}
+  to display pointwise envelopes or
+  \code{plot(envelope(M, nsim=19, global=TRUE))} for global envelopes.
+  Both displays can be interpreted as performing a Monte Carlo test with
+  significance level 0.05.
+}
+\value{
+  A function value table (object of class \code{"fv"})
+  which can be plotted directly.
+  See \code{\link[spatstat]{envelope}} for further details.
 }
 \references{
   Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
-} 
+}
+\author{
+Adrian Baddeley.
+}
 \seealso{
-  \code{\link{envelope.sphppm}} for goodness-of-fit tests of a fitted
-  model.
-  
-  \code{\link{sp2}},
-  \code{\link{runif.sphwin}},
+  \code{\link{envelope.sp2}} for tests of complete spatial randomness.
+
   \code{\link{rpoispp.sp2}},
   \code{\link{Ksphere}},
   \code{\link{Fsphere}},
@@ -222,18 +202,11 @@
 }
 \examples{
    X <- runif.sphwin(30)
-   E <- envelope(X, Ksphere, nsim=39)
-   plot(E)
-}
-\author{Adrian Baddeley
-  \email{Adrian.Baddeley@uwa.edu.au}
-  \url{http://www.maths.uwa.edu.au/~adrian/}
-  and Rolf Turner
-  \email{r.turner@auckland.ac.nz}
+   M <- sphppm(X ~ x1+x2+x3)
+   E <- envelope(M, Ksphere, nsim=19)
+   plot(E) 
 }
 \keyword{spatial}
 \keyword{htest}
 \keyword{hplot}
 \keyword{iteration}
- 
- 
