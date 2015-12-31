@@ -98,6 +98,7 @@ rStrauss.sp2(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"))
   Strauss, D.J. (1975) A model for clustering. \emph{Biometrika}
   \bold{63}, 467-475.
 }
+
 \author{
 Tom Lawrence <email: tjlawrence@bigpond.com>
 }

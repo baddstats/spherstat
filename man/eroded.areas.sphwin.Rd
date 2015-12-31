@@ -90,7 +90,7 @@
   A vector containing the areas of morphological erosions of the sphere.
 }
 \author{
-  Tom Lawrence
+  Tom Lawrence  <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the

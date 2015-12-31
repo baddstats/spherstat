@@ -1,6 +1,6 @@
 \name{spherstat-internal}
-\alias{birth.sp2}
-\alias{death.sp2}
+\alias{birth.sphwin}
+\alias{death.sphwin}
 \alias{gridmat.nlon}
 \alias{in.W.poly}
 \alias{mindist.band}
@@ -40,8 +40,8 @@
 Internal Spherstat Functions
 }
 \usage{
-birth.sp2(X, beta, gamma, R, p, n, rad, win)
-death.sp2(X, beta, gamma, R, p, n, win)
+birth.sphwin(X, beta, gamma, R, p, n, rad, win)
+death.sphwin(X, beta, gamma, R, p, n, win)
 gridmat.nlon(colats, lons, ncolat, nlon)
 in.W.poly(points, win)
 mindist.band(X, win)

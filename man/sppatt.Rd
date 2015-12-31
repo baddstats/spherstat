@@ -74,7 +74,7 @@ sp3(X, win=sphwin(type="sphere"), check=TRUE)
   A one sentence description of the window.
 }
 \author{
-Tom Lawrence
+Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \seealso{
   \code{\link{spherstat-package}} for detail on the spherical coordinate

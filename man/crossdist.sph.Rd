@@ -46,16 +46,29 @@ crossdistsph(X, Y, rad = 1)
 \author{
 Tom Lawrence <email: tjlawrence@bigpond.com>
 }
+\note{
+  This function is the analogue for point processes on the sphere of the
+  function \code{\link[spatstat]{crossdist}} in \pkg{spatstat}, which is the
+  corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
+  elements of the code for \code{crossdist.sph} and help page have been taken
+  from \code{\link[spatstat]{crossdist}} with the permission of
+  A. J. Baddeley.  This enables the code to be highly efficient and give
+  corresponding output to, and for the information on this help page to
+  be consistent with that for the function \code{\link[spatstat]{crossdist}}.
+  It is hoped that this will minimise or remove any confusion for users
+  of both \pkg{spatstat} and \pkg{spherstat}. 
+}
+
 \seealso{
   \code{\link{nncrosssph}} (nearest neighbour distances between two
   samples), \code{\link{nndistsph}} (nearest neighbour distances),
   \code{\link{gcdist}} (great circle distance between two points),
-  \code{\link{bdist.sphwin}} (boundary distances) 
+  \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat]{crossdist}}
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps1 <- rpoispp.sp2(win=sph, lambda=1)
-rps2 <- rpoispp.sp2(win=sph, lambda=1)
+rps1 <- rpoispp.sphwin(win=sph, lambda=1)
+rps2 <- rpoispp.sphwin(win=sph, lambda=1)
 crossdistsph(X=rps1, Y=rps2)
 }
 \keyword{spatial}

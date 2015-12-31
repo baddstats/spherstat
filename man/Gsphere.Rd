@@ -38,9 +38,9 @@ The nearest neighbour distance distribution function (also called the "event-to-
 
 An estimate of \code{G} derived from a spatial point pattern dataset can be used in exploratory data analysis and formal inference about the pattern (Cressie, 1991; Diggle, 1983; Ripley, 1988). In exploratory analyses, the estimate of \code{G} is a useful statistic summarising one aspect of the "clustering" of points. For inferential purposes, the estimate of \code{G} is usually compared to the true value of G for a completely random (Poisson) point process, which is 
 
-\code{G(r) = 1 - exp( - lambda * pi *2 * (1-cos(r))}
+\deqn{G(r) = 1 - exp( - \lambda * \pi *2 * (1-\cos(r))}{G(r) = 1 - exp( - lambda * pi *2 * (1-cos(r))}
 
-where lambda is the intensity (expected number of points per unit area). Deviations between the empirical and theoretical \code{G} curves may suggest spatial clustering or spatial regularity. 
+where \eqn{\lambda}{lambda} is the intensity (expected number of points per unit area). Deviations between the empirical and theoretical \code{G} curves may suggest spatial clustering or spatial regularity. 
 
 This algorithm estimates the nearest neighbour distance distribution function \code{G} from the point pattern \code{X}. It assumes that \code{X} can be treated as a realisation of a stationary (spatially homogeneous) random spatial point process in the plane, observed through a bounded window. The window may have arbitrary shape on the sphere. 
 
@@ -52,7 +52,7 @@ First-time users would be strongly advised not to specify \code{r}. However, if 
 
 The algorithm also returns an estimate of the hazard rate function, \code{lambda(r)}, of \code{G(r)}. The hazard rate is defined as the derivative 
 
-\code{lambda(r) = - (d/dr) log(1 - G(r))}
+\deqn{\lambda(r) = - (d/dr) \log(1 - G(r))}{lambda(r) = - (d/dr) log(1 - G(r))}
 
 This estimate should be used with caution as G is not necessarily differentiable. 
 
@@ -65,7 +65,7 @@ If \code{X} is an object of class \code{\link{sp2}} or \code{\link{sp3}}, then i
 The variance-stabilising transform of \code{G} is \code{asin(sqrt(G(r)))}.  This is implemented in \code{spherstat} as \code{Gstab.sph}, and is a superior statistic to \code{G} when used for inference based on a Monte Carlo or envelope-based test.
 }
 \value{
-An object of class \code{\link{fv}}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
+An object of class \code{\link[spatstat]{fv}}, see \code{\link[spatstat]{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 
 Essentially a data frame containing some or all of the following columns: 
 \item{r}{the values of the argument r at which the function \code{G(r)} has been estimated}
@@ -85,29 +85,52 @@ Essentially a data frame containing some or all of the following columns:
 \item{theo}{the theoretical value of \code{G(r)} for a stationary Poisson process of the same estimated intensity.}
 }
 
-\section{warnings }{The function \code{G} does not necessarily have a density. Any valid c.d.f. may appear as the nearest neighbour distance distribution function of a stationary point process. 
+\section{Warnings}{The function \code{G} does not necessarily have a density. Any valid c.d.f. may appear as the nearest neighbour distance distribution function of a stationary point process. 
 
 The reduced sample estimator of \code{G} is pointwise approximately unbiased, but need not be a valid distribution function; it may not be a nondecreasing function of \code{r}. Its range is always within \code{[0,1]}. 
 
 The spatial Kaplan-Meier estimator of \code{G} is always nondecreasing but its maximum value may be less than 1. 
-
-
 }
+
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
+
+Baddeley, A J. and Gill, R.D. Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} (1997) 263=-292. 
+Cressie, N.A.C. Statistics for spatial data. John Wiley and Sons, 1991. 
+
+Bahcall, J. N. and Soneira, R. M. (1981) The distribution of stars to $V=16$th magnitude near the north galactic pole: normalization, clustering properties and counts in various bands \emph{Astrophysical Journal}, \bold{246}, pp. 122--135.
+
+Diggle, P.J. Statistical analysis of spatial point patterns. Academic Press, 1983. 
+
+Hanisch, K.-H. (1984) Some remarks on estimators of the distribution function of nearest-neighbour distance in stationary spatial point patterns. \emph{Mathematische Operationsforschung und Statistik, series Statistics} \bold{15}, 409--412. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
+
+Robeson, S., Li, A., and Huang C. (2014) Point pattern analysis on the sphere \emph{Spatial Statistics}, \bold{10}, pp. 76--86.
+
+Scott, D. and Tout C. A. (1989) Nearest neighbour analysis of random distributions on a sphere. \emph{Mon. Not. R. astr. Soc.} \bold{241}, pp. 109--117.
+
+Stoyan, D, Kendall, W.S. and Mecke, J. Stochastic geometry and its applications. 2nd edition. Springer Verlag, 1995.
 }
+
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
 }
+
 \note{
-This function is the analogue for point processes on the sphere of the function \code{\link{Gest}} in \code{\link{spatstat}}, which is the corresponding function for point processes in R^2.  Hence elements of the code for \code{\link{Gest}} and this help page have been taken from \code{\link{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
+This function is the analogue for point processes on the sphere of the function \code{\link[spatstat]{Gest}} in \pkg{spatstat}, which is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of the code for \code{\link[spatstat]{Gest}} and this help page have been taken from \code{\link[spatstat]{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link[spatstat]{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \pkg{spatstat} and \pkg{spherstat}.
 }
+
 \seealso{
-  \code{\link{Fsphere}}
+\code{\link{Fsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}
 }
+
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp)
 sph.Gstab <- Gstab.sph(X=sph.pp)
 }

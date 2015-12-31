@@ -45,7 +45,7 @@ envelope.sp2 <-
     nY <- nrow(Y$X)
     Ywin <- Y$win
     # expression that will be evaluated
-    simexpr <- expression(rpoispp.sp2(Yintens, win=Ywin))
+    simexpr <- expression(rpoispp.sphwin(Yintens, win=Ywin))
     # evaluate in THIS environment
     simrecipe <- simulrecipe(type = "csr",
                              expr = simexpr,

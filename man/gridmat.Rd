@@ -66,7 +66,7 @@ gridmat(colats, lons, ncolat=100, nlon=100, cellarea=FALSE)
   longitude - both in ascending order. 
 }
 \author{
-Tom Lawrence
+Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 gridsph <- gridmat(colats=c(0, pi), lons=c(0, 2*pi), ncolat=100, nlon=100)

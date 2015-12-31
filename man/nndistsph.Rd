@@ -60,11 +60,11 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 \seealso{
   \code{\link{pairdistsph}} (pairwise distances for a single sample),
   \code{\link{gcdist}} (great circle distance between two points),
-  \code{\link{bdist.sphwin}}(boundary distances) 
+  \code{\link{bdist.sphwin}}(boundary distances), \code{\link[spatstat]{nndist}}
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=1)
+rps <- rpoispp.sphwin(win=sph, lambda=1)
 nndistsph(X=rps)
 }
 \keyword{spatial}

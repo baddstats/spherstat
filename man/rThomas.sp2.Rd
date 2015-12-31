@@ -49,9 +49,6 @@ rThomas.sp2(alpha, scale, mu, win=sphwin(type="sphere"), parents=FALSE)
   An object of class \code{"sp2"}, giving the locations of points in
   the simulation. 
 }
-\references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
-}
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
 }
@@ -73,6 +70,16 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \code{\link{rMatClust.sp2}}, \code{\link{rMaternI.sp2}},
   \code{\link{rMaternII.sp2}}, \code{\link{rpoispp.sp2}},
   \code{\link{rStrauss.sp2}}, \code{\link[spatstat]{rThomas}} 
+}
+\references{
+Diggle, P. J., Besag, J. and Gleaves, J. T. (1976) Statistical analysis of spatial point patterns by means of distance methods. \emph{Biometrics} \bold{32} 659--667. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Thomas, M. (1949) A generalisation of Poisson's binomial limit for use in ecology. \emph{Biometrika} \bold{36}, 18--25. 
+
+Waagepetersen, R. (2007) An estimating function approach to inference for inhomogeneous Neyman-Scott processes. \emph{Biometrics} \bold{63}, 252--258. 
+
 }
 \examples{
 rT1 <- rThomas.sp2(250, 25, 5, sphwin(), FALSE)

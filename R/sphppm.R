@@ -25,7 +25,7 @@ sphppm <- function(formula) {
   lam <- intensitysph(X)
   rho <- 2 * lam
   ## generate Poisson dummy points with same average intensity
-  dum <- rpoispp.sp2(rho, win)
+  dum <- rpoispp.sphwin(rho, win)
   df <- rbind(cbind(allcoords(X), isdata=TRUE),
               cbind(allcoords(dum), isdata=FALSE))
   df$rho <- rho

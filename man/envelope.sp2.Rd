@@ -206,7 +206,20 @@
   \code{\link[spatstat]{envelope}}.
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Baddeley, A., Diggle, P.J., Hardegen, A., Lawrence, T., Milne, R.K. and Nair, G. (2014) On tests of spatial pattern based on simulation envelopes. \emph{Ecological Monographs}, \bold{84}(3) 477--489
+
+Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991. 
+
+Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Arnold, 2003. 
+
+Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+
+Ripley, B.D. (1981) \emph{Spatial statistics}. John Wiley and Sons. 
+
+Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
+
+Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields: methods of geometrical statistics}. John Wiley and Sons. 
+
 } 
 \seealso{
   \code{\link{envelope.sphppm}} for goodness-of-fit tests of a fitted
@@ -214,7 +227,7 @@
   
   \code{\link{sp2}},
   \code{\link{runif.sphwin}},
-  \code{\link{rpoispp.sp2}},
+  \code{\link{rpoispp.sphwin}},
   \code{\link{Ksphere}},
   \code{\link{Fsphere}},
   \code{\link{Gsphere}},

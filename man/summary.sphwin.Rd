@@ -24,12 +24,12 @@ This is a method for the generic function \code{\link{summary}}.
 }
 
 \author{
-Tom Lawrence
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for windows on the sphere of the
   function \code{\link[spatstat]{summary.owin}} in \pkg{spatstat}, which
-  is the corresponding function for point processes in R^2.  Hence
+  is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
   elements of this help page have been taken from
   \code{\link[spatstat]{summary.owin}} with the permission of
   A. J. Baddeley.  This enables the information on this help page to be
@@ -40,7 +40,7 @@ Tom Lawrence
 
 \seealso{
 \code{\link{summary.sp2}}, \code{\link{summary.sp3}},
-\code{\link{print.sp2}}, \code{\link{print.sp2}},
+\code{\link{print.sp2}}, \code{\link{print.sp3}},
 \code{\link{print.sphwin}} 
 }
 \examples{

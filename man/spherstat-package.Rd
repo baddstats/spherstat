@@ -14,24 +14,25 @@ The preferred coordinate system for data given to functions in this package is t
 \tabular{ll}{
 Package: \tab spherstat\cr
 Type: \tab Package\cr
-Version: \tab 1.4-3\cr
-Date: \tab 2015-11-11\cr
+Version: \tab 1.6\cr
+Date: \tab 2015-12-07\cr
 License: \tab GPL (>= 2.0) \cr
 LazyLoad: \tab yes\cr
 }
 }
 \author{
-Tom Lawrence tjlawrence@bigpond.com
+Tom Lawrence <email: tjlawrence@bigpond.com>
+Adrian Baddeley
 }
 
 \note{
-Many functions in these package are the analogues for point processes on the sphere of functions available in \code{\link{spatstat}} for point processes in R^2 or R^3.  Hence elements of the code and help pages in this package have been taken from corresponding material in \code{\link{spatstat}}, with the permission of A. J. Baddeley.  This enables the code in \code{\link{spatstat}} to be both efficient and give similar output to corresponding functions in \code{\link{spatstat}}.  It is hoped that this will minimise or remove any confusion for users of both \code{\link{spatstat}} and \code{\link{spherstat}}.
+Many functions in these package are the analogues for point processes on the sphere of functions available in \pkg{spatstat} for point processes in \eqn{R^2}{R^2} or \eqn{R^3}{R^3}.  Hence elements of the code and help pages in this package have been taken from corresponding material in \pkg{spatstat}, with the permission of A. J. Baddeley.  This enables the code in \pkg{spatstat} to be both efficient and give similar output to corresponding functions in \pkg{spatstat}.  It is hoped that this will minimise or remove any confusion for users of both \pkg{spatstat} and \pkg{spherstat}.
 }
 
 \keyword{"spatial statistics"}
 
 \examples{
 sph <- sphwin(type="sphere")
-sph.pp <- rpoispp.sp2(win=sph, lambda=10)
+sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp, win=sph)
 }

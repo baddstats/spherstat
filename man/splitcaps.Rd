@@ -58,7 +58,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \code{\link{gcdist}}
 }
 \examples{
-X <- rpoispp.sp2(lambda=10, win=sphwin("bandcomp", param=c(pi/3, 2*pi/3)))
+X <- rpoispp.sphwin(lambda=10, win=sphwin("bandcomp", param=c(pi/3, 2*pi/3)))
 Xupper <- splitcaps(X=X, upper=TRUE, lower=FALSE)
 Xlower <- splitcaps(X=X, upper=FALSE, lower=TRUE)
 Xboth <- splitcaps(X=X, upper=TRUE, lower=TRUE)

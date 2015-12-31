@@ -33,7 +33,7 @@ Tom Lawrence
 \note{
 These functions are the analogues for point processes on the sphere of
 the function \code{\link[spatstat]{summary.ppp}} in \pkg{spatstat},
-which is the corresponding function for point processes in R^2.  Hence
+which is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
 elements of this help page have been taken from
 \code{\link[spatstat]{summary.ppp}} with the permission of
 A. J. Baddeley.  This enables the information on this help page to be

@@ -35,12 +35,12 @@
 A numeric.
 }
 \author{
-Tom Lawrence
+Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
   function \code{\link[spatstat]{intensity}} in \pkg{spatstat}, which is
-  the corresponding function for point processes in R^2.  Hence elements
+  the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements
   of this help page have been taken from \code{\link[spatstat]{intensity}}
   with the 
   permission of A. J. Baddeley.  This enables the information on this help
@@ -49,11 +49,11 @@ Tom Lawrence
   \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link{rpoispp.sphere}}
+  \code{\link{rpoispp.sphwin}}
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=10)
+rps <- rpoispp.sphwin(win=sph, lambda=10)
 intensitysph(X=rps, win=sph)
 }
 \keyword{spatial}

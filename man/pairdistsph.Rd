@@ -43,7 +43,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 \note{
 This function is the analogue for point processes on the sphere of the
 function \code{\link[spatstat]{pairdist}} in \pkg{spatstat}, which is
-the corresponding function for point processes in R^2.  Hence elements
+the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements
 of this help page have been taken from \code{\link[spatstat]{pairdist}} with the
 permission of A. J. Baddeley.  This enables the information on this help
 page to be consistent with that for \code{\link[spatstat]{pairdist}}.
@@ -53,11 +53,11 @@ It is hoped that this will minimise or remove any confusion for users of both
 \seealso{
  \code{\link{nndistsph}} (nearest neighbour distances),
  \code{\link{gcdist}} (great circle distance between two points),
- \code{\link{bdist.sphwin}} (boundary distances) 
+ \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat]{pairdist}} 
 }
 \examples{
 sph <- sphwin(type="sphere")
-rps <- rpoispp.sp2(win=sph, lambda=1)
+rps <- rpoispp.sphwin(win=sph, lambda=1)
 pairdistsph(rps)
 }
 \keyword{spatial}
