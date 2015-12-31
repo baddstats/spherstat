@@ -1,13 +1,13 @@
-rpoispp.sp2 <- function(lambda, win=sphwin(type="sphere"), lmax=NULL, as.sp=TRUE, sp.dim="2", ...) {
+rpoispp.sp2 <- function(lambda, win=sphwin(type="sphere"), lmax=NULL, as.sp=TRUE, ndim="2", ...) {
 	stopifnot(inherits(win, "sphwin"))
 	if(is.numeric(lambda) && length(lambda)==1 && lambda>0) {
 		asph <- area.sphwin(w=win)
 		stopifnot(asph > 0)
 		n <- rpois(1, lambda*asph)
-		X <- runif.sphwin(n, win=win, as.sp=as.sp, sp.dim=sp.dim)
+		X <- runif.sphwin(n, win=win, as.sp=as.sp, ndim=ndim)
 	}
 	else if (is.function(lambda) && !is.null(lmax)) {
-	        X <- rpoispp.sp2(lambda=lmax, win=win, as.sp=as.sp, sp.dim=sp.dim)
+	        X <- rpoispp.sp2(lambda=lmax, win=win, as.sp=as.sp, ndim=ndim)
 		if(inherits(X, c("sp2", "sp3"))) {
 			X <- X$X
 		}
@@ -19,14 +19,14 @@ rpoispp.sp2 <- function(lambda, win=sphwin(type="sphere"), lmax=NULL, as.sp=TRUE
         		X <- X[retain, ]
 		}
 		if(as.sp==TRUE) {
-			X <- switch(sp.dim,
+			X <- switch(ndim,
 				"2" = {
 					sp2(X, win)
 				},
 				"3" = {
 					sp3(X, win)
 				},
-				stop("sp.dim incorrectly defined")
+				stop("ndim incorrectly defined")
 			)
 		}
 	}

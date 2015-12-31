@@ -3,7 +3,7 @@ rThomas.sphwin <- function(kappa, scale, mu, win=sphwin(type="sphere"), parents=
 	stopifnot(kappa > 0)
 	stopifnot(scale > 0)
 	stopifnot(mu > 0)
-	stopifnot(sum(ndim==c("2","3")) != 1)
+	stopifnot(sum(ndim==c("2","3")) == 1)
 	if(scale/(4*pi*kappa*tanh(scale)) <= poisthresh) {
 		warning("Process near-identical to Poisson with intensity kappa*mu; simulating that process instead")
 		output <- rpoispp.sphwin(lambda=kappa*mu, win=win, nsim=nsim, drop=drop, as.sp=as.sp, ndim=ndim)
@@ -17,16 +17,16 @@ rThomas.sphwin <- function(kappa, scale, mu, win=sphwin(type="sphere"), parents=
 			}
 			rpl <- nrow(rp)
 			rThom2 <- rp
-			for(i in 1:rpl) {
+			for(j in 1:rpl) {
 				np <- rpois(1, mu)
 				if(np > 0) {
 					rThom1 <-  rFisher(n=np, mode=rp[i,], kappa=scale, win=sphwin(type="sphere", rad=win$rad), as.sp=FALSE, ndim="2")
 					inrt <- in.W(points=rThom1, win=win)
-					rThom2 <- rbind(rThom2, rThom1[inrt,])
+					rThom2 <- rbind(rThom2, rThom1[inrt,,drop=FALSE])
 				}
 			}
 			if(!parents) {
-				output <- rThom2[(rpl+1):nrow(rThom2),]
+                          rThom2 <- rThom2[(rpl+1):nrow(rThom2),,drop=FALSE]
 			}
 			else {
 				output <- rThom2

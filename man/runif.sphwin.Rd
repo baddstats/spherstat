@@ -100,10 +100,10 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \examples{
 sph <- sphwin(type="sphere")
-rus <- runif.sphwin(n=150, win=sph, as.sp=TRUE, sp.dim="2")
+rus <- runif.sphwin(n=150, win=sph, as.sp=TRUE, ndim="2")
 rus
 
-rps <- rpoispp.sphwin(win=sph, lambda=150, as.sp=TRUE, sp.dim="2")
+rps <- rpoispp.sphwin(win=sph, lambda=150, as.sp=TRUE, ndim="2")
 rps
 }
 \keyword{spatial}

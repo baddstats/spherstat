@@ -27,7 +27,7 @@ rHardcore.sphwin <- function(beta, R=0, p=0.5, m=100, win=sphwin(type="sphere"),
 				n <- nrow(X)
 			}
 		} else {
-			for(i in 1:m) {
+			for(j in 1:m) {
 				prop <- runif(1,0,1)
 				if(prop <= p) {
 					X <- birth.sphwin(X=X, beta=beta, gamma=0, R=R, p=p, n=n, win=wina)
@@ -40,7 +40,7 @@ rHardcore.sphwin <- function(beta, R=0, p=0.5, m=100, win=sphwin(type="sphere"),
 	  	}
 		if(expand) {
 			inX <- in.W(X, win)
-			X <- X[inX,]
+			X <- X[inX,,drop=FALSE]
 		}
 		output[[i]] <- switch(ndim,
 			"2" = {

@@ -3,7 +3,7 @@ rMatClust.sphwin <- function(kappa, scale, mu, win=sphwin(type="sphere"), parent
 	stopifnot(kappa > 0)
 	stopifnot(mu > 0)
 	stopifnot(scale > 0)
-	stopifnot(sum(ndim=c("2", "3"))==1)
+	stopifnot(sum(ndim==c("2", "3"))==1)
 	rad <- win$rad
 	output <- list()
 	for(i in 1:nsim) {
@@ -14,17 +14,17 @@ rMatClust.sphwin <- function(kappa, scale, mu, win=sphwin(type="sphere"), parent
 		}
 		rpl <- nrow(rp)
 		rM <- rp
-		for(i in 1:rpl) {
+		for(j in 1:rpl) {
 			nlam <- rpois(1, mu)
 			if(nlam > 0) {
 				daughtwin <- sphwin(type="band", param=c(0, scale/rad), ref=rp[i,])
 				rMat1 <-  runif.sphwin(n=nlam,  win=daughtwin, as.sp=FALSE)
 				inrm <- in.W(points=rMat1, win=win)
-				rM <- rbind(rM, rMat1[inrm,])
+				rM <- rbind(rM, rMat1[inrm,,drop=FALSE])
 			}
 		}
 		if(!parents) {
-			X <- rM[(rpl+1):nrow(rM),]
+			X <- rM[(rpl+1):nrow(rM),,drop=FALSE]
 		}
 		else {
 			X <- rM

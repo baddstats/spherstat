@@ -14,7 +14,7 @@ rFisher <- function(n, mode, kappa, win=sphwin(type="sphere"), nsim=1, drop=TRUE
 		rf1 <- cbind(theta, phi)
 		rf1 <- rot.sphere(points=rf1, northpole=mode, inverse=TRUE)
 		rf1in <- in.W(rf1, win)
-		r2keep <- rf1[rf1in,]
+		r2keep <- rf1[rf1in,, drop=FALSE]
 		output[[i]] <- switch(ndim,
 			"2" = {
 				r2keep

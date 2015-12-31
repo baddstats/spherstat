@@ -39,7 +39,7 @@
   sphere.
 
   Simulated realisations of the model are generated using
-  \code{\link{rpoispp.sp2}}, using \code{\link{predict.sphppm}} to
+  \code{\link{rpoispp.sphwin}}, using \code{\link{predict.sphppm}} to
   evaluate the intensity function.
 }
 \value{
@@ -51,7 +51,7 @@
   Adrian Baddeley.
 }
 \seealso{
-  \code{\link{sphppm}}, \code{\link{rpoispp.sp2}}
+  \code{\link{sphppm}}, \code{\link{rpoispp.sphwin}}
 }
 \examples{
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))

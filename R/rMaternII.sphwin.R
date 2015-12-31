@@ -14,7 +14,7 @@ rMaternII.sphwin <- function(kappa, r, win=sphwin(type="sphere"), nsim=1, drop=T
 		X1 <- rpoispp.sphwin(lambda=kappa, win=wina, as.sp=FALSE)
 		nrX <- nrow(X1)
 		X2 <- runif.sphwin(n=1, win=wina, as.sp=FALSE)
-		for(i in 1:(nrX-1)) {
+		for(k in 1:(nrX-1)) {
 			Xtest <- runif.sphwin(n=1, win=wina, as.sp=FALSE)
 			to.keep <- c()
 			nrX2 <- nrow(X2)
@@ -32,13 +32,13 @@ rMaternII.sphwin <- function(kappa, r, win=sphwin(type="sphere"), nsim=1, drop=T
 					X2 <- rbind(X2, Xtest)
 				}
 				else {
-					X2 <- X2[to.keep,]
+					X2 <- X2[to.keep,,drop=FALSE]
 				}
 			}
 		}
 		if(stationary) {
 			X2in <- in.W(X2, win)
-			X2 <- X2[X2in,]
+			X2 <- X2[X2in, , drop=FALSE]
 		}
 		output[[i]] <- switch(ndim,
 			"2" = {
@@ -59,7 +59,7 @@ rMaternII.sphwin <- function(kappa, r, win=sphwin(type="sphere"), nsim=1, drop=T
 		}
 	}
 	if(nsim==1 && drop==TRUE) {
-		output <- output[[i]]
+		output <- output[[1]]
 	}
 	output
 }

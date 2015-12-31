@@ -194,7 +194,7 @@ Adrian Baddeley.
 \seealso{
   \code{\link{envelope.sp2}} for tests of complete spatial randomness.
 
-  \code{\link{rpoispp.sp2}},
+  \code{\link{rpoispp.sphwin}},
   \code{\link{Ksphere}},
   \code{\link{Fsphere}},
   \code{\link{Gsphere}},

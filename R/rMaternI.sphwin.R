@@ -13,7 +13,7 @@ rMaternI.sphwin <- function(kappa, r, win=sphwin(type="sphere"), nsim=1, drop=TR
 		X1 <- rpoispp.sphwin(lambda=kappa, win=wina, as.sp=FALSE)
 		nrX <- nrow(X1)
 		X2 <- runif.sphwin(n=1, win=wina, as.sp=FALSE)
-		for(i in 1:(nrX-1)) {
+		for(j in 1:(nrX-1)) {
 			Xtest <- runif.sphwin(n=1, win=wina, as.sp=FALSE)
 			if(min(nncrosssph(Xtest, X2)) > r) {
 				X2 <- rbind(X2, Xtest)
@@ -21,7 +21,7 @@ rMaternI.sphwin <- function(kappa, r, win=sphwin(type="sphere"), nsim=1, drop=TR
 		}
 		if(stationary==TRUE) {
 			Xin <- in.W(X2, win)
-			X2 <- X2[Xin]
+			X2 <- X2[Xin, , drop=FALSE]
 		}
 		output[[i]] <- switch(ndim,
 			"2" = {
