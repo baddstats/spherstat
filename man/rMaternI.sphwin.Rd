@@ -89,7 +89,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \code{\link{rThomas.sphwin}} 
 }
 \examples{
-rM1 <- rMaternI.sphwin(kappa=20, r=pi/10, win=sphwin())
+rM1 <- rMaternI.sphwin(kappa=3, r=pi/30, win=sphwin())
 rM1
 }
 \keyword{spatial}
