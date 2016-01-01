@@ -91,7 +91,7 @@ This function is the analogue for point processes on the sphere of the
   \code{\link{rThomas.sphwin}} 
 }
 \examples{
-rM2 <- rMaternII.sphwin(kappa=20, r=pi/10, win=sphwin())
+rM2 <- rMaternII.sphwin(kappa=5, r=pi/20, win=sphwin())
 rM2
 }
 \keyword{spatial}
