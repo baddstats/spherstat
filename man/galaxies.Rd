@@ -1,5 +1,6 @@
 \name{galaxies}
 \alias{galaxies}
+\alias{galaxiesband}
 \docType{data}
 \title{
   Galaxies
@@ -7,12 +8,15 @@
 \description{
   Sky positions of 10610 galaxies from the New General Catalogue (NGC).
 }
-\usage{data("galaxies")}
+\usage{data("galaxies"); data("galaxiesband")}
 \format{
-  A \code{data.frame}
+  The raw dataset \code{galaxies} is a \code{data.frame}
   with two columns containing the galactic coordinates
   longitude (in degrees from 0 to 360) and latitude
   (in degrees from -90 to 90).
+
+  The object \code{galaxiesband} is a spherical point pattern
+  (object of class \code{"sp2"}).
 }
 \details{
   This dataset, extracted from the New General Catalogue (NGC),
@@ -27,6 +31,12 @@
   region lying between the concentric small circles of radius
   80 and 95 degrees respectively, with common centre
   at longitude 187.5 degrees, latitude 25 degrees.
+
+  The raw dataset \code{galaxies} is a data frame containing the
+  sky positions of the galaxies. The object \code{galaxiesband} is a
+  spherical point pattern (object of class \code{"sp2"}) containing the
+  same points, but also containing a representation of the observable
+  region in the sky.
 }
 \source{
   Steinicke (2015)
@@ -39,5 +49,7 @@
 }
 \examples{
 data(galaxies)
+data(galaxiesband)
+plot(galaxiesband, eye=c(pi/2, 0))
 }
 \keyword{datasets}
