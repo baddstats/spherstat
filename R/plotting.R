@@ -2,10 +2,6 @@
 
 plot.sp3 <- plot.sp2 <- function(x, ..., eye, top, add=FALSE) {
   X <- convert.globe(x)
-  if(!add) {
-    globeearth(NULL)
-    plot(x$win, ..., add=TRUE)
-  }
   if(missing(eye) || is.null(eye)) {
     eye <- place('nedlands')
   } else if(!is.globe.point(eye)) {
@@ -15,6 +11,10 @@ plot.sp3 <- plot.sp2 <- function(x, ..., eye, top, add=FALSE) {
     top <- place('northpole')
   } else if(!is.globe.point(top)) {
     top <- Convert.globe(top)
+  }
+  if(!add) {
+    globeearth(NULL)
+    plot(x$win, ..., eye=eye, top=top, add=TRUE)
   }
   globepoints(X, eye=eye, top=top, ...)
 }
@@ -43,10 +43,10 @@ plot.sphwin <- function(x, ..., eye, top, add=FALSE) {
            fullcircle <- seq(0, 2*pi, length=1000)
            if(param[1] != 0)
              curve1 <- rot.sphere(cbind(param[1], fullcircle),
-                                  northpole=ref)
+                                  northpole=ref, inverse=TRUE)
            if(param[2] != pi)
              curve2 <- rot.sphere(cbind(param[2], fullcircle),
-                                  northpole=ref)
+                                  northpole=ref, inverse=TRUE)
          },
          wedge = ,
          polygon = ,
