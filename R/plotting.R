@@ -48,12 +48,34 @@ plot.sphwin <- function(x, ..., eye, top, add=FALSE) {
              curve2 <- rot.sphere(cbind(param[2], fullcircle),
                                   northpole=ref, inverse=TRUE)
          },
-         wedge = ,
-         polygon = ,
+         wedge = {
+           halfcircle <- seq(0, pi, length=500)
+           long1 <- param[2]
+           long2 <- long1 + param[1]
+           curve1 <- rot.sphere(cbind(halfcircle, long1),
+                                northpole=ref, inverse=TRUE)
+           curve2 <- rot.sphere(cbind(halfcircle, long2),
+                                northpole=ref, inverse=TRUE)
+         },
+         polygon = {
+           verts <- param
+           curve1 <- matrix(, 0, 2)
+           nv <- nrow(verts) - 1
+           for(i in 1:nv) {
+             path <- geodesicarc(verts[i,], verts[i+1,])
+             curve1 <- rbind(curve1, path)
+           }
+         },
          quadrangle = {
-           warning(paste(
-             "Plotting is not yet implemented for windows of type",
-             sQuote(type)))
+           colat <- param[1:2]
+           long <- param[4] + c(0, param[3])
+           colats <- seq(colat[1], colat[2], length=250)
+           longs  <- seq(long[1], long[2], length=250)
+           curve1 <- rbind(cbind(colat[1], longs),
+                           cbind(colats, long[2]),
+                           cbind(colat[2], rev(longs)),
+                           cbind(rev(colats), long[1]))
+           curve1 <- rot.sphere(curve1, northpole=ref, inverse=TRUE)
          })
   if(!is.null(curve1))
     globelines(convert.globe(curve1), ..., eye=eye, top=top)
@@ -71,5 +93,10 @@ Convert.globe <- function(x) {
   convert.globe(x)
 }
 
-
-
+geodesicarc <- function(A, B, n=100) {
+  D <- rot.sphere(A, northpole=B)
+  colats <- seq(D[1], 0, length=n)
+  Path <- cbind(colats, D[2])
+  P <- rot.sphere(Path, northpole=B, inverse=TRUE)
+  return(P)
+}
