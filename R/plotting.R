@@ -1,39 +1,37 @@
-plot.sp3 <- plot.sp2 <- local({
+## plot methods for sp2, sp3, sphwin
 
-  is.globe.point <- function(x) {
-    is.list(x) && identical(names(x), c("lon", "lat"))
+plot.sp3 <- plot.sp2 <- function(x, ..., eye, top, add=FALSE) {
+  X <- convert.globe(x)
+  if(!add) {
+    globeearth(NULL)
+    plot(x$win, ..., add=TRUE)
   }
-
-  Convert.globe <- function(x) {
-    if(!is.matrix(x)) x <- matrix(x, nrow=1)
-    convert.globe(x)
+  if(missing(eye) || is.null(eye)) {
+    eye <- place('nedlands')
+  } else if(!is.globe.point(eye)) {
+    eye <- Convert.globe(eye)
   }
-  
-  plot.sp2 <- function(x, ..., eye, top, add=FALSE) {
-    X <- convert.globe(x)
-    if(!add) {
-      globeearth(NULL)
-      plot(x$win, ..., add=TRUE)
-    }
-    if(missing(eye) || is.null(eye)) {
-      eye <- place('nedlands')
-    } else if(!is.globe.point(eye)) {
-      eye <- Convert.globe(eye)
-    }
-    if(missing(top) || is.null(top)) {
-      top <- place('northpole')
-    } else if(!is.globe.point(top)) {
-      top <- Convert.globe(top)
-    }
-    globepoints(X, eye=eye, top=top, ...)
+  if(missing(top) || is.null(top)) {
+    top <- place('northpole')
+  } else if(!is.globe.point(top)) {
+    top <- Convert.globe(top)
   }
-
-  plot.sp2
-})
+  globepoints(X, eye=eye, top=top, ...)
+}
 
 plot.sphwin <- function(x, ..., eye, top, add=FALSE) {
   if(!add)
     globeearth(NULL)
+  if(missing(eye) || is.null(eye)) {
+    eye <- place('nedlands')
+  } else if(!is.globe.point(eye)) {
+    eye <- Convert.globe(eye)
+  }
+  if(missing(top) || is.null(top)) {
+    top <- place('northpole')
+  } else if(!is.globe.point(top)) {
+    top <- Convert.globe(top)
+  }
   type  <- x$type
   param <- x$param
   ref   <- x$ref
@@ -53,14 +51,24 @@ plot.sphwin <- function(x, ..., eye, top, add=FALSE) {
          wedge = ,
          polygon = ,
          quadrangle = {
-           warning(paste("Plotting is not yet implemented for windows of type",
-                         sQuote(type)))
+           warning(paste(
+             "Plotting is not yet implemented for windows of type",
+             sQuote(type)))
          })
   if(!is.null(curve1))
     globelines(convert.globe(curve1), ..., eye=eye, top=top)
   if(!is.null(curve2))
     globelines(convert.globe(curve2), ..., eye=eye, top=top)
   return(invisible(NULL))
+}
+
+is.globe.point <- function(x) {
+  is.list(x) && identical(names(x), c("lon", "lat"))
+}
+
+Convert.globe <- function(x) {
+  if(!is.matrix(x)) x <- matrix(x, nrow=1)
+  convert.globe(x)
 }
 
 
