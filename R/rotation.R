@@ -1,7 +1,7 @@
 # methods for 'rotate' for spherical objects
 
 rotate.sphwin <- function(X, northpole, inverse=FALSE, ...) {
-  if(length(...) > 0)
+  if(length(list(...)) > 0)
     warning("Additional arguments were ignored by rotate.sphwin")
   switch(X$type,
          sphere={ },
@@ -25,7 +25,7 @@ rotate.sphwin <- function(X, northpole, inverse=FALSE, ...) {
 }
 
 rotate.sp2 <- function(X, northpole, inverse=FALSE, ...) {
-  if(length(...) > 0)
+  if(length(list(...)) > 0)
     warning("Additional arguments were ignored by rotate.sp2")
   sp2(rot.sphere(X, northpole=northpole, inverse=inverse),
       rotate(X$win, northpole=northpole, inverse=inverse))
