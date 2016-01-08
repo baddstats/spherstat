@@ -3,6 +3,7 @@
 \alias{anova.sphppm}
 \alias{coef.sphppm}
 \alias{fitted.sphppm}
+\alias{formula.sphppm}
 \alias{update.sphppm}
 \alias{print.sphppm}
 \title{
@@ -18,6 +19,8 @@
  \method{coef}{sphppm}(object, \dots)
 
  \method{fitted}{sphppm}(object, \dots)
+
+ \method{formula}{sphppm}(x, \dots)
 
  \method{update}{sphppm}(object, \dots)
 
@@ -37,6 +40,7 @@
   \code{\link[stats]{anova}},
   \code{\link[stats]{coef}},
   \code{\link[stats]{fitted}},
+  \code{\link[stats]{formula}},
   \code{\link[stats]{update}}
   and 
   \code{\link[base]{print}},
@@ -59,6 +63,7 @@
    model
    coef(model)
    fitted(model)
+   formula(model)
    anova(model)
    update(model, . ~ sin(theta))
 

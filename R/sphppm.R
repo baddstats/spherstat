@@ -30,7 +30,7 @@ sphppm <- function(formula) {
               cbind(allcoords(dum), isdata=FALSE))
   df$rho <- rho
   ## change the LHS of the formula, and modify its environment
-  fmla <- formula
+  fmla <- oldfmla <- formula
   fmla[[2]] <- as.name("isdata")
   fenv <- new.env(parent=callingframe)
   assign("df", df, envir=fenv)
@@ -41,23 +41,25 @@ sphppm <- function(formula) {
   result <- list(rho=rho,
                  fit=fit,
                  X=X,
-                 dum=dum)
+                 dum=dum,
+                 oldfmla=oldfmla)
   class(result) <- c("sphppm", class(result))
   return(result)
 }
 
 print.sphppm <- function(x, ...) {
   cat("Parametric model fitted to spherical point pattern data\n")
-  fit <- x$fit
-  cat("Model formula:", pasteFormula(formula(fit)), "\n")
+  cat("Model formula:", pasteFormula(formula(x)), "\n")
   cat("Fitted coefficients:\n")
-  print(coef(fit))
+  print(coef(x))
   return(invisible(NULL))
 }
 
 coef.sphppm <- function(object, ...) {
   return(coef(object$fit))
 }
+
+formula.sphppm <- function(x, ...) { x$oldfmla }
 
 fitted.sphppm <- function(object, ...) {
   fit <- object$fit
@@ -74,6 +76,23 @@ anova.sphppm <- function(object, ...) {
 }
 
 update.sphppm <- function(object, ...) {
+  argh <- list(...)
+  if(length(argh) == 0) return(object)
+  if(any(ispat <- sapply(argh, inherits, what=c("sp2", "sp3")))) {
+    X <- argh[[ispat]]
+    object$X <- X
+    fenv <- environment(formula(object$fit))
+    df <- get("df", fenv)
+    dumdf <- df[with(df, !isdata), , drop=FALSE]
+    df <- rbind(cbind(allcoords(X), isdata=TRUE, rho=object$rho),
+                dumdf)
+    assign("df", df, envir=fenv)
+    assign("fmla", formula(object$fit), envir=fenv)
+    newcall <- update(object$fit, evaluate=FALSE)
+    newfit <- eval(substitute(newcall), envir=environment(formula(object$fit)))
+    newobject <- do.call(update, append(list(object), argh[!ispat]))
+    return(newobject)
+  }
   newcall <- update(object$fit, ..., evaluate=FALSE)
   newfit <- eval(substitute(newcall), envir=environment(formula(object$fit)))
   object$fit <- newfit
@@ -142,9 +161,9 @@ simulate.sphppm <- function(object, nsim=1, ..., win, drop=TRUE) {
     predict(fit, newdata=X, type="intensity")
   }
   out <- replicate(nsim,
-                   rpoispp.sp2(lambda=lambdafunction,
-                               lmax=lmax,
-                               win = win),
+                   rpoispp.sphwin(lambda=lambdafunction,
+                                  lmax=lmax,
+                                  win = win),
                    simplify=FALSE)
   if(nsim == 1 && drop)
     out <- out[[1]]
