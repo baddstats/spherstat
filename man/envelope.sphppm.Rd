@@ -203,8 +203,11 @@ Adrian Baddeley.
 \examples{
    X <- runif.sphwin(30)
    M <- sphppm(X ~ x1+x2+x3)
+   # envelopes of Ripley's K
    E <- envelope(M, Ksphere, nsim=19)
    plot(E) 
+   # envelopes of inhomogeneous K, using correctly-updated intensities
+   E2 <- envelope(M, Ksphere, lambdavalues=M, nsim=19)
 }
 \keyword{spatial}
 \keyword{htest}

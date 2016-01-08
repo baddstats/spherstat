@@ -79,8 +79,11 @@ update.sphppm <- function(object, ...) {
   argh <- list(...)
   if(length(argh) == 0) return(object)
   if(any(ispat <- sapply(argh, inherits, what=c("sp2", "sp3")))) {
+    ## One of the arguments is a point pattern 
+    if(sum(ispat) > 1)
+      stop("Only one point pattern should be given to update.sphppm",
+           call.=FALSE)
     X <- argh[[ispat]]
-    object$X <- X
     fenv <- environment(formula(object$fit))
     df <- get("df", fenv)
     dumdf <- df[with(df, !isdata), , drop=FALSE]
@@ -90,6 +93,11 @@ update.sphppm <- function(object, ...) {
     assign("fmla", formula(object$fit), envir=fenv)
     newcall <- update(object$fit, evaluate=FALSE)
     newfit <- eval(substitute(newcall), envir=environment(formula(object$fit)))
+    object$fit <- newfit
+    object$X <- X
+    if(all(ispat))
+      return(object)
+    ## additional arguments given: apply them now
     newobject <- do.call(update, append(list(object), argh[!ispat]))
     return(newobject)
   }
