@@ -10,7 +10,7 @@
 \usage{
   Ksphere(X, win=sphwin(), r,
           correction=c("un", "iso", "rs", "rsm"),
-          ratio=FALSE, lambdavalues=NULL)
+          ratio=FALSE, lambdavalues=NULL, update=TRUE)
 }
 \arguments{
   \item{X}{
@@ -37,9 +37,17 @@
     other functions.
   }
   \item{lambdavalues}{
-    Optional. Numeric vector contain an estimate of the intensity
-    at each data point. If this argument is given, the inhomogeneous
+    Optional.  If this argument is given, the inhomogeneous
     \eqn{K} function is computed.
+    Either a numeric vector containing estimates of the intensity
+    at each data point, or a fitted point process model (object of class
+    \code{"sphppm"}) which predicts the intensity.
+  }
+  \item{update}{
+    Logical value indicating, when \code{lambdavalues} is a fitted
+    point process model, whether to re-fit the model to
+    the point pattern \code{X} before extracting the fitted intensity
+    values. 
   }
 }
 \details{

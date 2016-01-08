@@ -15,7 +15,7 @@
 
 Ksphere <- function(X, win=sphwin(), r=NULL,
                     correction=c("un", "iso", "rs", "rsm"),
-                    ratio=FALSE, lambdavalues=NULL) {
+                    ratio=FALSE, lambdavalues=NULL, update=TRUE) {
 
   ## standard checks of the X and win arguments
   stopifnot(inherits(X, c("sp2", "sp3", "matrix")))
@@ -38,6 +38,16 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
   if(!is.null(lambdavalues) && !all(correction == "iso")) {
     warning("For inhomogeneous K, only the isotropic correction is available")
     correction <- "iso"
+  }
+
+  if(!is.null(lambdavalues) && inherits(lambdavalues, "sphppm")) {
+    model <- lambdavalues
+    if(update) {
+      ## refit model to current data
+      XX <- sp2(X, win)
+      model <- update(model, XX)
+    }
+    lambdavalues <- fitted(model)
   }
 
   ## Create objects that will be used in later calculaations
