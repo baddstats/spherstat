@@ -1,14 +1,15 @@
 #' plot an intensity surface on the sphere
 
 plot.sphppm <- function(x, eye=place("nedlands"), top=place("northpole"),
+                        w,
                        ..., eps=NULL, dimyx=NULL, main="", 
                        action=c("image", "contour", "imagecontour"),
                        col.image=NULL, col.lines=NULL) {
   action <- match.arg(action)
   if(inherits(x, "sphppm")) {
-    ## evenly spaced points
+    #' make grid of points for function evaluation
     lonlat <- expand.grid(lon=0:359,
-                          lat=(-89):89)
+                          lat=asin(seq(-0.999, 0.999, length=200)) * 180/pi)
     lonlat <- rbind(lonlat,
                     data.frame(lon=0, lat=c(90, -90)))
     lon <- lonlat$lon
@@ -16,10 +17,17 @@ plot.sphppm <- function(x, eye=place("nedlands"), top=place("northpole"),
     phi <- (lon/180)*pi
     theta <- ((90-lat)/180)*pi
     Xgrid <- sp2(cbind(theta=theta,phi=phi))
+    #' restrict to window
+    if(missing(w)) w <- x$X$win
+    if(!is.null(w)) {
+      inside <- in.W(Xgrid, w)
+      Xgrid$X <- Xgrid$X[inside,,drop=FALSE]
+      Xgrid$win <- w
+    }
+    #' compute fitted intensity
     values <- predict(x, newdata=Xgrid)
-    df <- data.frame(lon=lon,
-                     lat=lat,
-                     values=values)
+    df <- cbind(Convert.globe(Xgrid$X),
+                data.frame(values=values))
   } else if(is.data.frame(x)) {
     stopifnot(ncol(x) == 3)
     if(is.null(cnames <- colnames(x)) ||
@@ -28,24 +36,31 @@ plot.sphppm <- function(x, eye=place("nedlands"), top=place("northpole"),
                     "longitude and latitude respectively, in degrees"),
               call.=FALSE)
     df <- x
+    if(missing(w)) w <- NULL
   } else stop("x should be a fitted model (sphppm)")
-  
-  eye <- ensure3d(eye)
-  top <- ensure3d(top)
+
+  if(!is.globe.point(eye)) eye <- Convert.globe(eye)
+  if(!is.globe.point(top)) eye <- Convert.globe(top)
+  eye3 <- ensure3d(eye)
+  top3 <- ensure3d(top)
   
   spos <- spatialpos(df[,1], df[,2])
-  mpos <- orthogproj(eye, top, spos)
+  mpos <- orthogproj(eye3, top3, spos)
   xx <- mpos[,1]
   yy <- mpos[,2]
   ok <- (mpos[,3] < 0)
 
   D <- disc(1)
   W <- disc(1, mask=TRUE, eps=eps, dimyx=dimyx)
-  X <- ppp(xx[ok], yy[ok], marks=df[ok,3], window=W, check=FALSE)
 
+  if(!is.null(w)) {
+    wow <- sphwin2owin(w, eye=eye, top=top)
+    W <- intersect.owin(W, wow)
+  }
+  X <- ppp(xx[ok], yy[ok], marks=df[ok,3], window=W, check=FALSE)
   ##  sigma <- 2 * mean(nndist(X))
   sigma <- 0.0125
-  Y <- Smooth(X, sigma=sigma)
+  Y <- Smooth(X, sigma=sigma, eps=eps, dimyx=dimyx)
 
   switch(action,
          image = {
@@ -80,6 +95,7 @@ plot.sphppm <- function(x, eye=place("nedlands"), top=place("northpole"),
                            extrargs=extrargs)
            plot(D, add=TRUE)
          })
+  if(!is.null(w)) plot(wow, add=TRUE)
   return(invisible(NULL))
 }
 

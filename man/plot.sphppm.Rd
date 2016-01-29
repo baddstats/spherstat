@@ -10,6 +10,7 @@
 \usage{
 \method{plot}{sphppm}(x,
              eye = place("nedlands"), top = place("northpole"),
+             w,
              \dots,
              eps = NULL, dimyx = NULL, main = "",
              action = c("image", "contour", "imagecontour"),
@@ -29,6 +30,11 @@
     in degrees) determining a position in space. The plot will be
     rotated so that this position appears to be directly above the
     centre of the earth. 
+  }
+  \item{w}{
+    Spherical window (object of class \code{"sphwin"}) in which the
+    fitted intensity should be plotted. Default is the window of the
+    original data to which the model was fitted.
   }
   \item{\dots}{
     Additional arguments controlling the plot, passed
