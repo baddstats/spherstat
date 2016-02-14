@@ -218,27 +218,35 @@ curve2bigowin <- function(a) {
       aa[[j]] <- rbind(aa[[i]], aa[[j]])
       aa <- aa[-i]
     }
-    ## only one fragment remains
-    a <- aa[[1]]
+    ## at most one fragment remains
+    a <- if(length(aa) == 0) NULL else aa[[1]]
   }
-  ## 'a' is a single unbroken curve
-  n <- nrow(a)
-  x <- c(a[,1], a[n,3])
-  y <- c(a[,2], a[n,4])
-  n <- n+1
-  theta0 <- atan2(y[1], x[1])
-  theta1 <- atan2(y[n], x[n])
-  if(theta0 < 0) theta0 <- theta0 + 2 * pi
-  if(theta1 < 1) theta1 <- theta1 + 2 * pi
-  theta <- seq(theta1,
-               if(theta1 < theta0) theta0 else (theta0+2*pi),
-               length=64)
-  P <- list(x=c(x, 3*cos(theta)),
-            y=c(y, 3*sin(theta)))
+  ## 'a' is a single unbroken curve, or empty
+  if(!is.null(a)) {
+    a <- a[complete.cases(a), , drop=FALSE]
+    n <- nrow(a)
+    if(n > 0) {
+      x <- c(a[,1], a[n,3])
+      y <- c(a[,2], a[n,4])
+      n <- n+1
+      theta0 <- atan2(y[1], x[1])
+      theta1 <- atan2(y[n], x[n])
+      if(theta0 < 0) theta0 <- theta0 + 2 * pi
+      if(theta1 < 1) theta1 <- theta1 + 2 * pi
+      theta <- seq(theta1,
+                   if(theta1 < theta0) theta0 else (theta0+2*pi),
+                   length=64)
+      P <- list(x=c(x, 3*cos(theta)),
+                y=c(y, 3*sin(theta)))
+      ## add to list of polygons
+      Plist <- append(Plist, list(P))
+    }
+  }
+
   ## make polygonal owin
-  Plist <- append(Plist, list(P))
+  if(length(Plist) == 0) return(emptywindow(square(c(-3,3))))
   if(sum(sapply(Plist, Area.xypolygon)) < 0)
-    P <- lapply(Plist, reverse.xypolygon)
+    Plist <- lapply(Plist, reverse.xypolygon)
   return(owin(poly=Plist))
 }
 
