@@ -1,9 +1,11 @@
 Package: spherstat
 Type: Package
 Title: Spatial Point Pattern Analysis, Geometry and Trigonometry for the Sphere
-Version: 1.7-3
-Date: 2016-02-07
-Author: Tom Lawrence and Adrian Baddeley
+Version: 1.7-4
+Date: 2016-02-14
+Authors@R: c(person("Tom", "Lawrence", role = c("aut", "cre"),
+		     email = "tjlawrence@bigpond.com"),
+	     person("Adrian", "Baddeley", role=c("aut", "ths")))
 Depends: spatstat, globe (>= 1.1-2), stats
 Suggests: sphereplot
 Maintainer: Tom Lawrence <tjlawrence@bigpond.com>

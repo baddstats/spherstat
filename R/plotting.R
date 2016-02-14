@@ -196,7 +196,7 @@ curve2bigowin <- function(a) {
       cc <- lapply(aa[closed], curve2bigowin)
       cc <- lapply(cc, getElement, name="bdry")
       Plist <- Reduce(append, cc)
-      aa <- aa[!open]
+      aa <- aa[!closed]
     }
     while(length(aa) > 1) {
       starts <- lapply(aa, startof)
