@@ -14,7 +14,7 @@ sround(x)
 }
 \arguments{
   \item{x}{
-    The number or numbers to be rounded.  Can be a vector, matrix, or numeric.
+    The number or numbers to be rounded.  Can be a vector, matrix, numeric, list or data frame.
   }
 }
 \details{
