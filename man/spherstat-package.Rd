@@ -15,8 +15,13 @@ The preferred coordinate system for data given to functions in this package is t
 Package: \tab spherstat\cr
 Type: \tab Package\cr
 
+<<<<<<< HEAD
 Version: \tab 1.7-6\cr
 Date: \tab 2016-03-11\cr
+=======
+Version: \tab 1.7-5\cr
+Date: \tab 2016-02-14\cr
+>>>>>>> origin/master
 LazyLoad: \tab yes\cr
 }
 }
