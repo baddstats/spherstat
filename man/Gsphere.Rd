@@ -1,6 +1,5 @@
 \name{Gsphere}
 \alias{Gsphere}
-\alias{Gstab.sph}
 \title{
 Nearest Neighbour Distance Function G 
 }
@@ -9,7 +8,7 @@ Using a number of methods, this function estimates the nearest neighbour distanc
 }
 \usage{
 Gsphere(X, win = sphwin(type = "sphere"), r = NULL, ...)
-Gstab.sph(X, win = sphwin(type = "sphere"), r = NULL, ...)
+
 }
 \arguments{
   \item{X}{
@@ -61,8 +60,6 @@ The naive empirical distribution of distances from each point of the pattern \co
 To simply compute the nearest neighbour distance for each point in the pattern, use nndist.sph.
 
 If \code{X} is an object of class \code{\link{sp2}} or \code{\link{sp3}}, then its radius is used in this calculation; otherwise, the radius of \code{win} is used.
-
-The variance-stabilising transform of \code{G} is \code{asin(sqrt(G(r)))}.  This is implemented in \code{spherstat} as \code{Gstab.sph}, and is a superior statistic to \code{G} when used for inference based on a Monte Carlo or envelope-based test.
 }
 \value{
 An object of class \code{\link[spatstat]{fv}}, see \code{\link[spatstat]{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
@@ -132,7 +129,6 @@ This function is the analogue for point processes on the sphere of the function 
 sph <- sphwin(type="sphere")
 sph.pp <- rpoispp.sphwin(win=sph, lambda=10)
 sph.Gest <- Gsphere(X=sph.pp)
-sph.Gstab <- Gstab.sph(X=sph.pp)
 }
 \keyword{spatial}
 \keyword{nonparametric}

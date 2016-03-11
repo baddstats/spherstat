@@ -1,6 +1,5 @@
 \name{Fsphere}
 \alias{Fsphere}
-\alias{Fstab.sph}
 \title{
 The Empty Space Function F 
 }
@@ -9,8 +8,6 @@ Estimates the summary function \code{F(r)} for a point pattern in a window of ar
 }
 \usage{
 Fsphere(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
-
-Fstab.sph(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
 }
 \arguments{
   \item{X}{
@@ -186,7 +183,7 @@ Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applica
   \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}
+  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Fest}}
 }
 \examples{
 sph <- sphwin(type="sphere")

@@ -1,3 +1,4 @@
+
 ## File Ksphere.R
 ## (was: '20140723 Ksphere.txt')
 
@@ -194,3 +195,19 @@ neighbourcount <- function(Dmat, r) {
 }
 
 cumtab <- function(z, m) { cumsum(table(factor(z, levels=m))) }
+Lsphere <- function(X, ...) {
+	K <- Ksphere(X, ...)
+	L <- eval.fv(sqrt(K))
+	L <- rebadge.fv(L, quote(L(r)), "L", names(K), new.labl = attr(K, 
+        "labl"))
+	return(L)
+}
+
+
+Kpp <- function(X, ...) {
+	K <- Ksphere(X, ...)
+	Kpp <- eval.fv(acos(1-K/(2*pi)))
+	Kpp <- rebadge.fv(Kpp, quote(K_pp(r)), "K_pp", names(K), new.labl = attr(K, 
+        "labl"))
+	return(Kpp)
+}
