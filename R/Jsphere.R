@@ -1,4 +1,4 @@
-Jsphere <- function(X, refpoints, r=NULL, ..., correction = NULL) 
+Jsphere <- function(X, refpoints=NULL, r=NULL, ..., correction = NULL) 
 {
     W <- X$win
     FF <- Fsphere(X, refpoints=refpoints, win=W, r=r, ...)

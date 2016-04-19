@@ -7,7 +7,7 @@ The Empty Space Function F
 Estimates the summary function \code{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
 }
 \usage{
-Fsphere(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
+Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
 }
 \arguments{
   \item{X}{
@@ -20,7 +20,7 @@ Fsphere(X, refpoints, win = sphwin(type = "sphere"), r = NULL, ...)
     The reference points in the window used to estimate the \eqn{F}
     function.  An object of class \code{"sp2"} or \code{"sp3"},
     or a 2 or 3 column matrix giving the locations of
-    points in spherical coordinates. 
+    points in spherical coordinates. If \code{NULL}, a homogeneous Poisson process with expected number of points equal to 100 is generated inside the window.
   }  
   \item{win}{
     The window; an object of class \code{"sphwin"}.  Only required if
