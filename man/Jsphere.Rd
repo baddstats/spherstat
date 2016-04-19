@@ -22,7 +22,7 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
      (a prerequisite to calculating \code{J(r)}, see Details
      section).  An object of class \code{\link{sp2}} or
      \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations
-     of points in spherical coordinates. 
+     of points in spherical coordinates. If \code{NULL}, a homogeneous Poisson process with expected number of points equal to 100 is generated inside the window.
    }  
   \item{r}{
     Optional.  Numeric vector. The values of the argument \code{r} at
