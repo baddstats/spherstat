@@ -71,14 +71,9 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
 	Kdf <- data.frame(r = r, theo = 2*pi *rad*(1-cos(r/rad)))
 	desc <- c("distance argument r", "theoretical Poisson %s")
 	K <- ratfv(Kdf, NULL, denom, "r", quote(K(r)), "theo",
-<<<<<<< HEAD
 		.~ r, range(r), c("r", "%s[pois](r)"),
 		desc, fname = "K", ratio = ratio)
-=======
-	 ~ r, range(r), c("r", "%s[pois](r)"),
-	desc, fname = "K", ratio = ratio)
->>>>>>> origin/master
-	
+
 	## We now give the code for the cases where X contains points, and where X is empty
 
 	if(nrow(X) !=0) {
