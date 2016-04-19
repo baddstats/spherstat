@@ -102,12 +102,12 @@ Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields:
    K <- Ksphere(X, win, rv)
    Kstab <- Kstab.sphwin(X, win, rv)
    Kinv <- Kinv.sphwin(X, win, rv)
-   plot(K)
-   plot(K, .~theo)
-   plot(K, .-theo~r)
-   plot(Kstab)
-   plot(Kstab, .~theo)
-   plot(Kinv) 
+##   plot(K)
+##   plot(K, .~theo)
+##   plot(K, .-theo~r)
+##   plot(Kstab)
+##   plot(Kstab, .~theo)
+##   plot(Kinv) 
 }
 \keyword{spatial}
 \keyword{nonparametric}
