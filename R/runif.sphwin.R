@@ -43,7 +43,7 @@ runif.sphwin <- function(n, win=sphwin(type="sphere"), nsim=1, drop=TRUE, as.sp=
 		}
 	}
 	if(nsim==1 && drop==TRUE) {
-		output <- output[[i]]
+		output <- output[[1]]
 	}
 	output
 }
