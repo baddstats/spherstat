@@ -36,6 +36,7 @@
 \alias{allcoords}
 \alias{is.poisson.sphppm}
 \alias{is.stationary.sphppm}
+\alias{addpoint.Watson}
 \title{
 Internal Spherstat Functions
 }
@@ -76,6 +77,7 @@ ptinsphpoly(X, win, P)
 allcoords(X)
 \method{is.poisson}{sphppm}(x)
 \method{is.stationary}{sphppm}(x)
+addpoint.Watson(s1, X, win)
 }
 \description{
 Internal spherstat functions
