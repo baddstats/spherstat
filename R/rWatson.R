@@ -59,14 +59,13 @@ rWatson.bipolar <- function(n, mode, kappa, win=sphwin(type="sphere"), squeeze=F
 			test0 <- kappa*s1*(s1-1)
 			## The first if argument applies the squeeze test if required.  If the squeeze test fails or is not required, the second if argument performs the standard test.  If either test passes, the point is will be added to dataset i (if addWatson confirms that it is in the window win)
 			if(squeeze && (test0 + 1 >= u2)) {
-				X <- addpoint.Watson(sround(cround(s1)), X, win)
+				X <- addpoint.Watson(sround(cround(s1)), X, win, mode)
 			} else if(exp(kappa*s1*(s1-1)) >= u2) {
- 				X <- addpoint.Watson(sround(cround(s1)), X, win)
+ 				X <- addpoint.Watson(sround(cround(s1)), X, win, mode)
 			}
 		}
 		## Dataset i contains n points from a standard Watson bipolar distribution (i.e. mode=c(0,0)).  We now rotate this to the desired mode and take the required action for the output to be as defined by nsim, as.sp, ndim and (if applicable) drop
-		X <- rot.sphere(X, mode)
-		output[[i]] <- switch(ndim,
+		X <- switch(ndim,
 				"2" = {
 					X
 				},
@@ -77,10 +76,10 @@ rWatson.bipolar <- function(n, mode, kappa, win=sphwin(type="sphere"), squeeze=F
 				)
 		if(as.sp) {
 			if(ndim=="2") {
-				output[[i]] <- sp2(output[[i]], win)
+				output[[i]] <- sp2(X, win)
 			}
 			else {
-				output[[i]] <- sp3(output[[i]], win)
+				output[[i]] <- sp3(X, win)
 			}
 		}
 	}
@@ -127,14 +126,13 @@ rWatson.girdle <- function(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FA
 			test1 <- kappa*(s1^2)
 			## The first if argument applies the squeeze test if required.  If the squeeze test fails or is not required, the second if argument performs the standard test.  If either test passes, the point is will be added to dataset i (if addWatson confirms that it is in the window win)
 			if(squeeze && (1-(test1^2)) >= u2) {
-				X <- addpoint.Watson(sround(cround(s1)), X, win)
+				X <- addpoint.Watson(sround(cround(s1)), X, win, mode)
 			} else if((1-test1)*exp(test1) >= u2) {
- 				X <- addpoint.Watson(sround(cround(s1)), X, win)
+ 				X <- addpoint.Watson(sround(cround(s1)), X, win, mode)
 			}
 		}
 		## Dataset i contains n points from a standard Watson bipolar distribution (i.e. mode=c(0,0)).  We now rotate this to the desired mode and take the required action for the output to be as defined by nsim, as.sp, ndim and (if applicable) drop
-		X <- rot.sphere(X, mode)
-		output[[i]] <- switch(ndim,
+		X <- switch(ndim,
 				"2" = {
 					X
 				},
@@ -145,10 +143,10 @@ rWatson.girdle <- function(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FA
 				)
 		if(as.sp) {
 			if(ndim=="2") {
-				output[[i]] <- sp2(output[[i]], win)
+				output[[i]] <- sp2(X, win)
 			}
 			else {
-				output[[i]] <- sp3(output[[i]], win)
+				output[[i]] <- sp3(X, win)
 			}
 		}
 	}
@@ -163,10 +161,11 @@ rWatson.girdle <- function(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FA
 ## Arguments: 
 ## s1 : is the information required to determine the colatitude (theta) of the observation (the longitude phi is generated from a uniform distribution)
 ## X  : is the dataset to which the new point is added (a matrix with 2 columns)
+## mode : the coordinates of a mode of the Watson distribution (matrix with 1 row and 2 or 3 columns, or numeric of length 2 or 3)
 ## win : is the window in which the points are to be located (the point defined by s1 is not added to X if it is outside win
 
 
-addpoint.Watson <- function(s1, X, win) {
+addpoint.Watson <- function(s1, X, win, mode) {
 	stopifnot(length(s1)==1 && s1 >= -1 && s1 <= 1 && inherits(X, "matrix") && ncol(X)==2 && inherits(win, "sphwin"))
 	## Set the initial values of theta and phi (places the point in the upper hemisphere)
 	twopi <- 2*pi
@@ -177,9 +176,10 @@ addpoint.Watson <- function(s1, X, win) {
 	if(u3 >= 0.5) {
 		theta <- pi-theta
 	}
+	point <- rot.sphere(c(theta, phi), northpole=mode)
 	## Add the point, if it's in W
-	if(in.W(matrix(c(theta, phi), nrow=1, ncol=2, byrow=TRUE), win)) {
-		X <- rbind(X, c(theta, phi))
+	if(in.W(matrix(point, nrow=1, ncol=2, byrow=TRUE), win)) {
+		X <- rbind(X, point)
 	}
 	X
 }

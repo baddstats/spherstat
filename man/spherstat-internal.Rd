@@ -77,7 +77,7 @@ ptinsphpoly(X, win, P)
 allcoords(X)
 \method{is.poisson}{sphppm}(x)
 \method{is.stationary}{sphppm}(x)
-addpoint.Watson(s1, X, win)
+addpoint.Watson(s1, X, win, mode)
 }
 \description{
 Internal spherstat functions

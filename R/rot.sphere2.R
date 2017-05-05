@@ -48,5 +48,11 @@ rot.sphere2 <- function(points, v, theta) {
 			yout <- cround(sround(y))
 		}
 	}
+	else if(inherits(points, "numeric")) {
+		yout <- y
+		if(length(points)==2) {
+			yout <- convert2(y)
+		}
+	}
 	yout
 }
