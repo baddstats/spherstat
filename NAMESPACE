@@ -1,4 +1,5 @@
 import(spatstat)
+import(spatstat.utils)
 import(globe)
 import(stats)
 importFrom("graphics", "contour.default", "plot")
