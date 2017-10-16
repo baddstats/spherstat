@@ -31,14 +31,16 @@ Ksphere <- function(X, win=sphwin(), r=NULL,
 	r <- seq(0, rmax, length=512)
 	}
 
+        correction.given <- !missing(correction)
 	correction <- match.arg(correction,
 			c("un", "iso", "rs", "rsm", "best"),
 			several.ok=TRUE)
 	correction[correction == "best"] <- "iso"
 
-	if(!is.null(lambdavalues) && !all(correction == "iso")) {
-		warning("For inhomogeneous K, only the isotropic correction is available")
-		correction <- "iso"
+        if(!is.null(lambdavalues) && !all(correction == "iso")) {
+            if(correction.given)
+ 	        warning("For inhomogeneous K, only the isotropic correction is available")
+            correction <- "iso"
 	}
 
 	if(!is.null(lambdavalues) && inherits(lambdavalues, "sphppm")) {

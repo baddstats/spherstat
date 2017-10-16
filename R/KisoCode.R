@@ -101,9 +101,8 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
   type <- win$type
 
   ## We now calculate wmat (i.e. equation (0.1)
-
   wmat <- switch(type,
-                 sphere = {matrix(1, nrow=nrX, ncol=nrX)},
+                 sphere = matrix(1, nrX, nrX),
                  band = {
                    if(win$param[1]==0 || win$param[2]==pi) {
                      Kisocap(X=X, win=win, r=r, nrX=nrX, Dmat=Dmat, disc=FALSE,
@@ -129,6 +128,10 @@ Kiso <- function(X, win, r, rad=win$rad, Dmat=pairdistsph(X), nrX=nrow(X), denom
                  stop("Unrecognised shape type")
                  )
 
+  if(!is.null(lambda) &&
+     type %in% c("sphere", "wedge", "polygon", "quadrangle")) 
+    wmat <- wmat * outer(lambda, lambda, "*")
+    
   ## shortcut
   if(is.fv(wmat)) return(wmat)
 
