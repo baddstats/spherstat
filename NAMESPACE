@@ -19,6 +19,7 @@ useDynLib(spherstat,
 # exported functions
 
 export("allcoords")
+export("allstats.sphwin")
 export("anova.sphppm")
 export("area.sphwin")
 export("bdist.sphwin")
