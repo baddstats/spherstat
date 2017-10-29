@@ -41,8 +41,8 @@
 }
 \details{
   Only points that are visible from the \code{eye} position
-  are plotted. That is, points on the other side of the sphere
-  are not displayed.
+  are plotted (i.e. all points \eqn{x} for which \eqn{d(x,eye) \leq \pi\rho/2}{d(x,eye) <= pi*rho/2}, where \eqn{\rho}{rho} is the radius of the sphere). That is, points on the other side of the sphere
+  are not displayed (i.e. all points \eqn{y} for which \eqn{d(y,eye) > \pi\rho/2}{d(x,eye) > pi*rho/2}).
 }
 \value{
   Null.

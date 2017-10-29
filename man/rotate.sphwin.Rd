@@ -57,7 +57,7 @@
   is moved to the position specified by \code{northpole}.
 
   To apply a general rotation which moves point \code{A} to point
-  \code{B}, use two rotations: \code{rotate(rotate(X, A), B, inverse=TRUE)}
+  \code{B}, use \code{rotate(rotate(X, A), B, inverse=TRUE)}.  This performs two rotations: the first rotation sends A to the north pole, the second sends the north pole to B. 
 }
 \value{
   Another object of the same kind as \code{X} representing the result

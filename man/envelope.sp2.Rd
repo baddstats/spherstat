@@ -1,9 +1,11 @@
-\name{envelope.sp2}
+\name{envelope.sphere}
 \alias{envelope.sp2}
+\alias{envelope.sphppm}
 \title{Simulation Envelopes of Summary Function for Spherical Point Pattern}
 \description{
-  Computes simulation envelopes of a summary function
-  for a point pattern on a sphere.
+  \code{envelope.sp2} computes simulation envelopes of a summary function
+  for a point pattern on a sphere; \code{envelope.sphppm} computes simulation envelopes of a summary function,
+  based on a fitted point process model, for a point pattern on a sphere.
 }
 \usage{
   \method{envelope}{sp2}(Y, fun=Ksphere, nsim=99, nrank=1, \dots, 
@@ -14,6 +16,16 @@
   savefuns=FALSE, savepatterns=FALSE,
   nsim2=nsim, VARIANCE=FALSE, nSD=2, Yname=NULL, maxnerr=nsim,
   do.pwrong=FALSE, envir.simul=NULL)
+\method{envelope}{sphppm}(Y, fun = Ksphere, nsim = 99, nrank = 1, \dots,
+                 funargs = list(), simulate = NULL, fix.n = FALSE,
+                 verbose = TRUE, transform = NULL, global = FALSE,
+                 ginterval = NULL, use.theory = NULL,
+                 alternative = c("two.sided", "less", "greater"),
+                 scale = NULL, clamp = FALSE,
+                 savefuns = FALSE, savepatterns = FALSE,
+                 nsim2 = nsim, VARIANCE = FALSE, nSD = 2,
+                 Yname = NULL, maxnerr = nsim, do.pwrong = FALSE,
+                 envir.simul = NULL)
 }
 \arguments{
   \item{Y}{
@@ -78,7 +90,7 @@
   \item{use.theory}{
     Logical value indicating whether to use the theoretical value,
     computed by \code{fun}, as the reference value for simultaneous
-    envelopes. Applicable only when \code{global=TRUE}.
+    envelopes. Only relevant if \code{global=TRUE}.
   }
   \item{alternative}{
     Character string determining whether the envelope corresponds
@@ -170,14 +182,24 @@
   The \code{\link[spatstat]{envelope}} function is generic, with methods for
   the classes \code{"ppp"}, \code{"ppm"} and \code{"kppm"}
   described in the help file for \code{\link[spatstat]{envelope}}.
-  This function \code{envelope.sp2} is the method for 
-  spherical point patterns (objects of class \code{"sp2"}).
-  
+  The function \code{envelope.sp2} is the method for 
+  spherical point patterns (objects of class \code{"sp2"}), and the function \code{envelope.sphppm} is the method for 
+  point process models fitted to spherical point patterns
+  (objects of class \code{"sphppm"}).
+
   For the most basic use, if you have a spherical point pattern \code{X} and
   you want to test Complete Spatial Randomness (CSR), type
   \code{plot(envelope(X, Ksphere,nsim=39))} to see the spherical
   \eqn{K} function for \code{X} plotted together with the envelopes of
   the spherical \eqn{K} function for 39 simulations of CSR. 
+
+However, if you have fitted a model \code{M} to
+  spherical point pattern data and you want to test the goodness-of-fit
+  of the model, simply do \code{plot(envelope(M, nsim=39))}
+  to display pointwise envelopes or
+  \code{plot(envelope(M, nsim=19, global=TRUE))} for global envelopes.
+  Both displays can be interpreted as performing a Monte Carlo test with
+  significance level 0.05.
   
   To create simulation envelopes, the command \code{envelope(Y, ...)} 
   first generates \code{nsim} random point patterns
@@ -212,7 +234,7 @@ Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991.
 
 Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Arnold, 2003. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Ripley, B.D. (1981) \emph{Spatial statistics}. John Wiley and Sons. 
 
@@ -222,9 +244,7 @@ Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields:
 
 } 
 \seealso{
-  \code{\link{envelope.sphppm}} for goodness-of-fit tests of a fitted
-  model.
-  
+
   \code{\link{sp2}},
   \code{\link{runif.sphwin}},
   \code{\link{rpoispp.sphwin}},
@@ -235,8 +255,15 @@ Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields:
 }
 \examples{
    X <- runif.sphwin(30)
-   E <- envelope(X, Ksphere, nsim=39)
-   plot(E)
+   # envelopes of Ripley's K for this pattern
+   EX <- envelope(X, Ksphere, nsim=39)
+   plot(EX)
+   M <- sphppm(X ~ x1+x2+x3)
+   # envelopes of Ripley's K for this model
+   EM <- envelope(M, Ksphere, nsim=19)
+   plot(EM) 
+   # envelopes of inhomogeneous K, using correctly-updated intensities
+   EM2 <- envelope(M, Ksphere, lambdavalues=M, nsim=19)
 }
 \author{Adrian Baddeley
   \email{Adrian.Baddeley@uwa.edu.au}

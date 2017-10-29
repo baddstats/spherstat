@@ -94,6 +94,8 @@
   \code{action="contour"}). Otherwise the arguments \code{col.image}
   and \code{col.lines} determine the colours used in the
   image and contour plots, respectively.
+
+  Note that the plot shows the half of the sphere that is visible from the eye position (i.e. all locations \eqn{u} for which \eqn{d(u,eye) \leq \pi\rho/2}{d(u,eye) <= pi*rho/2}, where \eqn{\rho}{rho} is the radius of the sphere).
 }
 \value{
   Null.

@@ -5,8 +5,7 @@
 }
 \description{
   Generates a grid on the sphere, or a spherical cap, band, wedge, or
-  quadrangle (subset of the sphere bounded by two circles of colatitude
-  and two semcircles of longitude)  
+  quadrangle.  
 }
 \usage{
 gridmat(colats, lons, ncolat=100, nlon=100, cellarea=FALSE)
@@ -34,18 +33,16 @@ gridmat(colats, lons, ncolat=100, nlon=100, cellarea=FALSE)
 }
 \details{
   This function generates a grid on the sphere, or a spherical cap,
-  band, wedge, or quadrangle (subset of the sphere bounded by two
-  circles of colatitude and two semcircles of longitude).  The cells in
-  the grid have equal area, and width (measured in angular distance);
-  the cosine The output is the centres of all the grid cells, which can
-  be used in calculations e.g. to estimate the distribution of the
+  band, wedge, or quadrangle.  The cells in the grid have equal area and width (measured in angular distance); the cosines of the heights of the cells are also equal.
+  The output is the centres of all the grid cells, which can
+  be used in calculations e.g.~estimation of the distribution of the
   distance from a randomly selected point in a window to the nearst
   point in a spatial point pattern.  Finer grids (i.e. high values of
   \code{ncolats, nlons}) heighten the accuracy of such estimates but can
   take a long time for R to generate those estimates. 
 
   Note that the shape of the cells is dependent on the values of the
-  input variables.  Ideally, 
+  input variables.  Ideally, the cells should be close to square (i.e.~[cos(\code{colats}[2])-cos(\code{colats}[1])]/\code{ncolats} and (\code{lons}[2]-\code{lons}[1])/nlons should be (close to) equal.)
 
   For a spherical cap or band, set \code{lons=c(0, 2*pi)} and
   \code{colats} as appropriate; for a spherical wedge, set

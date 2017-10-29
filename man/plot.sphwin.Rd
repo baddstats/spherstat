@@ -37,7 +37,7 @@
 }
 \details{
   The plot shows the half of the sphere that is visible
-  from the \code{eye} position.
+  from the \code{eye} position (i.e. all locations \eqn{u} for which \eqn{d(u,eye) \leq \pi\rho/2}{d(u,eye) <= pi*rho/2}, where \eqn{\rho}{rho} is the radius of the sphere).
 }
 \value{
   Null.

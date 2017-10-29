@@ -4,7 +4,7 @@
   Estimate the J-function 
 }
 \description{
-  Estimates the summary function \code{J(r)} for a point pattern in a
+  Estimates the summary function \eqn{J(r)} for a point pattern in a
   window of arbitrary shape on a (subset of) a sphere. 
 }
 \usage{
@@ -12,21 +12,21 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
 }
 \arguments{
   \item{X}{
-    The observed point pattern, from which an estimate of \code{J(r)}
+    The observed point pattern, from which an estimate of \eqn{J(r)}
     will be computed.  An object of class \code{\link{sp2}} or
     \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of
     points in spherical coordinates. 
   }
    \item{refpoints}{
      The reference points in the window used to estimate the \eqn{F} function
-     (a prerequisite to calculating \code{J(r)}, see Details
+     (a prerequisite to calculating \eqn{J(r)}, see Details
      section).  An object of class \code{\link{sp2}} or
      \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations
      of points in spherical coordinates. If \code{NULL}, a homogeneous Poisson process with expected number of points equal to 100 is generated inside the window.
    }  
   \item{r}{
-    Optional.  Numeric vector. The values of the argument \code{r} at
-    which \code{F(r)} should be evaluated. There is a sensible default,
+    Optional.  Numeric vector. The values of the argument \eqn{r} at
+    which \eqn{F(r)} should be evaluated. There is a sensible default,
     which works well the window is either the sphere or contains a
     significant proportion of the sphere. First-time users are strongly
     advised not to specify this argument.
@@ -90,7 +90,7 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
 
   The Hanisch-style estimate (returned as \code{han}) is the ratio
   \eqn{J = (1-G)/(1-F)} using the Chiu-Stoyan estimate of
-  \code{F} and the Hanisch estimate of \code{G}. This is
+  \eqn{F} and the Hanisch estimate of \eqn{G}. This is
   computed if \code{correction=NULL} or if correction includes
   \code{"cs"} or \code{"han"}.  
 
@@ -99,7 +99,7 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
   corrected estimates. This is computed if \code{correction=NULL} or if
   correction includes \code{"rs"} or \code{"border"}.  
 
-  These edge-corrected estimators are slightly biased for \code{J},
+  These edge-corrected estimators are slightly biased for \eqn{J},
   since they are ratios of approximately unbiased estimators. The
   logarithm of the Kaplan-Meier estimate is exactly unbiased for
   \eqn{log(J)}.  
@@ -141,7 +141,7 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
  
   \item{km}{the spatial Kaplan-Meier estimator of \eqn{J(r)}}
  
-  \item{hazard}{the hazard rate \eqn{lambda(r)} of \eqn{J(r)} by the
+  \item{hazard}{the hazard rate \eqn{\lambda(r)}{lambda(r)} of \eqn{J(r)} by the
     spatial Kaplan-Meier method} 
  
   \item{raw}{the uncorrected estimate of \eqn{J(r)}, i.e. the empirical
@@ -200,7 +200,7 @@ Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991.
 
 Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
 

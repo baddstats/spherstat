@@ -1,4 +1,4 @@
-\name{convert.globe}
+\name{convertpoints}
 \alias{convert.globe}
 \alias{convert.sphereplot}
 \title{
@@ -20,7 +20,7 @@ convert.sphereplot(X, inverse=FALSE, sp.dim=2)
     If \code{inverse=FALSE} and using \code{convert.sphereplot}, a 2 column matrix or length 2 numeric.
   }
   \item{inverse}{
-   Logical.  If TRUE, then conversion is to coordinates that can be used in \pkg{spherstat}.  If FALSE, then converstion is to coordinates that  can be used in \pkg{globe} (\code{convert.globe}) or \pkg{sphereplot} (code{convert.sphereplot}).
+   Logical.  If TRUE, then conversion is to coordinates that can be used in \pkg{spherstat}.  If FALSE, then converstion is to coordinates that  can be used in \pkg{globe} (\code{convert.globe}) or \pkg{sphereplot} (\code{convert.sphereplot}).
   }
   \item{sp.dim}{
    If \code{inverse=TRUE}, takes value 2 or 3 to respectively produce a 2 or 3 column matrix.  Ignored if \code{inverse=FALSE}.
@@ -36,9 +36,9 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   \code{convert.sphereplot} does not need the radius of the sphere; you
-  specify the radius when making calls to \code{rgl.sphgrid} and
+  specify the radius when making calls to \pkg{sphereplot} functions suchh as \code{rgl.sphgrid} and
   \code{rgl.sphpoints} that plot the data.
-   Also, if coordinates are converted using either function, and then converted back again with the same function, the doubly converted coordinates may differ from the orignal coordinates by a minute quantity (i.e. in the vicinity of 10^-16).
+   Also, if coordinates are converted using either function, and then converted back again with the same function, the doubly converted coordinates may differ from the orignal coordinates by a minute quantity (i.e.~in the vicinity of 10^-16).
 }
 \seealso{
   \code{\link{convert2}}, \code{\link{convert3}}

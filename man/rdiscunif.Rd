@@ -28,8 +28,8 @@
 
 \details{
   \code{rdiscunif} generates a realisation of \code{n} points of the
-  discrete uniform distribution with support \code{(min, min+steps,
-  min+2*steps, ... max)}.  If \code{steps} is not a factor of
+  discrete uniform distribution with support \code{(min,min+steps,
+  min+2*steps,...,max)}.  If \code{steps} is not a factor of
   \code{(max-min)}; or if \code{min > max} then an error is generated.
   If \code{min = max}, then \code{rdiscunif(n, min, max,
   steps)=repeat(min, n)}.
@@ -39,7 +39,7 @@
   uniform distribution. 
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+  Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 }
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>

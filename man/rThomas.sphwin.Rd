@@ -9,7 +9,8 @@
   sphere. Includes CSR (complete spatial randomness).  
 }
 \usage{
-rThomas.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE, nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2", poisthresh=1e-06)
+rThomas.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE,
+ nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2", poisthresh=1e-06)
 }
 \arguments{
   \item{kappa}{
@@ -39,7 +40,7 @@ rThomas.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE, nsim=
     Logical. If \code{TRUE} (the default), the process is simulated on the entire sphere, and the output is only those points in the window defined by \code{win}.  If \code{FALSE}, the process is simulated within the window defined by \code{win}.
   }
   \item{as.sp}{
-    Logical.  If TRUE, returns an object of class as defined by
+    Logical.  If \code{TRUE}, returns an object of class as defined by
     \code{sp.dim}.  Otherwise, returns a matrix.  See Value. 
   }
   \item{ndim}{
@@ -50,7 +51,7 @@ rThomas.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE, nsim=
   }
 }
 \details{
-  This algorithm generates a realisation of the analogue on the sphere
+  This algorithm generates a realisation of the analogue on the sphere of the 
   (`modified') Thomas process, a special case of the Neyman-Scott process,
   inside the window \code{win}.  
 
@@ -64,15 +65,19 @@ rThomas.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE, nsim=
   of the classical ``stationary Thomas process'' generated inside the
   window \code{win}. This point process has intensity \code{kappa * mu}.  
 
-If the pair correlation function of the model is very close to that of a Poisson process, deviating by less than \code{poisthresh}, then the model is approximately a Poisson process, and will be simulated as a Poisson process with intensity \eqn{kappa * mu}, using \code{rpoispp.sp}. This avoids computations that would otherwise require huge amounts of memory.  
+If the pair correlation function of the model is very close to that of a Poisson process, deviating by less than \code{poisthresh}, then the model is approximately a Poisson process, and will be simulated as a Poisson process with intensity \eqn{kappa * mu}, using \code{\link{rpoispp.sphwin}}. This avoids computations that would otherwise require huge amounts of memory.  
 }
 \value{
   If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
   An item is determined by the values of \code{as.sp} and \code{ndim}:
+
   If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 
 }
@@ -93,7 +98,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link{rFisher}}, \code{link{rHardcore.sphwin}},
+  \code{\link{rFisher}}, \code{\link{rHardcore.sphwin}},
   \code{\link{rMatClust.sphwin}}, \code{\link{rMaternI.sphwin}},
   \code{\link{rMaternII.sphwin}}, \code{\link{rpoispp.sphwin}},
   \code{\link{rStrauss.sphwin}}, \code{\link[spatstat]{rThomas}} 
@@ -101,7 +106,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 \references{
 Diggle, P. J., Besag, J. and Gleaves, J. T. (1976) Statistical analysis of spatial point patterns by means of distance methods. \emph{Biometrics} \bold{32} 659--667. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Thomas, M. (1949) A generalisation of Poisson's binomial limit for use in ecology. \emph{Biometrika} \bold{36}, 18--25. 
 

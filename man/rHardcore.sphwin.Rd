@@ -15,7 +15,7 @@
     intensity parameter (a positive number).
   }
   \item{R}{
-    interaction parameter (a number between 0 and 1, inclusive).
+    interaction parameter (a number between 0 and \eqn{\pi\rho}{pi*rho}, inclusive, where \eqn{\rho}{rho} is the radius of the sphere that to simulate the point pattern on.).
   }
   \item{p}{
     Metropolis-Hastings parameter: The conditional probability of
@@ -84,15 +84,15 @@ from the desired point process.
 However, there are difficulties in deciding whether the algorithm has
 run for ``long enough''. The convergence of the algorithm may indeed be
 extremely slow. No guarantees of convergence are given!  Hence, the
-argument \code{proper} is provided; if \code{proper=FALSE}, then
-\code{m} iterations of the Metropolis-Hastings algorithm have been
-completed.  If \code{proper=TRUE}, then \code{m} is ignored and as many
+argument \code{proper} is provided; if \code{proper=FALSE}, then \code{rHardcore.sphwin} will perform 
+\code{m} iterations of the Metropolis-Hastings algorithm and give the resulting point pattern.
+completed.  Otherwise, (if \code{proper=TRUE}), then \code{rHardcore.sphwin} ignores \code{m} is ignored and as many
 iterations of the Metropolis-Hastings algorithm are performed as is
 needed to attain a true hard core process (i.e. with
 \eqn{
-  gcdist(x, X \setminus \{x\}) \ge R
+  d(x, X \setminus \{x\}) \ge R
 }{
-  gcdist(x, X \ {x}) >= R
+ d(x, X \ {x}) >= R
 }
 for all \eqn{x \in X}{x in X}.
 
@@ -104,13 +104,17 @@ easy to implement for a wide range of models.
 If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
 An item is determined by the values of \code{as.sp} and \code{ndim}:
+
 If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
 If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
 If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
 If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+  Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 }
 \author{
 Tom Lawrence tjlawrence@bigpond.com
@@ -121,16 +125,16 @@ function \code{\link{rmh}} in \code{\link{spatstat}} when used in the
 third example in \code{\link{rmh.default}}, which is the corresponding
 function for point processes in \eqn{R^2}{R^2}.  Hence elements of this help
 page have been taken from those for \code{\link{rmh}} and
-\code{\link{rHardcore}} (also in \code{\link{spatstat}}, with the
+\code{\link{rHardcore}} (also in \pkg{spatstat}), with the
 permission of A. J. Baddeley.  This enables the code to be highly
 efficient and give corresponding output to \code{\link{rmh}}, and for
 the information on this help page to be consistent with that for
 \code{\link{rmh}} and \code{\link{rHardcore}}.  It is hoped that this
 will minimise or remove any confusion for users of both
-\code{\link{spatstat}} and \code{\link{spherstat}}. 
+\pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-\code{link{rHardcore}}, \code{\link{rMatClust.sphwin}},
+\code{\link{rHardcore}}, \code{\link{rMatClust.sphwin}},
 \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
 \code{\link{rpoispp.sphwin}}, \code{\link{rStrauss.sphwin}},
 \code{\link{rThomas.sphwin}} 

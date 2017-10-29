@@ -47,9 +47,11 @@ splitcaps(X, win=sphwin(type="sphere"), upper=TRUE, lower=TRUE, as.sp=TRUE)
   locations of the points in the lower cap (if also \code{as.sp=FALSE})
   or an object of the same class as \code{X}. 
 
-  If \code{upper=TRUE} and \code{lower=TRUE} a list containing the
-  locations of the points in the upper cap as matrices (if also
-  \code{as.sp=FALSE}) or objects of the same class as \code{X}. 
+  If \code{upper=TRUE} and \code{lower=TRUE} a list containing two objects,
+  which are those described in the two previous cases (i.e. the first object
+  contains the points in the upper cap, the second object contains the 
+  points in the lower cap --- as matrices (if \code{as.sp=FALSE}), or as
+  objects of the same class as \code{X}). 
 }
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>

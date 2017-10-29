@@ -8,7 +8,8 @@
   Strauss process, using the Metropolis-Hastings simulation algorithm.   
 }
 \usage{
-rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"), nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
+rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"),
+ nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{beta}{
@@ -18,7 +19,7 @@ rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"), nsi
     interaction strength parameter (a number between 0 and 1, inclusive).
   }
   \item{R}{
-    interaction range parameter (a number between 0 and \code{pi}).
+    interaction range parameter (a number between 0 and \eqn{\pi\rho}{pi*rho}, inclusive, where \eqn{\rho}{rho} is the radius of the sphere that to simulate the point pattern on).
   }
   \item{p}{
     Metropolis-Hastings parameter: The conditional probability of
@@ -59,7 +60,7 @@ rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"), nsi
   \code{beta} and \code{gamma} is the pairwise interaction point process
   with probability density  
   \deqn{
-    f(x_1, \ldots, x_n) = alpha \, beta^{n(x)} gamma^{s(x)}
+    f(x_1, \ldots, x_n) = \alpha \, \beta^{n(x)} \gamma^{s(x)}
   }{
     f(x[1], ..., x[n]) = alpha * beta^(n(x)) * gamma^(s(x))
   }
@@ -75,7 +76,7 @@ rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"), nsi
   The interaction parameter \code{gamma} must be less than or equal to 1
   in order that the process be well-defined (Kelly and Ripley,
   1976). This model describes an ``ordered'' or ``inhibitive''
-  pattern. If \code{gamma=1} it reduces to a Poisson process (complete
+  pattern. If \code{gamma=1} it reduces to a homogeneous spherical Poisson process (complete
   spatial randomness) with intensity \code{beta}. If \code{gamma=0} it
   is called a ``hard core process'' with hard core radius \code{R/2},
   since no pair of points is permitted to lie closer than \code{R} units
@@ -108,9 +109,13 @@ rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"), nsi
   If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
   An item is determined by the values of \code{as.sp} and \code{ndim}:
+
   If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 }
 \references{

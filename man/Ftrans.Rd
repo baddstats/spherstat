@@ -5,7 +5,7 @@
 Transforms of the Empty Space Function F 
 }
 \description{
-Estimates the summary function \code{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
+Estimates the summary function \eqn{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
 }
 \usage{
 Finv.sphwin(X, ...)
@@ -30,25 +30,25 @@ Fstab.sphwin(X, ...)
   distribution function \eqn{F} of the distance from a fixed point in
   space to the nearest point of \code{X}.  
 
-  The variance-stabilising transform of \code{F} is \code{asin(sqrt(F(r)))}.  This is implemented in \code{spherstat} as \code{Fstab.sphwin}, and is a superior statistic to \code{F} when used for inference based on a Monte Carlo or envelope-based test.
+  The variance-stabilising transform of \code{F} is \eqn{\arcsin{\sqrt{F(r)}}}{asin(sqrt(F(r)))}.  This is implemented in \code{spherstat} as \code{Fstab.sphwin}, and is a superior statistic to \code{F} when used for inference based on a Monte Carlo or envelope-based test.
 
   Alternatively, \code{Finv.sphwin} calculates the inverse of the estimated \eqn{F} function, under the assumption that the underlying process is Poisson.  The calculated function is therefore independent of the estimated intensity of the point pattern and therefore any deviation test performed using this estimate will avoid the related conservatism issue.  The plot is also a P-P plot.
 
-  Plots that can be useful include centring (include the argument \code{.-theo~r}) the function, or for either of \eqn{G(r)} or \eqn{Gstab(r)}, plotting the estimated function against the theoretical value for a model (use e.g. the argument \code{.~theo} in the plot function).
+  Plots that can be useful include centring (include the argument \code{.-theo~r}) the function, or for either of \eqn{F(r)} or \eqn{Fstab(r)}, plotting the estimated function against the theoretical value for a model (use e.g. the argument \code{.~theo} in the plot function).
 }
 \value{
   An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
   which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
 
   Essentially a data frame containing some or all of the following columns: 
-  \item{r}{the values of the argument r at which the transformation of\eqn{F(r)}
+  \item{r}{the values of the argument r at which the transformation of \eqn{F(r)}
   has been estimated} 
  
   \item{rs}{the transformation of the "reduced sample" (border correction) estimator of \eqn{F(r)}}
  
   \item{km}{the trasnformation of the spatial Kaplan-Meier estimator of \eqn{F(r)}}
  
-  \item{hazard}{the transformation of the hazard rate \eqn{lambda(r)} of \eqn{F(r)} by the spatial Kaplan-Meier method}
+  \item{hazard}{the transformation of the hazard rate \eqn{\lambda(r)}{lambda(r)} of \eqn{F(r)} by the spatial Kaplan-Meier method}
  
   \item{raw}{the transform of the uncorrected estimate of \eqn{F(r)}, i.e. the empirical distribution of the distance from a fixed point in the window to the nearest point of \code{X}}
  
@@ -58,7 +58,7 @@ Fstab.sphwin(X, ...)
 }
 
 \section{Note}{
-Sizeable amounts of memory may be needed during the calculation
+Sizeable amounts of memory may be needed during the calculation.
 }
 
 \references{
@@ -76,7 +76,7 @@ Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991.
 
 Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
 
@@ -89,7 +89,7 @@ Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applica
 }
 
 \seealso{
-  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Fest}}, \code{\link{Gstab.sphwin}}, \code{\link{Ginv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
+  \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Fest}}, \code{\link{Gstab.sphwin}}, \code{\link{Ginv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
 }
 \examples{
 sph <- sphwin(type="sphere")

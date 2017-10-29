@@ -84,9 +84,12 @@ rWatson.girdle(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1,
 }
 \references{
   Best, D. J. and Fisher, N. I. (1986) `Goodness-of-fit and discordancy tests for samples from the Watson distribution on the sphere', \emph{Australasian Journal of Statistics}, \bold{28}, 13--31.
+
   Fisher, N. I., Embleton, B. J. J. and Lewis, T. (1987) `Statistical analysis of spherical data', 1st paperback edition.  Cambridge University Press.
+
   Fisher, N. I., Lewis, T. and Willcox, M. E. (1981) `Tests of discordancy for samples from Fisher's distribution on the sphere' \emph{Journal of the Royal Statistical Society Series C}, \bold{30}, 230--237.
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.  
+
+  Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.  
 }
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>

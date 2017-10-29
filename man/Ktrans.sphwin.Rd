@@ -26,26 +26,26 @@
 \details{
 This command computes an estimate of the variance-stabilising and inverse transformations of Ripley's (1977) \eqn{K} function for the spatial point pattern X. The variance-stabilising transformation of Ripley's K-function is
 \deqn{
-Kstab(r) = \sqrt(K(r)/(2*\pi*\rho^2))
+Kstab(r) = \sqrt{(K(r)/(2*\pi*\rho^2))}
 }{
 Kstab(r) = sqrt(K(r)/(2*pi*rho^2))
 }
 while the inverse transformation is
 \deqn{
-Kinv(r) = \rho*acos(K(r)/(2*\pi*\rho^2))
+Kinv(r) = \rho*\arccos(K(r)/(2*\pi*\rho^2))
 }{
-Kinv(r) = rho*acos(K(r)/(2*pi*rho^2))
+Kinv(r) = rho*arccos(K(r)/(2*pi*rho^2))
 }
-where \eqn{K(r)} is the \eqn{K}-function and \eqn{\rho}{rho} is the radius of the sphere. 
+where \eqn{K(r)} is the \eqn{K}-function and \eqn{\rho}{rho} is the radius of the sphere on which \code{X} is observed. 
 
-See Kest for information about Ripley's K-function. The variance-stabilising transformation was proposed by Besag (1977); the inverse transformation by Lawrence (2016). 
+See \code{\link{Ksphere}} for information about Ripley's \eqn{K}-function. The variance-stabilising transformation was proposed by Besag (1977); the inverse transformation by Lawrence (2016). 
 
 The commands \code{Kstab.sphwin} and \code{Kinv.sphwin} first calls \code{\link{Ksphere}} to compute the estimate of the \eqn{K}-function, and then applies the appropriate transformation. 
 
-For a completely random (uniform Poisson) point pattern, the theoretical value of the inverse transformation function is Kinv(r) = r. The variance-stabilising transformation is more appropriate for use in simulation envelopes and hypothesis tests. 
+For a completely random (uniform Poisson) point pattern, the theoretical value of the inverse transformation function is \eqn{Kinv(r) = r}. The variance-stabilising transformation is more appropriate for use in simulation envelopes and hypothesis tests. 
 
 
-  Other plots that can be useful include centring (include the argument \code{.-theo~r}) the function, or for either of \eqn{G(r)} or \eqn{Gstab(r)}, plotting the estimated function against the theoretical value for a model (use e.g. the argument \code{.~theo} in the plot function).
+Other plots that can be useful include centring (include the argument \code{.-theo~r}) the function, or for either of \eqn{K(r)} or \eqn{Kstab(r)}, plotting the estimated function against the theoretical value for a model (use e.g. the argument \code{.~theo} in the plot function).
 
 See \code{\link{Ksphere}} for the list of arguments. 
 }
@@ -67,7 +67,9 @@ Baddeley, A., Moller, J. and Waagepetersen, R. (2000) Non- and semiparametric es
 
 Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991. 
 
-Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
+Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983.
+
+Lawrence, T. (2017) Master's Thesis, University of Western Australia. 
 
 Ohser, J. (1983) On estimators for the reduced second moment measure of point processes. \emph{Mathematische Operationsforschung und Statistik, series Statistics}, \bold{14}, 63 -- 71. 
 

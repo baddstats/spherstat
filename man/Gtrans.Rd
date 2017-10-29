@@ -2,10 +2,10 @@
 \alias{Ginv.sphwin}
 \alias{Gstab.sphwin}
 \title{
-Transforms of the Empty Space Function F 
+Transforms of the Nearest Neighbour Distance Function G 
 }
 \description{
-Estimates the summary function \code{G(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere and performs either the variance-stabilising or inverse transform.
+Estimates the summary function \eqn{G(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere and performs either the variance-stabilising or inverse transform.
 }
 \usage{
 Ginv.sphwin(X, ...)
@@ -24,9 +24,9 @@ Gstab.sphwin(X, ...)
   }
 }
 \details{
-  The nearest neighbour distance distribution function (also called the "event-to-event", or the "inter-event" distribution) of a point process \code{X} is the cumulative distribution function \code{G} of the distance from a typical random point of \code{X} to the nearest other point of \code{X}. 
+  The nearest neighbour distance distribution function (also called the "event-to-event", or the "inter-event" distribution) of a point process \code{X} is the cumulative distribution function \eqn{G} of the distance from a typical random point of \code{X} to the nearest other point of \code{X}. 
 
-  The variance-stabilising transform of \code{G} is \code{asin(sqrt(G(r)))}.
+  The variance-stabilising transform of \eqn{G} is \eqn{\arcsin{\sqrt{G(r)}}}{asin(sqrt(G(r)))}.
 
   Alternatively, \code{Ginv.sphwin} calculates the inverse of the estimated \eqn{G} function, under the assumption that the underlying process is Poisson.  The calculated function is therefore independent of the estimated intensity of the point pattern and therefore any deviation test performed using this estimate will avoid the related conservatism issue.  The plot is also a P-P plot.
 
@@ -37,14 +37,14 @@ Gstab.sphwin(X, ...)
   which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
 
   Essentially a data frame containing some or all of the following columns: 
-  \item{r}{the values of the argument r at which the transformation of\eqn{G(r)}
+  \item{r}{the values of the argument r at which the transformation of \eqn{G(r)}
   has been estimated} 
  
   \item{rs}{the transformation of the "reduced sample" (border correction) estimator of \eqn{G(r)}}
  
   \item{km}{the trasnformation of the spatial Kaplan-Meier estimator of \eqn{G(r)}}
  
-  \item{hazard}{the transformation of the hazard rate \eqn{lambda(r)} of \eqn{G(r)} by the spatial Kaplan-Meier method}
+  \item{hazard}{the transformation of the hazard rate \eqn{\lambda(r)}{lambda(r)} of \eqn{G(r)} by the spatial Kaplan-Meier method}
  
   \item{raw}{the transform of the uncorrected estimate of \eqn{G(r)}, , i.e. the empirical distribution of the distances from each point in the pattern X to the nearest other point of the pattern}
  
@@ -72,7 +72,7 @@ Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991.
 
 Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
 
@@ -85,7 +85,7 @@ Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applica
 }
 
 \seealso{
-  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
+  \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
 }
 \examples{
 sph <- sphwin(type="sphere")

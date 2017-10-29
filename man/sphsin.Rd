@@ -33,16 +33,16 @@ sphsin(d1, d2, theta1, theta2, rad = 1)
   }
 }
 \details{
-  This function can be used to either calculate an angle in a spherical
-  triangle when the length of the opposite side is knwon, the length of
-  another side and size of the angle opposite it are all known.  This
-  function can also be used to calculate the length of a side of a
-  spherical triangle when the size of the angle opposite it, the size of
-  another angle in the the triangle and length of the side opposite it
-  are all known.  The calculation performed depends on whether \code{d2}
-  or \code{theta2} is set to \code{NULL}; the variable set to
-  \code{NULL} is the one for which this function calculates the value.
-  If both \code{d2} and \code{theta2} (or neither) are set to
+  This function can be used to either calculate an angle in a spherical 
+  triangle when the length of the opposite side, the length of 
+  another side and the size of the angle opposite that other side are all known.  This 
+  function can also be used to calculate the length of a side of a 
+  spherical triangle when the size of the angle opposite it, the size of 
+  another angle in the the triangle and length of the side opposite that other angle 
+  are all known.  The calculation performed depends on whether \code{d2} 
+  or \code{theta2} is set to \code{NULL}; the variable set to 
+  \code{NULL} is the one for which this function calculates the value. 
+  If both \code{d2} and \code{theta2} (or neither) are set to 
   \code{NULL}, an error is generated. 
 
   The distance(s) given to this function should be across the surface of
@@ -60,7 +60,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 \seealso{
   \code{\link{sphcos}} (spherical cosine function),
   \code{\link{sph.angles}} (calculate the sizes of all angles in a
-  spherical polygon) 
+  spherical polygon) , \code{\link{sround}}, \code{\link{cround}}
 }
 \examples{
 sphsin(d1=pi/2, d2=NULL, theta1=pi/2, theta2=pi/3, rad=1)

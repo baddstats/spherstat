@@ -38,7 +38,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 \section{Warning}{
   On any sphere, the boundaries that define a window \eqn{W} on the
   sphere also define a second shape \eqn{W_2}{W2}, that containing all the
-  boundaries and vertices of \eqn{W}, and the complement of W.  Since
+  boundaries and vertices of \eqn{W}, and the complement of \eqn{W}.  Since
   the two shapes have boundaries and vertices in common, the set of all
   points that this function would identify as being outside \eqn{W} is
   not the set of all points in \eqn{W_2}{W2}.

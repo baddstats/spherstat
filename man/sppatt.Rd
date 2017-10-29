@@ -32,7 +32,7 @@ sp3(X, win=sphwin(type="sphere"), check=TRUE)
 \details{
   An object of class \code{sp2} or \code{sp3} is the most efficient way
   of giving information about the locations of points on a sphere, and
-  the window in which they ae observed.  Functions in this package
+  the window in which they are observed.  Functions in this package
   accept objects of these types as input (even when one of the elements
   e.g. the locations of points, or the window, is irrelevant), they can
   instead accept the relevant information provided in the same way as
@@ -40,7 +40,7 @@ sp3(X, win=sphwin(type="sphere"), check=TRUE)
   \code{"sphwin"}.  This being said, \code{sp2} and \code{sp3} are
   strongly recommended as the classes of objects given as input in this
   package because their creation includes a check to ensure all
-  specified points are on the sphere and in the required format. 
+  specified points are in \code{win} and in the required format. 
 
   For both \code{sp2} and \code{sp3}, the locations of points (\code{X})
   must be given in matrix form, with each row specifying the location of
@@ -64,7 +64,7 @@ sp3(X, win=sphwin(type="sphere"), check=TRUE)
   argument \code{check} allows the user to determine whether or not such
   checks occur, and was introduced to reduce the run-time of some other
   functions in this package.  It is very strongly recommended that this
-  argumebnt always be set to \code{TRUE} (the default setting) since if
+  argument always be set to \code{TRUE} (the default setting) since if
   an object of class \code{sp2} or \code{sp3} is created such that some
   points are outside the observation window, and that object is passed
   to other functions then either errors will be generated, or the output

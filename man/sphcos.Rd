@@ -47,7 +47,7 @@ sphcos(d1, d2, d3, theta, rad = 1)
   used to calculate the size of an angle, it is given in radians. 
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+  Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 }
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
@@ -55,8 +55,9 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 \seealso{
   \code{\link{sphsin}} (spherical sine function),
   \code{\link{sph.angles}} (calculate the sizes of all angles in a
-  spherical polygon) 
+  spherical polygon), \code{\link{cround}}, \code{\link{sround}},
 }
+
 \examples{
 sphcos(d1=pi/2, d2=pi/2, d3=pi/3, theta=NULL, rad=1)
 

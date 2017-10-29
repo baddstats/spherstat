@@ -57,20 +57,24 @@
   being placed and uniformly inside a disc of radius \code{r} centred on
   the parent point. The resulting point pattern is a realisation of the
   classical ``stationary Matern cluster process'' generated inside the
-  window win. This point process has intensity \code{kappa * mu}. 
+  window \code{win}. This point process has intensity \code{kappa * mu}. 
 }
 \value{
   If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
   An item is determined by the values of \code{as.sp} and \code{ndim}:
+
   If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 
 }
 \references{
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Matern, B. (1960) \emph{Spatial Variation}. Meddelanden fraan Statens Skogsforskningsinstitut, volume 59, number 5. Statens Skogsforskningsinstitut, Sweden. 
 
@@ -95,7 +99,7 @@ Waagepetersen, R. (2007) An estimating function approach to inference for inhomo
   \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{link{rHardcore.sphwin}}, \code{\link[spatstat]{rMatClust}},
+  \code{\link{rHardcore.sphwin}}, \code{\link[spatstat]{rMatClust}},
   \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
   \code{\link{rpoispp.sphwin}}, \code{\link{rStrauss.sphwin}},
   \code{\link{rThomas.sphwin}} 

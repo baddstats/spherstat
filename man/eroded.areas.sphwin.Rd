@@ -18,7 +18,7 @@
   \item{r}{
     Numeric vector of radii at which erosions will be performed.  Must have
     length 512, and must be specified if \code{win} is of type
-    \code{qaudrangle} or \code{polygon}.  If \code{r=NULL} and \code{win} is
+    \code{quadrangle} or \code{polygon}.  If \code{r=NULL} and \code{win} is
     of type \code{band} or \code{wedge}, then the \code{r} will be generated
     such that \code{r} is between 0 and the smallest distance at which the
     area of the erosion is 0.  If \code{win} is of type \code{sphere}, then
@@ -29,10 +29,10 @@
   \item{method}{
     (For spherical wedges only) specifies the method used to
     estimate/calculate the area morphological erosions of the window.
-    Must be one of "exact", "integral" or "grid" (see Details). 
+    Must be one of \code{"exact"}, \code{"integral"} or \code{"grid"} (see Details). 
   }
   \item{\dots}{
-    (For spherical wedges where method="grid", and polygons only) Input to
+    (For spherical wedges where method=\code{"grid"}, and polygons only) Input to
     be passed to \code{\link{gridmat}}.  See Details below, then
     \code{\link{gridmat}}, for more information. 
   }
@@ -62,7 +62,7 @@
   of the three methods. 
 
   Alternatively, there are two estimates of the morphological erosions
-  of the spheriucl wedge.  The first estimator is "integral", which
+  of the spherical wedge.  The first estimator is "integral", which
   involves estimating the integral formula for the morphological
   erosion:
   \deqn{

@@ -2,8 +2,8 @@
 \alias{runif.sphwin}
 \alias{rpoispp.sphwin}
 \title{
-  Generate the uniform distribution or a homogeneous Poisson Point
-  Pattern on the sphere 
+  Generate the uniform distribution or a homogeneous Poisson point
+  pattern on the sphere 
 }
 \description{
   Generates the uniform distribution or a random point pattern using the
@@ -11,9 +11,11 @@
   sphere. Includes CSR (complete spatial randomness).  
 }
 \usage{
-runif.sphwin(n, win = sphwin(type = "sphere"), nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
+runif.sphwin(n, win = sphwin(type = "sphere"), nsim=1, drop=TRUE,
+ as.sp=TRUE, ndim="2")
 
-rpoispp.sphwin(lambda, win = sphwin(type = "sphere"), lmax=NULL, ..., nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
+rpoispp.sphwin(lambda, win = sphwin(type = "sphere"), lmax=NULL,
+ ..., nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{n}{
@@ -40,7 +42,7 @@ rpoispp.sphwin(lambda, win = sphwin(type = "sphere"), lmax=NULL, ..., nsim=1, dr
     Logical. If \code{nsim=1} and \code{drop=TRUE} (the default), the result will be a point pattern, rather than a list containing a point pattern. 
   }
   \item{as.sp}{
-    Logical.  If TRUE, returns an object of class as defined by
+    Logical.  If \code{TRUE}, returns an object of class as defined by
     \code{sp.dim}.  Otherwise, returns a matrix.  See Value. 
   }
   \item{ndim}{
@@ -68,9 +70,13 @@ rpoispp.sphwin(lambda, win = sphwin(type = "sphere"), lmax=NULL, ..., nsim=1, dr
   If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
   An item is determined by the values of \code{as.sp} and \code{ndim}:
+
   If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 }
 \references{
@@ -94,7 +100,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \seealso{
   \code{\link[spatstat]{rpoispp}},  \code{\link{rFisher}},
-  \code{link{rHardcore.sphwin}}, \code{\link{rMatClust.sphwin}},
+  \code{\link{rHardcore.sphwin}}, \code{\link{rMatClust.sphwin}},
   \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
   \code{\link{rStrauss.sphwin}}, \code{\link{rThomas.sphwin}} 
 }

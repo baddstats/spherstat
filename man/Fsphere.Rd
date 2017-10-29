@@ -4,7 +4,7 @@
 The Empty Space Function F 
 }
 \description{
-Estimates the summary function \code{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
+Estimates the summary function \eqn{F(r)} for a point pattern in a window of arbitrary shape on a (subset of) a sphere.
 }
 \usage{
 Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
@@ -50,15 +50,15 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
   pattern (Cressie, 1991; Diggle, 1983; Ripley, 1988). In exploratory
   analyses, the estimate of \code{F} is a useful statistic summarising the
   sizes of gaps in the pattern. For inferential purposes, the estimate of
-  \code{F} is usually compared to the true value of \code{F} for a
+  \eqn{F} is usually compared to the true value of \eqn{F} for a
   completely random (Poisson) point process, which is  
   \deqn{
-    F(r)=1-\exp(-2\lambda\pi(1-\cos(r/rad)))
+    F(r)=1-\exp(-2\pi\rho\lambda(1-\cos(r/\rho)))
   }{
-    F(r) = 1 - exp( - 2 * lambda * pi * (1 - cos (r/rad) ) )
+    F(r) = 1 - exp( - 2 * pi * rho * lambda(1 - cos (r/rho) ) )
   }
   where \eqn{\lambda}{lambda} is the intensity (expected number of
-  points per unit area). Deviations between the empirical and
+  points per unit area) and \eqn{\rho}{rho} is the radius of the sphere in which \code{X} is obsered. Deviations between the empirical and
   theoretical \eqn{F} curves may suggest spatial clustering or spatial
   regularity.  
 
@@ -98,7 +98,7 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
   successive \code{r} values must be very fine.  
 
   The algorithm also returns an estimate of the hazard rate function,
-  \code{lambda(r)}, of \code{F(r)}. The hazard rate is defined by  
+  \eqn{\lambda(r)}{lambda(r)}, of \eqn{F(r)}. The hazard rate is defined by  
   \deqn{
     \lambda(r) = - \frac{d}{dr} \log(1 - F(r))
   }{
@@ -106,7 +106,7 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
   }
 
   The hazard rate of \eqn{F} has been proposed as a useful exploratory
-  statistic (Baddeley and Gill, 1994). The estimate of \eqn{lambda(r)} given
+  statistic (Baddeley and Gill, 1994). The estimate of \code{lambda(r)} given
   here is a discrete approximation to the hazard rate of the
   Kaplan-Meier estimator of \eqn{F}. Note that \eqn{F} is absolutely
   continuous (for any stationary point process \code{X}), so the hazard
@@ -131,11 +131,11 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
  
   \item{km}{the spatial Kaplan-Meier estimator of \eqn{F(r)}}
  
-  \item{hazard}{the hazard rate \eqn{lambda(r)} of \eqn{F(r)} by the spatial Kaplan-Meier method}
+  \item{hazard}{the hazard rate \eqn{\lambda(r)}{lambda(r)} of \eqn{F(r)} by the spatial Kaplan-Meier method}
  
   \item{raw}{the uncorrected estimate of \eqn{F(r)}, i.e. the empirical distribution of the distance from a fixed point in the window to the nearest point of \code{X}}
  
-\item{han}{the Hanisch correction estimator of \eqn{F(r)}}
+\item{han}{the Hanisch/Chiu-Stoyan estimator of \eqn{F(r)}}
  
 \item{theo}{the theoretical value of \eqn{F(r)} for a stationary Poisson process of the same estimated intensity.}
 }
@@ -159,7 +159,7 @@ Cressie, N.A.C. \emph{Statistics for spatial data}. John Wiley and Sons, 1991.
 
 Diggle, P.J. \emph{Statistical analysis of spatial point patterns}. Academic Press, 1983. 
 
-Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
 Ripley, B.D. \emph{Statistical inference for spatial processes}. Cambridge University Press, 1988. 
 

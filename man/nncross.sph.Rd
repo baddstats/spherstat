@@ -33,7 +33,7 @@ nncrosssph(X, Y, rad=1)
 
   Note that this function is not symmetric in \code{X} and \code{Y}. To
   find the nearest neighbour in \code{X} of each point in \code{Y},
-  where \code{Y} is a point pattern, use nncross(Y,X).  
+  where \code{Y} is a point pattern, use \code{nncross.sph(Y,X)}.  
 
   If \code{X} is an object of class \code{\link{sp2}} or
   \code{\link{sp3}}, then its radius is used in this calculation.  If
@@ -50,7 +50,7 @@ nncrosssph(X, Y, rad=1)
 Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \seealso{
-  \code{link{nndistsph}} (nearest neighbour distances for a single
+  \code{\link{nndistsph}} (nearest neighbour distances for a single
   sample), \code{\link{crossdistsph}} (pairwise distances between two
   samples), \code{\link{pairdistsph}} (pairwise distances for a single
   sample), \code{\link{gcdist}} (great circle distance between two

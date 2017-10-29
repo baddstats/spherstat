@@ -70,8 +70,8 @@ rot.sphere2(points, v, theta)
   \eqn{\phi_1}{phi1}.  This can be easily overcome by 
   first performing the rotation that sends \eqn{x_1}{x1} to the north pole, then
   performing a second roation on the result, where
-  \code{northpole=c(0, phi1-phi0)} for \eqn{phi1 > phi0}{phi1 > phi0},
-  or \code{northpole}\eqn{=c(0, 2*pi - (phi1-phi0)}{=c(0, 2pi - (phi1-phi0)} for \eqn{phi1 < phi0}{phi1 < phi0}.
+  northpole\eqn{-c(0, \phi_{1}-\phi_{0})}{=c(0, phi1-phi0)} for \eqn{\phi_{1} > \phi_{0}}{phi1 > phi0},
+  or \code{northpole}\eqn{=c(0, 2*\pi - (\phi_{1}-\phi_{0})}{=c(0, 2\pi - (\phi_{1}-\phi_{0})} for \eqn{\phi_{1} < \phi_{0}}{phi1 < phi0}.
   More information about this rotation can be found in Section 3.2.2 of N. I. Fisher et al. (1993).
 
   Under this second rotation (i.e. where the colatitude of the point given
@@ -86,18 +86,18 @@ rot.sphere2(points, v, theta)
 
   If the points are to be rotated in a clockwise direction through a known
   angle about a known axis, then this can be done using \code{rot.sphere2},
-  which applies Rodrigues' rotation formula (see, e.g. Koks, ).
+  which applies Rodrigues' rotation formula (see, e.g. Koks, 2006).
   This can also be used if we know that the rotation will send a point \eqn{x}{x} to a point \eqn{y}{y} along
-  the shortest great circle path.  In this case the axis of rotation, \code{v} is the
-  unit vector in the direction of the cross product of \eqn{x}{x} and \eqn{y}{y}, and \eqn{theta=pi}{theta=pi}.
+  the shortest great circle path.  In this case the axis of rotation, \eqn{v} is the
+  unit length vector in the direction of the cross product of \eqn{x}{x} and \eqn{y}{y}, and \eqn{\theta=\pi}{theta=pi}.
 
-  The function \code{rot.sphere2} can be used to rotate any point \eqn{x}{x} to the north pole \eqn{0_s}{0s}; simply
-  \eqn{theta}{theta} to be the colatitude of \eqn{x}{x} and \eqn{v}{v} to be the cross product of \eqn{x}{x} and
-  \eqn{0_s}{0s}.  To rotate a point to the south pole, set \eqn{v}{v} as for rotation to the north pole, and set
-  \eqn{theta}{theta} to be \eqn{pi}{pi} + the colatitude of \eqn{x}{x}.
+  The function \code{rot.sphere2} can be used to rotate any point \eqn{x}{x} to the north pole \eqn{0_{sph}}{0sph}; simply let 
+  \eqn{\theta}{theta} to be the colatitude of \eqn{x}{x} and \eqn{v}{v} to be the unit length vector in the direction of the cross product of \eqn{x}{x} and
+  \eqn{0_{sph}}{0sph}.  To rotate a point to the south pole, set \eqn{v}{v} as for rotation to the north pole, and set
+  \eqn{\theta}{theta} to be \eqn{\pi}{pi} + the colatitude of \eqn{x}{x}.
 
   To perform an inverse rotation using \code{rot.sphere2}, set \eqn{v}{v} to be as for the original rotation, and set
-  \eqn{theta}{theta} to be \eqn{2*pi}{2pi} - the value of \eqn{theta}{theta} used in the original rotation. 
+  \eqn{\theta}{theta} to be \eqn{2*\pi}{2pi} - the value of \eqn{\theta}{theta} used in the original rotation. 
 
   For \code{rot.sphere}, if \code{points} is an object of class
   \code{\link{sp2}} or \code{\link{sp3}}, then its radius will be used
@@ -112,7 +112,8 @@ rot.sphere2(points, v, theta)
   The output of \code{rot.sphere2} is in the same format as that which the argument code{points} is given in.
 }
 \references{
-Fisher, N. I., Embleton, B. J. J. and Lewis, T. (1987) `Statistical analysis of spherical data', 1st paperback edition.  Cambridge University Press.
+Fisher, N. I., Embleton, B. J. J. and Lewis, T. (1987) `Statistical Analysis of Spherical Data', 1st paperback edition.  Cambridge University Press.
+
 Koks, D. (2006) `A Roundabout Route to Geometric Algebra', in \emph{Explorations in Mathematical Physics}, ch 4, pp. 144--157.  Springer Science + Business Media LLC.
 }
 \author{

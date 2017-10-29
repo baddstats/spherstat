@@ -4,8 +4,8 @@
   Boundary Distances
 }
 \description{
-  Calculate the minimum great circle distance from each of a set of
-  points to the boundary of a window on the sphere. 
+  Calculate the minimum great circle distance from a point (or each of a set of
+  points) to the boundary of a window on the sphere. 
 }
 \usage{
 bdist.sphwin(X, win = sphwin(type = "sphere"))
@@ -23,7 +23,7 @@ bdist.sphwin(X, win = sphwin(type = "sphere"))
   }
 }
 \details{
-  Calculates the minimum great circle distance from a point (or each of
+  This function uses the dot product to calculates\ the minimum great circle distance from a point (or each of
   a set of points) to the boundary of a region on the sphere that can be
   defined using \code{\link{sphwin}}. 
 }

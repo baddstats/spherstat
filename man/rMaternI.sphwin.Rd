@@ -8,7 +8,8 @@
   Model I inhibition process model.  
 }
 \usage{
-rMaternI.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE, stationary=TRUE, as.sp=TRUE, ndim="2")
+rMaternI.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE, 
+stationary=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{kappa}{
@@ -54,20 +55,24 @@ rMaternI.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE, statio
 
   The final pattern of retained points constitute Matern's Model I.
 
-  The process is constructed by first generating a uniform Poisson point process of "proposal" points with intensity \code{kappa}. If \code{stationary = TRUE} (the default), the proposal points are generated on the entire sphere. If \code{stationary=FALSE} then the proposal points are only generated inside the window \code{win}. 
+  The process is constructed by first generating a uniform Poisson point process of "proposal" points with intensity \code{kappa}. If \code{stationary = TRUE} (the default), the proposal points are generated on the entire sphere; this is relevant when there may be points outside the window, as these would affect whether points inside the window are retained in the final model. If \code{stationary=FALSE} then the proposal points are only generated inside the window \code{win}; this is relevant when it is known or assumed that there are no points outside the window. 
 }
 \value{
   If \code{nsim=1} and \code{drop=FALSE} then a single item as described below; otherwise a list containing \code{nsim} items.
 
   An item is determined by the values of \code{as.sp} and \code{ndim}:
+
   If \code{as.sp=FALSE} and \code{ndim="2"}, a two column matrix giving the locations of the simulated points.
+
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+
   If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
 
 }
 \references{
-  Lawrence, T.J. (2016) Master's Thesis, University of Western Australia.
+  Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 }
 \author{
 Tom Lawrence <email:tjlawrence@bigpond.com>
@@ -75,7 +80,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 \note{
   This function is the analogue for point processes on the sphere of the
   function \code{\link[spatstat]{rMaternI}} in \pkg{spatstat}.  Hence
-  elements of this help page have been taken from that for
+  elements of this help page have been taken from that for 
   \code{\link[spatstat]{rMaternI}}, with the permission of
   A. J. Baddeley.  This enables the information on this help page to be
   consistent with that for\code{\link{rMaternI}}.  It is hoped that this
@@ -83,8 +88,8 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   and \pkg{spherstat}.
 }
 \seealso{
-  \code{link[spatstat]{rHardcore}}, \code{\link{rMatClust.sphwin}},
-  \code{link[spatstat]{rMaternI}}, \code{\link{rMaternII.sphwin}},
+  \code{\link[spatstat]{rHardcore}}, \code{\link{rMatClust.sphwin}},
+  \code{\link[spatstat]{rMaternI}}, \code{\link{rMaternII.sphwin}},
   \code{\link{rpoispp.sphwin}}, \code{\link{rStrauss.sphwin}},
   \code{\link{rThomas.sphwin}} 
 }

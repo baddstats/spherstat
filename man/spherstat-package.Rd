@@ -22,20 +22,20 @@
     \item estimation of summary functions including
     the spherical analogues of Ripley's \eqn{K} function,
     the nearest neighbour distance distribution function \eqn{G},
-    and the empty space function \eqn{F};
+    the empty space function \eqn{F} and the \eqn{J} function;
     \item
-    simulation of Poisson and Neyman-Scott point processes;
+    simulation of Poisson, Matern inhibition, Strauss, Hard-core and Neyman-Scott point processes;
     \item
     model-fitting for Poisson point processes and
     Neyman-Scott processes.
   }
   The preferred coordinate system for data given to functions in this
   package is the spherical coordinate system.  In other words, the
-  coordinate of a point should be given as \code{(theta, phi)}, where
-  \code{theta} is the colatitude, between \code{0} and \code{pi},
-  and \code{phi} is longitude and is between \code{0} and \code{2*pi}.
+  coordinate of a point should be given as \eqn{(\theta, \phi)}{(theta, phi)}, where
+  \eqn{\theta}{theta} is the colatitude, between \code{0} and \eqn{\pi}{pi},
+  and \eqn{\phi}{phi} is longitude and is between \code{0} and \eqn{2\pi}{2 * pi}.
   The north pole has colatitude \code{0} and arbitrary
-  longitude (although for most cases, use \code{phi=0}), and longitudes are
+  longitude (although for most cases, use \eqn{\phi=0}{phi=0}), and longitudes are
   measured in anticlockwise direction.  Some functions allow data to be
   given using Cartesian coordinates \code{(x,y,z)}.
 }
