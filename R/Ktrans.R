@@ -2,7 +2,7 @@ Kinv.sphwin <- function (X, ...)
 {
     K <- Ksphere(X, ...)
     rad <- X$win$rad
-    Kinv <- eval.fv(acos(cround(sround(1-(K/(2*pi*(X$win$rad^2)))))))
+    Kinv <- eval.fv(acos(cround(sround(1-(K/(2*pi*(rad^2)))))))
     Kinv <- rebadge.fv(Kinv, quote(Kinv(r)), "Kinv", names(K), new.labl = attr(K, 
         "labl"))
     return(Kinv)
