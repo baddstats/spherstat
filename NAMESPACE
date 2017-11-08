@@ -7,14 +7,7 @@ importFrom("graphics", "contour.default", "plot")
 ## C code entry points
 
 useDynLib(spherstat,
-          "kisocapweights",
-          "kisobandweights",
-          "dkisocap",
-          "dkisoband",
-          "dwkisocap",
-          "dwkisoband",
-          "RcallPtInSphPoly",
-          "Rpolyarea")
+          .registration=TRUE)
 
 # exported functions
 
