@@ -2,7 +2,7 @@ Package: spherstat
 Type: Package
 Title: Spatial Point Pattern Analysis, Geometry and Trigonometry for the Sphere
 Version: 1.9-3
-Date: 2017-10-29
+Date: 2017-11-02
 Authors@R: c(person("Tom", "Lawrence", role = c("aut", "cre"),
 		     email = "tjlawrence@bigpond.com"),
 	     person("Adrian", "Baddeley", role=c("aut", "ths")))
