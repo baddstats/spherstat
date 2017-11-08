@@ -8,7 +8,8 @@
   hard core process, using the Metropolis-Hastings simulation algorithm.   
 }
 \usage{
-  rHardcore.sphwin(beta, R=0, p=0.5, m=100, win = sphwin(type="sphere"), proper=TRUE, nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
+  rHardcore.sphwin(beta, R=0, p=0.5, m=100, win = sphwin(type="sphere"),
+ proper=TRUE, nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{beta}{

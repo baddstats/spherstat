@@ -10,10 +10,14 @@ Generate Fisher and Watson distributions on the sphere
 Generates variates of the Fisher and Watson distributions on the sphere. 
 }
 \usage{
-rFisher(n, mode, kappa, win=sphwin(type="sphere"), nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
-rWatson(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
-rWatson.bipolar(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
-rWatson.girdle(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1, drop=TRUE, as.sp=TRUE, ndim="2")
+rFisher(n, mode, kappa, win=sphwin(type="sphere"), nsim=1, 
+drop=TRUE, as.sp=TRUE, ndim="2")
+rWatson(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1, 
+drop=TRUE, as.sp=TRUE, ndim="2")
+rWatson.bipolar(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1,
+drop=TRUE, as.sp=TRUE, ndim="2")
+rWatson.girdle(n, mode, kappa, win=sphwin(type="sphere"), squeeze=FALSE, nsim=1,
+drop=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{n}{
@@ -101,25 +105,29 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 rFis <- rFisher(n=100, mode=c(0,0), kappa=50, win=sphwin())
 rFis
 
-rFis2 <- rFisher(n=100, mode=c(pi/3, pi/3), kappa=0.1, win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
+rFis2 <- rFisher(n=100, mode=c(pi/3, pi/3), kappa=0.1, 
+win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
 rFis2
 
 rWB <- rWatson.bipolar(n=100, mode=c(0,0), kappa=50, win=sphwin())
 rWB
 
-rWB2 <- rWatson.bipolar(n=100, mode=c(pi/3, pi/3), kappa=0.1, win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
+rWB2 <- rWatson.bipolar(n=100, mode=c(pi/3, pi/3), kappa=0.1, 
+win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
 rWB2
 
 rWG <- rWatson.girdle(n=100, mode=c(0,0), kappa=-50, win=sphwin())
 rWG
 
-rWG2 <- rWatson.girdle(n=100, mode=c(pi/3, pi/3), kappa=-0.1, win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
+rWG2 <- rWatson.girdle(n=100, mode=c(pi/3, pi/3), kappa=-0.1, 
+win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
 rWG2
 
 rWat <- rWatson(n=100, mode=c(0,0), kappa=50, win=sphwin())
 rWat
 
-rWat2 <- rWatson(n=100, mode=c(pi/3, pi/3), kappa=-0.1, win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
+rWat2 <- rWatson(n=100, mode=c(pi/3, pi/3), kappa=-0.1, 
+win=sphwin(type="band", param=c(0, pi/3), ref=c(pi/3, pi/3)))
 rWat2
 
 rWatFish <- rWatson(n=100, mode=c(0,0), kappa=0, win=sphwin())

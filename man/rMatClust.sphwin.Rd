@@ -8,7 +8,8 @@
   analogue of the Matern Cluster Process on the sphere.  
 }
 \usage{
-  rMatClust.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE, nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
+  rMatClust.sphwin(kappa, scale, mu, win=sphwin(type="sphere"), parents=FALSE,
+ nsim=1, drop=TRUE, expand=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{kappa}{

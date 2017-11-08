@@ -8,7 +8,8 @@
   Model II inhibition process model.  
 }
 \usage{
-rMaternII.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE, stationary=TRUE, as.sp=TRUE, ndim="2")
+rMaternII.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE,
+ stationary=TRUE, as.sp=TRUE, ndim="2")
 }
 \arguments{
   \item{kappa}{

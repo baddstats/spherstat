@@ -74,9 +74,10 @@ sphwedge <- sphwin(type="wedge", param=c(pi/3, 0), ref=c(0,0))
 sphwedge
 
 
-# The following call to sphwin at the end of the sequence of code below generates an error because the
-# second and third vertices are diametrically opposite, so there are infinitely many arcs between them
-# and hence insufficient information to determine which one is a boundary of the window.
+# The following call to sphwin at the end of the sequence of code below generates an error because
+# the second and third vertices are diametrically opposite, so there are infinitely many arcs 
+# between them, and hence insufficient information to determine which one is a boundary of 
+# the window.
 
 x <- matrix(nrow=4, ncol=2)
 x[1,] <- c(0,0)
