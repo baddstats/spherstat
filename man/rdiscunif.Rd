@@ -45,7 +45,7 @@
 Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \seealso{
-\code{\link[stats]{runif}} for generating the continuous uniform distribution.
+\code{\link[stats]{Uniform}} for generating the continuous uniform distribution.
 }
 \examples{
 rdiscunif(n=10, min=0, max=5, steps=1)

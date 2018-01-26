@@ -39,7 +39,7 @@
   These are methods for the generic functions
   \code{\link[stats]{anova}},
   \code{\link[stats]{coef}},
-  \code{\link[stats]{fitted}},
+  \code{\link[stats]{fitted.values}},
   \code{\link[stats]{formula}},
   \code{\link[stats]{update}}
   and 
@@ -54,7 +54,7 @@
   Adrian Baddeley
 }
 \seealso{
-  \code{\link{sphppm}}, \code{\link[spatstat]{methods.ppm}}, \code{\link[spatstat]{anova.ppm}}, \code{\link[spatstat]{coef.ppm}}, \code{\link[spatstat]{fitted.ppm}}, \code{\link[spatstat]{formula.ppm}}, \code{\link[spatstat]{update.ppm}}, \code{\link[spatstat]{print.ppm}}
+  \code{\link{sphppm}}, \code{\link[spatstat]{ppm.object}}, \code{\link[spatstat]{anova.ppm}}, \code{\link[spatstat]{coef.ppm}}, \code{\link[spatstat]{fitted.ppm}}, \code{\link[spatstat]{formula.ppm}}, \code{\link[spatstat]{update.ppm}}, \code{\link[spatstat]{print.ppm}}
 }
 \examples{
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))
