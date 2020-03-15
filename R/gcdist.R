@@ -6,7 +6,7 @@ gcdist <- function(x,y,rad=1){
   if(ncol(x) ==2) {x1 <- convert3(x)} else {x1 <- x}
   if(ncol(y) ==2) {y1 <- convert3(y)} else {y1 <- y}
   dp <- x1 %*% t(y1)
-  gc <- rad*acos(cround(dp/rad))
+  gc <- rad*acos(cround(dp/(rad^2)))
   gc
 }
 
@@ -20,7 +20,7 @@ gcdistPaired <- function(x, y, rad=1) {
   if(nrow(x) != nrow(y))
     stop("x and y must contain the same numbers of points")
   dp <- rowSums(x * y)
-  gc <- rad*acos(cround(dp/rad))
+  gc <- rad*acos(cround(dp/(rad^2)))
   gc
 }
 
