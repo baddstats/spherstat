@@ -91,16 +91,17 @@ The spatial Kaplan-Meier estimator of \eqn{G} is always nondecreasing but its ma
 
 \references{
 
-Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
+Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pp. 37--78. 
 
-Baddeley, A J. and Gill, R.D. Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} (1997) 263=-292. 
-Cressie, N.A.C. Statistics for spatial data. John Wiley and Sons, 1991. 
+Baddeley, A J. and Gill, R.D. (1997) Kaplan-Meier estimators of interpoint distance distributions for spatial point processes. \emph{Annals of Statistics} \bold{25} pp.263--292. 
 
 Bahcall, J. N. and Soneira, R. M. (1981) The distribution of stars to $V=16$th magnitude near the north galactic pole: normalization, clustering properties and counts in various bands \emph{Astrophysical Journal}, \bold{246}, pp. 122--135.
 
+Cressie, N.A.C. Statistics for spatial data. John Wiley and Sons, 1991. 
+
 Diggle, P.J. Statistical analysis of spatial point patterns. Academic Press, 1983. 
 
-Hanisch, K.-H. (1984) Some remarks on estimators of the distribution function of nearest-neighbour distance in stationary spatial point patterns. \emph{Mathematische Operationsforschung und Statistik, series Statistics} \bold{15}, 409--412. 
+Hanisch, K.-H. (1984) Some remarks on estimators of the distribution function of nearest-neighbour distance in stationary spatial point patterns. \emph{Mathematische Operationsforschung und Statistik, series Statistics} \bold{15}, pp.409--412. 
 
 Lawrence, T.J. (2017) Master's Thesis, University of Western Australia.
 
