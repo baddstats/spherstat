@@ -55,7 +55,7 @@ print.sphwin <- function(x, ...) {
                             fill=TRUE)
 		},
 		polygon = {
-			cat("polygon with ", nrow(x$param), "vertices.",
+			cat("polygon with ", nrow(x$param)-1, "vertices.",
                             fill=TRUE)
 		},
 		quadrangle = {
