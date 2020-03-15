@@ -37,6 +37,8 @@
 \alias{is.poisson.sphppm}
 \alias{is.stationary.sphppm}
 \alias{addpoint.Watson}
+\alias{is.sphcoords}
+\alias{sph.angles.poly}
 \title{
 Internal Spherstat Functions
 }
@@ -75,6 +77,8 @@ cumtab(z, m)
 rmax.rule.sphwin(win)
 ptinsphpoly(X, win, P)
 allcoords(X)
+is.sphcoords(x,rad)
+sph.angles.poly(win)
 \method{is.poisson}{sphppm}(x)
 \method{is.stationary}{sphppm}(x)
 addpoint.Watson(s1, X, win, mode)
