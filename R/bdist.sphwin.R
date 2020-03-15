@@ -31,7 +31,7 @@ bdist.sphwin <- function(X, win=sphwin(type="sphere")) {
            mat <- matrix(c(0,0, pi/2, 0, pi, 0, pi/2, win$param[1], 0, 0),
                          nrow=5, ncol=2, byrow=TRUE)
            sph.poly <- sphwin(type="polygon", param=mat,
-                              ref = rep(0,4), rad=rad)
+                              ref = rep(0,4), ref3=matrix(c(pi, win$param[1])/2, nrow=1, ncol=2), rad=rad)
            Xrot <- rot.sphere(points=X, northpole=win$ref, inverse=TRUE)
            bdists <- mindist.polygon(Xrot, win=sph.poly)
          },
