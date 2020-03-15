@@ -39,7 +39,17 @@ in.W <- function(points, win) {
            return(result)
          },
          polygon = {
-           result <- in.W.poly(points=points, win=win)
+##	   if(max(sph.angles(sph_test)) < pi) {
+##		result <- in.W.poly(points=points, win=win)
+##	   } else {
+##		lp <- nrow(win$param)
+##		win1 <- sphwin(type="polygon", param=win$param[c(1:3,1),], ref=win$ref[c(1:3,1)], ref2=win$ref2[c(1:3,1)])
+##		win2 <- sphwin(type="polygon", param=win$param[c(3:lp,3),], ref=win$ref[c(3:lp,3)], ref2=win$ref2[c(3:lp,3)])		
+##		result1 <- in.W(points=points, win=win1)
+##		result2 <- in.W(points=points, win=win2)
+##		result <- (result1+result2 > 0)
+##	   }
+	   result <- ptinsphpoly(X=win$ref3, win=win, P=points)
            return(result)
          })
 
