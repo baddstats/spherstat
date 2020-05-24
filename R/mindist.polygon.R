@@ -13,8 +13,8 @@ mindist.polygon <- function(X, win) {
   verts <- convert3(win$param)
   nvert <- nrow(verts)
   ## Set up a matrix, with as many rows as there are vertices in the polygon, each row containing the Cartesian coords of ref3
-  refpoint <- convert3(ref3)
-  refpointmat <- matrix(rep(convert3(ref3), times=nvert), nrow=nvert, ncol=3, byrow=TRUE)
+  refpoint <- convert3(win$ref3)
+  refpointmat <- matrix(rep(refpoint, times=nvert), nrow=nvert, ncol=3, byrow=TRUE)
   ## Work out the distance from each point to each vertex, by spherical trigonometry on the triangle with vertices at the point, the vertex and ref3 
   dXrefpoint <- gcdist(x=X, y=refpointmat)
   dVrefpoint <- gcdist(x=verts, y=refpointmat)

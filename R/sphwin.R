@@ -52,7 +52,7 @@ sphwin <- function(type="sphere", param, ref=c(0,0), ref2=NULL, ref3=NULL, rad=1
 			ref[2] <- 0
 		}
 	}
-	result <- list(type=type, param=param, ref=ref, ref2=ref2, rad=rad)
+	result <- list(type=type, param=param, ref=ref, ref2=ref2, ref3=ref3, rad=rad)
 	class(result) <- c("sphwin", class(result))
 	result
 }

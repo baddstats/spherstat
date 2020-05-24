@@ -40,7 +40,7 @@ sph.angles.poly <- function(win) {
 	rad <- win$rad
 	param3 <- convert3(win$param)
 	lp <- nrow(param3)
-	ref3 <- ref3
+	ref3 <- matrix(convert3(win$ref3), nrow=1, ncol=3, byrow=TRUE)
 	polyangs1 <- param3[1:(lp-1),]
 	polyangs2 <- param3[2:lp,]
 	polyangs3 <- rbind(param3[3:lp, ], param3[2,])
@@ -50,8 +50,8 @@ sph.angles.poly <- function(win) {
 	gc.r3v1 <- gcdist(x=ref3, y=polyangs1)
 	gc.r3v2 <- gcdist(x=ref3, y=polyangs2)
 	gc.r3v3 <- gcdist(x=ref3, y=polyangs3)
-	sc1 <- sphcos(d1=gc1, d2=gc.pv2, d3=gc.pv1, theta=NULL, rad=rad)
-	sc2 <- sphcos(d1=gc2, d2=gc.pv2, d3=gc.pv3, theta=NULL, rad=rad)
+	sc1 <- sphcos(d1=gc1, d2=gc.r3v2, d3=gc.r3v1, theta=NULL, rad=rad)
+	sc2 <- sphcos(d1=gc2, d2=gc.r3v2, d3=gc.r3v3, theta=NULL, rad=rad)
 	angles <- sc1+sc2	
 	angles
 }

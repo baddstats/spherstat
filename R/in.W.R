@@ -49,7 +49,8 @@ in.W <- function(points, win) {
 ##		result2 <- in.W(points=points, win=win2)
 ##		result <- (result1+result2 > 0)
 ##	   }
-	   result <- ptinsphpoly(X=win$ref3, win=win, P=points)
+	   ref3 <- matrix(convert3(win$ref3), nrow=1, ncol=3, byrow=TRUE)
+	   result <- ptinsphpoly(X=points, win=win, P=win$ref3)
            return(result)
          })
 
