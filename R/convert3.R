@@ -15,6 +15,6 @@ convert3 <- function(points, rad=1) {
                     sintheta * sin(phi),
                     cos(theta))
   if(rad != 1) 
-    points3 <- (rad * points3)
-  return(sround(cround(points3)))
+        points3 <- sround(rad * points3)
+    return(points3)
 }
