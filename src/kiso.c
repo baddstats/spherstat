@@ -249,8 +249,8 @@ void kisobandweights(n, x1, x2, x3, Dmat, centre, height1, height2, iscomp,
 				  x1i, x2i, x3i, cosdij,
 				  1e-8, cutAlo, cutBlo);
 	/* Treat infinite intersection as empty */
-	if(ncutup > 2) ncutup == 0;
-	if(ncutlo > 2) ncutlo == 0;
+	if(ncutup > 2) ncutup = 0;
+	if(ncutlo > 2) ncutlo = 0;
 	ncuts = ncutup + ncutlo;
 	if(ncuts > 0) {
 	  /* Pack coordinates of intersection points into array */
@@ -345,8 +345,8 @@ void dkisoband(n, x1, x2, x3, centre, height1, height2, iscomp,
 				    x1i, x2i, x3i, cosdij,
 				    1e-8, cutAlo, cutBlo);
 	  /* Treat infinite intersection as empty */
-	  if(ncutup > 2) ncutup == 0;
-	  if(ncutlo > 2) ncutlo == 0;
+	  if(ncutup > 2) ncutup = 0;
+	  if(ncutlo > 2) ncutlo = 0;
 	  ncuts = ncutup + ncutlo;
 	  if(ncuts > 0) {
 	    /* Pack coordinates of intersection points into array */
@@ -447,8 +447,8 @@ void dwkisoband(n, x1, x2, x3, lambda,
 				    x1i, x2i, x3i, cosdij,
 				    1e-8, cutAlo, cutBlo);
 	  /* Treat infinite intersection as empty */
-	  if(ncutup > 2) ncutup == 0;
-	  if(ncutlo > 2) ncutlo == 0;
+	  if(ncutup > 2) ncutup = 0;
+	  if(ncutlo > 2) ncutlo = 0;
 	  ncuts = ncutup + ncutlo;
 	  if(ncuts > 0) {
 	    /* Pack coordinates of intersection points into array */
