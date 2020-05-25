@@ -1,4 +1,4 @@
-sphwin <- function(type="sphere", param, ref=c(0,0), ref2=NULL, rad=1) {
+sphwin <- function(type="sphere", param, ref=c(0,0), ref2=NULL, ref3=NULL, rad=1) {
 	posstypes <- c("sphere", "band", "bandcomp", "wedge", "polygon", "quadrangle")
 	if(!(type %in% posstypes)) {
 		stop(paste("Type must be one of "), paste(posstypes, collapse=" or "))
@@ -9,17 +9,17 @@ sphwin <- function(type="sphere", param, ref=c(0,0), ref2=NULL, rad=1) {
 			param=c()
 			},
 		band = {
-			c(stopifnot(length(param)==2 && param[1] <= param[2] && length(ref)==2))
+			c(stopifnot(length(param)==2 && param[1] <= param[2] && is.sphcoords(x=ref,rad=rad)==TRUE))
                 },
 		wedge = {
-			c(stopifnot(length(param)==2 && length(ref)==2))
+			c(stopifnot(length(param)==2 && is.sphcoords(x=ref,rad=rad)==TRUE))
                 },
 	    	bandcomp = {
-			c(stopifnot(length(param)==2 && param[1] <= param[2] && length(ref)==2))
+			c(stopifnot(length(param)==2 && param[1] <= param[2] && is.sphcoords(x=ref,rad=rad)==TRUE))
                 },
 	    	polygon = {
 			nrp <- nrow(param)
-			c(stopifnot(ncol(param)==2 && param[1,]==param[nrp,]))
+			c(stopifnot(ncol(param)==2 && param[1,]==param[nrp,] && is.sphcoords(x=ref3,rad=rad)==TRUE))
 			if(!is.null(ref)) {
 				c(stopifnot(length(ref)==nrp-1 && ref*(1-ref)==rep(0, nrp-1)))
 			}
@@ -52,7 +52,7 @@ sphwin <- function(type="sphere", param, ref=c(0,0), ref2=NULL, rad=1) {
 			ref[2] <- 0
 		}
 	}
-	result <- list(type=type, param=param, ref=ref, ref2=ref2, rad=rad)
+	result <- list(type=type, param=param, ref=ref, ref2=ref2, ref3=ref3, rad=rad)
 	class(result) <- c("sphwin", class(result))
 	result
 }

@@ -16,6 +16,6 @@ rot.sphere <- function(points, northpole, rad=1, inverse=FALSE) {
   } else {
     rotpoints <- t(rad*(rotmat %*% t(points1)))
   }
-  output <- convert2(sround(rotpoints))
+  output <- convert2(rotpoints)
   output
 }

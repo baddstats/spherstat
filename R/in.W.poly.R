@@ -12,6 +12,7 @@ in.W.poly <- function(points, win=sphwin(type="sphere")) {
 	n <- nrow(points)
 	lp <- nrow(win$param)
 	p3 <- convert3(win$param)
+
 	if(ncol(points) !=3) {
 		points <- convert3(points)
 	}

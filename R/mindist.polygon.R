@@ -11,9 +11,18 @@ mindist.polygon <- function(X, win) {
   if(nX == 0) return(Inf)
   if(ncol(X) !=3) {X <- convert3(X)}
   verts <- convert3(win$param)
-  nvert <- nrow(verts)  ## note: last vertex = first vertex
+  nvert <- nrow(verts)
+  ## Set up a matrix, with as many rows as there are vertices in the polygon, each row containing the Cartesian coords of ref3
+  refpoint <- convert3(win$ref3)
+  refpointmat <- matrix(rep(refpoint, times=nvert), nrow=nvert, ncol=3, byrow=TRUE)
+  ## Work out the distance from each point to each vertex, by spherical trigonometry on the triangle with vertices at the point, the vertex and ref3 
+  dXrefpoint <- gcdist(x=X, y=refpointmat)
+  dVrefpoint <- gcdist(x=verts, y=refpointmat)
+  angleatrefpoint <- dXrefpoint %*% t(dVrefpoint)
+  dXV <- sphcos(d1=dXrefpoint, d2=dVrefpoint, d3=NULL, theta=angleatrefpoint)
+  ## note: last vertex = first vertex
   ## distance from each point to each vertex
-  dXV <- gcdist(x=X, y=verts, rad=rad)
+  ## dXV <- gcdist(x=X, y=verts, rad=rad)
   dXVj      <- t(dXV[,-nvert,drop=FALSE])
   dXVjplus1 <- t(dXV[,-1,    drop=FALSE])
   ## polygon edge lengths

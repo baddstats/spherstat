@@ -22,7 +22,9 @@ in.W(points, win)
   This function establishes whether each point in \code{points} is in
   the window specified in \code{win}.  A point is considered to be in
   the window if it is within or on the boundaries of the window,
-  including the vertices. 
+  including the vertices.
+
+  The algorithm used in the case that \code{win} is a spherical polygon is that developed by Bevis and Chatelain (1989).
 }
 
 \value{
@@ -43,6 +45,11 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   points that this function would identify as being outside \eqn{W} is
   not the set of all points in \eqn{W_2}{W2}.
 } 
+
+\references{
+Bevis, M. and Chatelain J.-L. (1989) Locating a point on a spherical surface relative to a spherical polygon of arbitrary shape. \emph{Mathematical Geology} \bold{21}, no. 8, pp. 811--827.
+}
+
 \examples{
 sphcap <- sphwin(type="band", param=c(0, pi/3), ref=c(0,0))
 sphband <- sphwin(type="band", param=c(pi/6, pi/2), ref=c(0,0))
