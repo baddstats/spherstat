@@ -1153,7 +1153,7 @@ Kisopoly <- function(X, win, r, nrX=nrow(X), Dmat=pairdistsph(X), disc=FALSE, qu
 				for(k in 1:nv) {
 					vk03 <- param3[k,]
 					vk13 <- param3[k+1,]
-					vk23 <- param3[k+2,]
+##					vk23 <- param3[k+2,]
 # ajb: 'vk23' defined but not used                                        
 					cvn <- cvmatn[k,]	
 
