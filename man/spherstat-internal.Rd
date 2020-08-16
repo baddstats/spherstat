@@ -32,6 +32,7 @@
 \alias{neighbourcount}
 \alias{cumtab}
 \alias{rmax.rule.sphwin}
+\alias{poly.inradius}
 \alias{ptinsphpoly}
 \alias{allcoords}
 \alias{is.poisson.sphppm}
@@ -75,6 +76,7 @@ quadtopoly(X, win)
 neighbourcount(Dmat, r)
 cumtab(z, m)
 rmax.rule.sphwin(win)
+poly.inradius(win, ncolat=100, nlon=100)
 ptinsphpoly(X, win, P)
 allcoords(X)
 is.sphcoords(x,rad)
