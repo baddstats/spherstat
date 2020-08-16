@@ -74,8 +74,8 @@ rmax.rule.sphwin <- function(win) {
                    band = mean(param),
                    bandcomp = max(param[1], pi - param[2]),
                    wedge = if(param[1] < pi) (param[1]/2) else pi/2,
-                   quadrangle = ,
-                   polygon = stop("r needs to be specified for this window"),
+                   quadrangle = min((param[1]+param[2])/2, param[3]/2),
+                   polygon = poly.inradius(win),
                    stop("Unrecognised window type")
                    )
   return(r1max * win$rad)
