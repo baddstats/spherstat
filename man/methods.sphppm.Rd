@@ -54,7 +54,7 @@
   Adrian Baddeley
 }
 \seealso{
-  \code{\link{sphppm}}, \code{\link[spatstat]{ppm.object}}, \code{\link[spatstat]{anova.ppm}}, \code{\link[spatstat]{coef.ppm}}, \code{\link[spatstat]{fitted.ppm}}, \code{\link[spatstat]{formula.ppm}}, \code{\link[spatstat]{update.ppm}}, \code{\link[spatstat]{print.ppm}}
+  \code{\link{sphppm}}, \code{\link[spatstat.model]{ppm.object}}, \code{\link[spatstat.model]{anova.ppm}}, \code{\link[spatstat.model]{coef.ppm}}, \code{\link[spatstat.model]{fitted.ppm}}, \code{\link[spatstat.model]{formula.ppm}}, \code{\link[spatstat.model]{update.ppm}}, \code{\link[spatstat.model]{print.ppm}}
 }
 \examples{
    W <- sphwin(type="band", param=c(pi/3, 2*pi/3), ref=c(0,0))

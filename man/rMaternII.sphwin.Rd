@@ -68,9 +68,9 @@ rMaternII.sphwin(kappa, r, win = sphwin(type="sphere"), nsim=1, drop=TRUE,
 
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{sp2} giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{sp3} giving the locations of the simulated points.
 }
 \references{
   Lawrence, T.J. (20178) Master's Thesis, University of Western Australia.
@@ -80,18 +80,18 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
 This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{rMaternII}} in \pkg{spatstat} for point processes in \eqn{R^2}{R^2}.  Hence
+  function \code{\link[spatstat.random]{rMaternII}} in \pkg{spatstat} for point processes in \eqn{R^2}{R^2}.  Hence
   elements of this help page have been taken from that for 
-  \code{\link[spatstat]{rMaternII}}, with the permission of
+  \code{\link[spatstat.random]{rMaternII}}, with the permission of
   A. J. Baddeley.  This enables the information on this help page to be
-  consistent with that for\code{\link[spatstat]{rMaternII}}.  It is
+  consistent with that for\code{\link[spatstat.random]{rMaternII}}.  It is
   hoped that this will minimise or 
   remove any confusion for users of both \pkg{spatstat} and
   \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link[spatstat]{rHardcore}}, \code{\link{rMatClust.sphwin}},
-  \code{\link{rMaternI.sphwin}}, \code{\link[spatstat]{rMaternII}},
+  \code{\link[spatstat.random]{rHardcore}}, \code{\link{rMatClust.sphwin}},
+  \code{\link{rMaternI.sphwin}}, \code{\link[spatstat.random]{rMaternII}},
   \code{\link{rpoispp.sphwin}}, \code{\link{rStrauss.sphwin}},
   \code{\link{rThomas.sphwin}} 
 }

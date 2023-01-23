@@ -15,7 +15,7 @@
 \arguments{
   \item{X}{
     The observed point pattern, from which an estimate of \eqn{K(r)} will be
-    computed.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or
+    computed.  An object of class \code{sp2} or \code{sp3}, or
     a 2 or 3 column matrix giving the locations of points in spherical
     coordinates. 
   }
@@ -63,7 +63,7 @@ An estimate of \eqn{K} derived from a spatial point pattern dataset can be used 
 
 where \eqn{\rho}{rho} is the radius of the sphere on which \code{X} is observed. Deviations between the empirical and theoretical \eqn{K} curves may suggest spatial clustering or spatial regularity. 
 
-Provided that \code{lambdavalues=NULL}, this routine \code{Ksphere} estimates the \eqn{K} function of a homogeneous point process, given observation of the process inside a window that is a sphere, cap, band, band complement, wedge, or polygon where all boundaries are great circle arcs. The argument \code{X} is interpreted as a point pattern object (of class "\code{\link{sp2}}" or "\code{\link{sp3}}"; or of class "\code{\link{matrix}}" with 2 or 3 columns giving the coordinates of points, and accompanied by an object of class "\code{\link{sphwin}}" giving the observation window). 
+Provided that \code{lambdavalues=NULL}, this routine \code{Ksphere} estimates the \eqn{K} function of a homogeneous point process, given observation of the process inside a window that is a sphere, cap, band, band complement, wedge, or polygon where all boundaries are great circle arcs. The argument \code{X} is interpreted as a point pattern object (of class \code{"sp2"} or \code{"sp3"}; or of class \code{"matrix"} with 2 or 3 columns giving the coordinates of points, and accompanied by an object of class \code{"sphwin"} giving the observation window). 
 
 The estimation of \eqn{K} is hampered by edge effects arising from the unobservability of points of the random pattern outside the window. An edge correction is needed to reduce bias (Baddeley, 1998; Ripley, 1988). The corrections implemented here are 
 
@@ -118,14 +118,14 @@ where \eqn{g(x[i],x[j])}{g(x[i],x[j])} is the fraction of the circumference of t
 
 }
 \value{
-  An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
-  which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
+  An object of class \code{"fv"}, see \code{\link[spatstat.explore]{fv.object}},
+  which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}. 
 }
 \author{
   Tom Lawrence.
 }
 \seealso{
-  \code{\link{Fsphere}}, \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link[spatstat]{Kest}}, \code{\link[spatstat]{Kinhom}}
+  \code{\link{Fsphere}}, \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link[spatstat.explore]{Kest}}, \code{\link[spatstat.explore]{Kinhom}}
 }
 \references{
 Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
@@ -154,13 +154,13 @@ Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields:
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  functions \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}} in \pkg{spatstat}, which is the
+  functions \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}} in \pkg{spatstat}, which is the
   corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of
   the code for \code{Ksphere} and help page have been taken from
-  \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}} with the permission of A. J. Baddeley.  This
+  \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}} with the permission of A. J. Baddeley.  This
   enables the code to be highly efficient and give corresponding output
   to, and for the information on this help page to be consistent with
-  that for the functions \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}}.  It is hoped that this will
+  that for the functions \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}}.  It is hoped that this will
   minimise or remove any confusion for users of both
   \pkg{spatstat} and \pkg{spherstat}. 
 }

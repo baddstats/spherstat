@@ -41,7 +41,7 @@ An estimate of \eqn{G} derived from a spatial point pattern dataset can be used 
 
 where \eqn{\lambda}{lambda} is the intensity (expected number of points per unit area) and \eqn{\rho}{rho} is the radius of the sphere in which \code{X} is observed. Deviations between the empirical and theoretical \eqn{G} curves may suggest spatial clustering or spatial regularity. 
 
-This algorithm estimates the nearest neighbour distance distribution function \eqn{G} from the point pattern \code{X}. It assumes that \code{X} can be treated as a realisation of a homogeneous random spatial point process on a sphere. The window (subset of the sphere) in which \code{X} is observed may be the any of those that can be defined using \link{sphwin}.
+This algorithm estimates the nearest neighbour distance distribution function \eqn{G} from the point pattern \code{X}. It assumes that \code{X} can be treated as a realisation of a homogeneous random spatial point process on a sphere. The window (subset of the sphere) in which \code{X} is observed may be the any of those that can be defined using \code{\link{sphwin}}.
 
 The estimation of \eqn{G} for a window other than the entire sphere is hampered by edge effects arising from the unobservability of points of the random pattern outside the window. An edge correction is needed to reduce bias (Baddeley, 1998; Ripley, 1988). The edge corrections implemented here are the border method ("reduced sample") estimator, the spatial Kaplan-Meier estimator (Baddeley and Gill, 1997) and the Hanisch estimator (Hanisch, 1984).
 
@@ -62,7 +62,7 @@ To simply compute the nearest neighbour distance for each point in the pattern, 
 If \code{X} is an object of class \code{\link{sp2}} or \code{\link{sp3}}, then its radius is used in this calculation; otherwise, the radius of \code{win} is used.
 }
 \value{
-An object of class \code{\link[spatstat]{fv}}, see \code{\link[spatstat]{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
+An object of class \code{fv}, see \code{\link[spatstat.explore]{fv.object}}, which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}.
 
 Essentially a data frame containing some or all of the following columns: 
 \item{r}{the values of the argument r at which the function \eqn{G(r)} has been estimated}
@@ -119,11 +119,11 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 
 \note{
-This function is the analogue for point processes on the sphere of the function \code{\link[spatstat]{Gest}} in \pkg{spatstat}, which is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of the code for \code{\link[spatstat]{Gest}} and this help page have been taken from \code{\link[spatstat]{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link[spatstat]{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \pkg{spatstat} and \pkg{spherstat}.
+This function is the analogue for point processes on the sphere of the function \code{\link[spatstat.explore]{Gest}} in \pkg{spatstat}, which is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of the code for \code{\link[spatstat.explore]{Gest}} and this help page have been taken from \code{\link[spatstat.explore]{Gest}} with the permission of A. J. Baddeley.  This enables the code to be highly efficient and give corresponding output to, and for the information on this help page to be consistent with that for the function \code{\link[spatstat.explore]{Gest}}.  It is hoped that this will minimise or remove any confusion for users of both \pkg{spatstat} and \pkg{spherstat}.
 }
 
 \seealso{
-\code{\link{Fsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}
+\code{\link{Fsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat.explore]{Gest}}
 }
 
 \examples{

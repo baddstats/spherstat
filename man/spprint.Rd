@@ -32,12 +32,12 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 
 \note{
 These functions are the analogues for point processes on the sphere of
-the function \code{\link[spatstat]{print.ppp}} in \pkg{spatstat}, which
+the function \code{\link[spatstat.geom]{print.ppp}} in \pkg{spatstat}, which
 is the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
 elements of this help page have been taken from
-\code{\link[spatstat]{print.ppp}} with the permission of A. J. Baddeley.
+\code{\link[spatstat.geom]{print.ppp}} with the permission of A. J. Baddeley.
 This enables the information on this help page to be consistent with
-that for \code{\link[spatstat]{print.ppp}}.  It is hoped that this will
+that for \code{\link[spatstat.geom]{print.ppp}}.  It is hoped that this will
 minimise or remove any confusion for users of both \pkg{spatstat} and
 \pkg{spherstat}. 
 }

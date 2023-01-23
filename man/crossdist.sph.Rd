@@ -48,13 +48,13 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{crossdist}} in \pkg{spatstat}, which is the
+  function \code{\link[spatstat.geom]{crossdist}} in \pkg{spatstat}, which is the
   corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
   elements of the code for \code{crossdist.sph} and help page have been taken
-  from \code{\link[spatstat]{crossdist}} with the permission of
+  from \code{\link[spatstat.geom]{crossdist}} with the permission of
   A. J. Baddeley.  This enables the code to be highly efficient and give
   corresponding output to, and for the information on this help page to
-  be consistent with that for the function \code{\link[spatstat]{crossdist}}.
+  be consistent with that for the function \code{\link[spatstat.geom]{crossdist}}.
   It is hoped that this will minimise or remove any confusion for users
   of both \pkg{spatstat} and \pkg{spherstat}. 
 }
@@ -63,7 +63,7 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
   \code{\link{nncrosssph}} (nearest neighbour distances between two
   samples), \code{\link{nndistsph}} (nearest neighbour distances),
   \code{\link{gcdist}} (great circle distance between two points),
-  \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat]{crossdist}}
+  \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat.geom]{crossdist}}
 }
 \examples{
 sph <- sphwin(type="sphere")

@@ -170,18 +170,18 @@
 \value{
   A function value table (object of class \code{"fv"})
   which can be plotted directly.
-  See \code{\link[spatstat]{envelope}} for further details.
+  See \code{\link[spatstat.explore]{envelope}} for further details.
 }
 \details{
-  The \code{\link[spatstat]{envelope}} command performs simulations and
+  The \code{\link[spatstat.explore]{envelope}} command performs simulations and
   computes envelopes of a summary statistic based on the simulations.
   The result is an object that can be plotted to display the envelopes.
   The envelopes can be used to assess the goodness-of-fit of
   a point process model to point pattern data.
   
-  The \code{\link[spatstat]{envelope}} function is generic, with methods for
+  The \code{\link[spatstat.explore]{envelope}} function is generic, with methods for
   the classes \code{"ppp"}, \code{"ppm"} and \code{"kppm"}
-  described in the help file for \code{\link[spatstat]{envelope}}.
+  described in the help file for \code{\link[spatstat.explore]{envelope}}.
   The function \code{envelope.sp2} is the method for 
   spherical point patterns (objects of class \code{"sp2"}), and the function \code{envelope.sphppm} is the method for 
   point process models fitted to spherical point patterns
@@ -225,7 +225,7 @@ However, if you have fitted a model \code{M} to
   containing the name of one of these functions.
   
   For further information, see the documentation for
-  \code{\link[spatstat]{envelope}}.
+  \code{\link[spatstat.explore]{envelope}}.
 }
 \references{
 Baddeley, A., Diggle, P.J., Hardegen, A., Lawrence, T., Milne, R.K. and Nair, G. (2014) On tests of spatial pattern based on simulation envelopes. \emph{Ecological Monographs}, \bold{84}(3) 477--489

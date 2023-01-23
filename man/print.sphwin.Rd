@@ -27,12 +27,12 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for windows on the sphere of the function
-  \code{\link[spatstat]{print.owin}} in \pkg{spatstat}, which is the
+  \code{\link[spatstat.geom]{print.owin}} in \pkg{spatstat}, which is the
   corresponding function for point processes in R^2.  Hence elements of
-  this help page have been taken from \code{\link[spatstat]{print.owin}}
+  this help page have been taken from \code{\link[spatstat.geom]{print.owin}}
   with the permission of A. J. Baddeley.  This enables the information on
   this help page to be consistent with that for
-  \code{\link[spatstat]{print.owin}}.  It is hoped that this will minimise
+  \code{\link[spatstat.geom]{print.owin}}.  It is hoped that this will minimise
   or remove any confusion for users of both \pkg{spatstat} and
   \pkg{spherstat}. 
 }

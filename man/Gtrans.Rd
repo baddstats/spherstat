@@ -33,8 +33,8 @@ Gstab.sphwin(X, ...)
   Plots that can be useful include centring (include the argument \code{.-theo~r}) the function, or for either of \eqn{G(r)} or \eqn{Gstab(r)}, plotting the estimated function against the theoretical value for a model (use e.g. the argument \code{.~theo} in the plot function).
 }
 \value{
-  An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
-  which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
+  An object of class \code{"fv"}, see \code{\link[spatstat.explore]{fv.object}},
+  which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}. 
 
   Essentially a data frame containing some or all of the following columns: 
   \item{r}{the values of the argument r at which the transformation of \eqn{G(r)}
@@ -85,7 +85,7 @@ Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applica
 }
 
 \seealso{
-  \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Gest}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
+  \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat.explore]{Gest}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Kstab.sphwin}}, \code{\link{Kinv.sphwin}}
 }
 \examples{
 sph <- sphwin(type="sphere")

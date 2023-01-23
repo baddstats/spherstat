@@ -69,8 +69,8 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
   window (which is specified in \code{X}) may have arbitrary shape.  
 
   The argument \code{X} is interpreted as a point pattern object (of
-  class \code{"ppp"}, see \code{\link[spatstat]{ppp.object}}) and can be
-  supplied in any of the formats recognised by \code{\link[spatstat]{as.ppp}}.  
+  class \code{"ppp"}, see \code{\link[spatstat.geom]{ppp.object}}) and can be
+  supplied in any of the formats recognised by \code{\link[spatstat.geom]{as.ppp}}.  
 
   The algorithm uses a discrete approximation which is controlled by
   the spacing of values of \code{r}. (See below for details.) First-time
@@ -120,8 +120,8 @@ Fsphere(X, refpoints=NULL, win = sphwin(type = "sphere"), r = NULL, ...)
   \eqn{F} as if it were an unbiased estimator of \eqn{F}.  
 }
 \value{
-  An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
-  which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
+  An object of class \code{"fv"}, see \code{\link[spatstat.explore]{fv.object}},
+  which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}. 
 
   Essentially a data frame containing some or all of the following columns: 
   \item{r}{the values of the argument r at which the function \eqn{F(r)}
@@ -172,18 +172,18 @@ Stoyan, D, Kendall, W.S. and Mecke, J. \emph{Stochastic geometry and its applica
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{Fest}} in \code{\link{spatstat}}, which is the
+  function \code{\link[spatstat.explore]{Fest}} in \pkg{spatstat}, which is the
   corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of
   the code for \code{Fsphere} and help page have been taken from
-  \code{\link[spatstat]{Fest}} with the permission of A. J. Baddeley.  This
+  \code{\link[spatstat.explore]{Fest}} with the permission of A. J. Baddeley.  This
   enables the code to be highly efficient and give corresponding output
   to, and for the information on this help page to be consistent with
-  that for the function \code{\link[spatstat]{Fest}}.  It is hoped that this will
+  that for the function \code{\link[spatstat.explore]{Fest}}.  It is hoped that this will
   minimise or remove any confusion for users of both
   \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat]{Fest}}
+  \code{\link{Gsphere}}, \code{link{Jsphere}}, \code{\link{Ksphere}}, \code{\link[spatstat.explore]{Fest}}
 }
 \examples{
 sph <- sphwin(type="sphere")

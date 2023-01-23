@@ -76,9 +76,9 @@ If the pair correlation function of the model is very close to that of a Poisson
 
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{sp2} giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{sp3} giving the locations of the simulated points.
 
 }
 \author{
@@ -86,14 +86,14 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{rThomas}} in \pkg{spatstat}, which is
+  function \code{\link[spatstat.random]{rThomas}} in \pkg{spatstat}, which is
   the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements
   of this help page have been taken from that for
-  \code{\link[spatstat]{rThomas}} with the permission of A. J. Baddeley.
+  \code{\link[spatstat.random]{rThomas}} with the permission of A. J. Baddeley.
   This enables the code to be highly efficient and give corresponding
-  output to \code{\link[spatstat]{rThomas}}, and for the information on
+  output to \code{\link[spatstat.random]{rThomas}}, and for the information on
   this help page to be consistent with that for
-  \code{\link[spatstat]{rThomas}}.  It is hoped that this will minimise
+  \code{\link[spatstat.random]{rThomas}}.  It is hoped that this will minimise
   or remove any confusion for users of both \pkg{spatstat} and
   \pkg{spherstat}. 
 }
@@ -101,7 +101,7 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
   \code{\link{rFisher}}, \code{\link{rHardcore.sphwin}},
   \code{\link{rMatClust.sphwin}}, \code{\link{rMaternI.sphwin}},
   \code{\link{rMaternII.sphwin}}, \code{\link{rpoispp.sphwin}},
-  \code{\link{rStrauss.sphwin}}, \code{\link[spatstat]{rThomas}} 
+  \code{\link{rStrauss.sphwin}}, \code{\link[spatstat.random]{rThomas}} 
 }
 \references{
 Diggle, P. J., Besag, J. and Gleaves, J. T. (1976) Statistical analysis of spatial point patterns by means of distance methods. \emph{Biometrics} \bold{32} 659--667. 

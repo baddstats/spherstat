@@ -19,7 +19,7 @@ sphppm(formula)
 }
 \details{
   This is analogous to the \pkg{spatstat} function
-  \code{\link[spatstat]{ppm}}.
+  \code{\link[spatstat.model]{ppm}}.
 
   The argument \code{formula} should be a formula in the \R language.
   The left hand side should be the name of a point pattern dataset,

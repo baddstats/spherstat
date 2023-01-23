@@ -15,7 +15,7 @@
 \arguments{
   \item{X}{
     The observed point pattern, from which an estimate of \eqn{K(r)} will be
-    computed.  An object of class \code{\link{sp2}} or \code{\link{sp3}}, or
+    computed.  An object of class \code{sp2} or \code{sp3}, or
     a 2 or 3 column matrix giving the locations of points in spherical
     coordinates. 
   }
@@ -51,14 +51,14 @@ See \code{\link{Ksphere}} for the list of arguments.
 }
 
 \value{
-  An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
-  which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
+  An object of class \code{"fv"}, see \code{\link[spatstat.explore]{fv.object}},
+  which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}. 
 }
 \author{
   Tom Lawrence.
 }
 \seealso{
-  \code{\link{Fsphere}}, \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link[spatstat]{Kest}}, \code{\link[spatstat]{Kinhom}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Gstab.sphwin}}, \code{\link{Ginv.sphwin}}, \code{\link[spatstat]{Lest}}
+  \code{\link{Fsphere}}, \code{\link{Gsphere}}, \code{\link{Jsphere}}, \code{\link[spatstat.explore]{Kest}}, \code{\link[spatstat.explore]{Kinhom}}, \code{\link{Fstab.sphwin}}, \code{\link{Finv.sphwin}}, \code{\link{Gstab.sphwin}}, \code{\link{Ginv.sphwin}}, \code{\link[spatstat.explore]{Lest}}
 }
 \references{
 Baddeley, A.J. Spatial sampling and censoring. In O.E. Barndorff-Nielsen, W.S. Kendall and M.N.M. van Lieshout (eds) \emph{Stochastic Geometry: Likelihood and Computation}. Chapman and Hall, 1998. Chapter 2, pages 37--78. 
@@ -87,13 +87,13 @@ Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields:
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  functions \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}} in \pkg{spatstat}, which is the
+  functions \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}} in \pkg{spatstat}, which is the
   corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements of
   the code for \code{Ksphere} and help page have been taken from
-  \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}} with the permission of A. J. Baddeley.  This
+  \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}} with the permission of A. J. Baddeley.  This
   enables the code to be highly efficient and give corresponding output
   to, and for the information on this help page to be consistent with
-  that for the functions \code{\link[spatstat]{Kest}} and \code{\link[spatstat]{Kinhom}}.  It is hoped that this will
+  that for the functions \code{\link[spatstat.explore]{Kest}} and \code{\link[spatstat.explore]{Kinhom}}.  It is hoped that this will
   minimise or remove any confusion for users of both
   \pkg{spatstat} and \pkg{spherstat}. 
 }

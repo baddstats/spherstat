@@ -114,9 +114,9 @@ rStrauss.sphwin(beta, gamma, R=0, p=0.5, m=100, win = sphwin(type="sphere"),
 
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{sp2} giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{sp3} giving the locations of the simulated points.
 }
 \references{
   Kelly, F.P. and Ripley, B.D. (1976)
@@ -131,22 +131,22 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \note{
 This function is the analogue for point processes on the sphere of the
-function \code{\link[spatstat]{rmh}} in \pkg{spatstat} when used in the
-first example in \code{\link[spatstat]{rmh.default}}, which is the corresponding
+function \code{\link[spatstat.random]{rmh}} in \pkg{spatstat} when used in the
+first example in \code{\link[spatstat.random]{rmh.default}}, which is the corresponding
 function for point processes in \eqn{R^2}{R^2}.  Hence elements of this help
-pages have been taken from those for \code{\link[spatstat]{rmh}} and
-\code{\link[spatstat]{rStrauss}} (also in \pkg{spatstat}), with the
+pages have been taken from those for \code{\link[spatstat.random]{rmh}} and
+\code{\link[spatstat.random]{rStrauss}} (also in \pkg{spatstat}), with the
 permission of A. J. Baddeley.  This enables the code to be highly
-efficient and give corresponding output to \code{\link[spatstat]{rmh}}, and for
+efficient and give corresponding output to \code{\link[spatstat.random]{rmh}}, and for
 the information on this help page to be consistent with that for
-\code{\link[spatstat]{rmh}} and \code{\link[spatstat]{rStrauss}}.
+\code{\link[spatstat.random]{rmh}} and \code{\link[spatstat.random]{rStrauss}}.
 It is hoped that this will minimise or remove any confusion for users of both
 \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
 \code{\link{rHardcore.sphwin}}, \code{\link{rMatClust.sphwin}},
 \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
-\code{\link{rpoispp.sphwin}}, \code{\link[spatstat]{rStrauss}},
+\code{\link{rpoispp.sphwin}}, \code{\link[spatstat.random]{rStrauss}},
 \code{\link{rThomas.sphwin}} 
 }
 \examples{

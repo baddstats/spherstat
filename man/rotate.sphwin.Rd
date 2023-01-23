@@ -41,7 +41,7 @@
 }
 \details{
   These functions are methods for the generic
-  \code{\link[spatstat]{rotate}}
+  \code{\link[spatstat.geom]{rotate}}
   for the classes \code{"sphwin"}, \code{"sp2"} and \code{"sp3"}
   representing spherical windows and point patterns.
 

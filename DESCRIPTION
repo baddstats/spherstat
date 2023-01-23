@@ -1,12 +1,12 @@
 Package: spherstat
 Type: Package
 Title: Spatial Point Pattern Analysis, Geometry and Trigonometry for the Sphere
-Version: 2.3-0
-Date: 2020-08-16
+Version: 2.3-1
+Date: 2023-01-23
 Authors@R: c(person("Tom", "Lawrence", role = c("aut", "cre"),
 		     email = "tjlawrence@bigpond.com"),
 	     person("Adrian", "Baddeley", role=c("aut", "ths")))
-Depends: spatstat, spatstat.utils, globe (>= 1.1-2), stats
+Depends: spatstat, spatstat.geom, spatstat.random, spatstat.explore, spatstat.model, spatstat.utils, globe (>= 1.1-2), stats
 Suggests: sphereplot
 Maintainer: Tom Lawrence <tjlawrence@bigpond.com>
 Description: Contains functions for the analysis of spatial point patterns on a sphere or a subset of a sphere.  Also contains functions for spherical geometry and trigonometry calculations.

@@ -42,18 +42,18 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \note{
 This function is the analogue for point processes on the sphere of the
-function \code{\link[spatstat]{pairdist}} in \pkg{spatstat}, which is
+function \code{\link[spatstat.geom]{pairdist}} in \pkg{spatstat}, which is
 the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements
-of this help page have been taken from \code{\link[spatstat]{pairdist}} with the
+of this help page have been taken from \code{\link[spatstat.geom]{pairdist}} with the
 permission of A. J. Baddeley.  This enables the information on this help
-page to be consistent with that for \code{\link[spatstat]{pairdist}}.
+page to be consistent with that for \code{\link[spatstat.geom]{pairdist}}.
 It is hoped that this will minimise or remove any confusion for users of both
 \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
  \code{\link{nndistsph}} (nearest neighbour distances),
  \code{\link{gcdist}} (great circle distance between two points),
- \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat]{pairdist}} 
+ \code{\link{bdist.sphwin}} (boundary distances), \code{\link[spatstat.geom]{pairdist}} 
 }
 \examples{
 sph <- sphwin(type="sphere")

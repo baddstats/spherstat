@@ -1,4 +1,4 @@
-import(spatstat)
+import(spatstat,spatstat.geom,spatstat.random,spatstat.explore,spatstat.model)
 import(spatstat.utils)
 import(globe)
 import(stats)

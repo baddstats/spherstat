@@ -94,12 +94,12 @@
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{eroded.areas}} in \pkg{spatstat}, which
+  function \code{\link[spatstat.geom]{eroded.areas}} in \pkg{spatstat}, which
   is the corresponding function for point processes in R^2.  Hence
   elements of this help page have been taken from
-  \code{\link[spatstat]{eroded.areas}} with the permission of A. J
+  \code{\link[spatstat.geom]{eroded.areas}} with the permission of A. J
   Baddeley.  This enables the information on this help page to be
-  consistent with that for \code{\link[spatstat]{eroded.areas}}.  It is
+  consistent with that for \code{\link[spatstat.geom]{eroded.areas}}.  It is
   hoped that this will minimise or remove any confusion for users of
   both \pkg{spatstat} and \pkg{spherstat}. 
 }

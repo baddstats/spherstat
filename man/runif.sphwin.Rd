@@ -75,9 +75,9 @@ rpoispp.sphwin(lambda, win = sphwin(type = "sphere"), lmax=NULL,
 
   If \code{as.sp=FALSE} and \code{ndim="3"}, a three column matrix giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{\link{sp2}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="2"}, an object of class \code{sp2} giving the locations of the simulated points.
 
-  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{\link{sp3}} giving the locations of the simulated points.
+  If \code{as.sp=TRUE} and \code{ndim="3"}, an object of class \code{sp3} giving the locations of the simulated points.
 }
 \references{
   Lewis, P.A.W. and Shedler, G.S. (1979)
@@ -89,17 +89,17 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \note{
   The function \code{rpoispp.sphwin} is the analogue for point processes on
-  the sphere of the function \code{\link[spatstat]{rpoispp}} in
+  the sphere of the function \code{\link[spatstat.random]{rpoispp}} in
   \pkg{spatstat}, which is the corresponding function for point
   processes in \eqn{R^2}{R^2}.  Hence elements of this help page have been taken
-  from \code{\link[spatstat]{rpoispp}} with the permission of
+  from \code{\link[spatstat.random]{rpoispp}} with the permission of
   A. J. Baddeley.  This enables the relevant information on this help
-  page to be consistent with that for \code{\link[spatstat]{rpoispp}}.
+  page to be consistent with that for \code{\link[spatstat.random]{rpoispp}}.
   It is hoped that this will minimise or remove any confusion for users
   of both \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link[spatstat]{rpoispp}},  \code{\link{rFisher}},
+  \code{\link[spatstat.random]{rpoispp}},  \code{\link{rFisher}},
   \code{\link{rHardcore.sphwin}}, \code{\link{rMatClust.sphwin}},
   \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
   \code{\link{rStrauss.sphwin}}, \code{\link{rThomas.sphwin}} 

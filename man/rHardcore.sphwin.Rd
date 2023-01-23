@@ -122,20 +122,20 @@ Tom Lawrence tjlawrence@bigpond.com
 }
 \note{
 This function is the analogue for point processes on the sphere of the
-function \code{\link{rmh}} in \code{\link{spatstat}} when used in the
-third example in \code{\link{rmh.default}}, which is the corresponding
+function \code{\link[spatstat.random]{rmh}} in \pkg{spatstat} when used in the
+third example in \code{\link[spatstat.random]{rmh.default}}, which is the corresponding
 function for point processes in \eqn{R^2}{R^2}.  Hence elements of this help
-page have been taken from those for \code{\link{rmh}} and
-\code{\link{rHardcore}} (also in \pkg{spatstat}), with the
+page have been taken from those for \code{\link[spatstat.random]{rmh}} and
+\code{\link[spatstat.random]{rHardcore}} (also in \pkg{spatstat}), with the
 permission of A. J. Baddeley.  This enables the code to be highly
-efficient and give corresponding output to \code{\link{rmh}}, and for
+efficient and give corresponding output to \code{\link[spatstat.random]{rmh}}, and for
 the information on this help page to be consistent with that for
-\code{\link{rmh}} and \code{\link{rHardcore}}.  It is hoped that this
+\code{\link[spatstat.random]{rmh}} and \code{\link[spatstat.random]{rHardcore}}.  It is hoped that this
 will minimise or remove any confusion for users of both
 \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-\code{\link{rHardcore}}, \code{\link{rMatClust.sphwin}},
+\code{\link[spatstat.random]{rHardcore}}, \code{\link{rMatClust.sphwin}},
 \code{\link{rMaternI.sphwin}}, \code{\link{rMaternII.sphwin}},
 \code{\link{rpoispp.sphwin}}, \code{\link{rStrauss.sphwin}},
 \code{\link{rThomas.sphwin}} 

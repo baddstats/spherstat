@@ -13,15 +13,15 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
 \arguments{
   \item{X}{
     The observed point pattern, from which an estimate of \eqn{J(r)}
-    will be computed.  An object of class \code{\link{sp2}} or
-    \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations of
+    will be computed.  An object of class \code{sp2} or
+    \code{sp3}, or a 2 or 3 column matrix giving the locations of
     points in spherical coordinates. 
   }
    \item{refpoints}{
      The reference points in the window used to estimate the \eqn{F} function
      (a prerequisite to calculating \eqn{J(r)}, see Details
-     section).  An object of class \code{\link{sp2}} or
-     \code{\link{sp3}}, or a 2 or 3 column matrix giving the locations
+     section).  An object of class \code{sp2} or
+     \code{sp3}, or a 2 or 3 column matrix giving the locations
      of points in spherical coordinates. If \code{NULL}, a homogeneous Poisson process with expected number of points equal to 100 is generated inside the window.
    }  
   \item{r}{
@@ -130,8 +130,8 @@ Jsphere(X, refpoints, r=NULL, \dots, correction=NULL)
   \code{Jsphere}. 
 }
 \value{
-  An object of class \code{"fv"}, see \code{\link[spatstat]{fv.object}},
-  which can be plotted directly using \code{\link[spatstat]{plot.fv}}. 
+  An object of class \code{"fv"}, see \code{\link[spatstat.explore]{fv.object}},
+  which can be plotted directly using \code{\link[spatstat.explore]{plot.fv}}. 
 
   Essentially a data frame containing some or all of the following columns: 
   \item{r}{the values of the argument r at which the function \eqn{J(r)}
@@ -171,18 +171,18 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{Jest}} in \pkg{spatstat}, which is the
+  function \code{\link[spatstat.explore]{Jest}} in \pkg{spatstat}, which is the
   corresponding function for point processes in \eqn{R^2}{R^2}.  Hence
   elements of the code for \code{Jsphere} and help page have been taken
-  from \code{\link[spatstat]{Jest}} with the permission of
+  from \code{\link[spatstat.explore]{Jest}} with the permission of
   A. J. Baddeley.  This enables the code to be highly efficient and give
   corresponding output to, and for the information on this help page to
-  be consistent with that for the function \code{\link[spatstat]{Jest}}.
+  be consistent with that for the function \code{\link[spatstat.explore]{Jest}}.
   It is hoped that this will minimise or remove any confusion for users
   of both \pkg{spatstat} and \pkg{spherstat}. 
 }
 \seealso{
-  \code{\link[spatstat]{Jest}}, \code{\link{Ksphere}}
+  \code{\link[spatstat.explore]{Jest}}, \code{\link{Ksphere}}
   \code{\link{Fsphere}}, \code{\link{Gsphere}}.
 }
 \references{

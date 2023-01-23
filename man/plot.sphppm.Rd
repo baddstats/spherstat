@@ -38,11 +38,11 @@
   }
   \item{\dots}{
     Additional arguments controlling the plot, passed
-    to \code{\link[spatstat]{plot.im}} or
-    \code{\link[spatstat]{contour.im}}.
+    to \code{\link[spatstat.geom]{plot.im}} or
+    \code{\link[spatstat.geom]{contour.im}}.
   }
   \item{eps,dimyx}{
-    Arguments passed to \code{\link[spatstat]{as.mask}}
+    Arguments passed to \code{\link[spatstat.geom]{as.mask}}
     controlling the resolution of the final plotted image.
   }
   \item{main}{
@@ -84,10 +84,10 @@
   visible from the viewing location \code{eye} are projected onto
   a two-dimensional plane. The values at these projected locations are
   interpolated onto a two-dimensional rectangular pixel grid by
-  kernel smoothing, using \code{\link[spatstat]{Smooth.ppp}}, with a very small
+  kernel smoothing, using \code{\link[spatstat.explore]{Smooth.ppp}}, with a very small
   bandwidth \code{sigma}. The resulting two-dimensional pixel image is
-  then plotted by \code{\link[spatstat]{plot.im}} and/or a contour map is drawn
-  by \code{\link[spatstat]{contour.im}}.
+  then plotted by \code{\link[spatstat.geom]{plot.im}} and/or a contour map is drawn
+  by \code{\link[spatstat.geom]{contour.im}}.
 
   To control colours in the plot, the argument \code{col} can be used if
   this is unambiguous (i.e. if \code{action="image"} or

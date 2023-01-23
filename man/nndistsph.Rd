@@ -48,19 +48,19 @@ Tom Lawrence <email: tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{nndist}} in \pkg{spatstat}, which is
+  function \code{\link[spatstat.geom]{nndist}} in \pkg{spatstat}, which is
   the corresponding function for point processes in R^2.  Hence elements
-  of this help page have been taken from \code{\link[spatstat]{nndist}} with the
+  of this help page have been taken from \code{\link[spatstat.geom]{nndist}} with the
   permission of A. J. Baddeley.  This enables the information on this
   help page to be consistent with that for
-  \code{\link[spatstat]{nndist}}.  It is 
+  \code{\link[spatstat.geom]{nndist}}.  It is 
   hoped that this will minimise or remove any confusion for users of
   both \pkg{spatstat} and \pkg{spherstat }. 
 }
 \seealso{
   \code{\link{pairdistsph}} (pairwise distances for a single sample),
   \code{\link{gcdist}} (great circle distance between two points),
-  \code{\link{bdist.sphwin}}(boundary distances), \code{\link[spatstat]{nndist}}
+  \code{\link{bdist.sphwin}}(boundary distances), \code{\link[spatstat.geom]{nndist}}
 }
 \examples{
 sph <- sphwin(type="sphere")

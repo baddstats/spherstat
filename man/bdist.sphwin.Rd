@@ -37,10 +37,10 @@ Tom Lawrence tjlawrence@bigpond.com
 }
 \note{
 This function is the analogue for point patterns on the sphere of the
-function \code{\link[spatstat]{bdist.points}} in \pkg{spatstat}. 
+function \code{\link[spatstat.geom]{bdist.points}} in \pkg{spatstat}. 
 }
 \seealso{
-  \code{\link[spatstat]{bdist.points}}, \code{\link{nndistsph}} (nearest
+  \code{\link[spatstat.geom]{bdist.points}}, \code{\link{nndistsph}} (nearest
   neighbour distances), \code{\link{pairdistsph}} (pairwise distances),
   \code{\link{gcdist}} (great circle distance between two points) 
 }

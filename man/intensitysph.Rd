@@ -39,12 +39,12 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{intensity}} in \pkg{spatstat}, which is
+  function \code{\link[spatstat.geom]{intensity}} in \pkg{spatstat}, which is
   the corresponding function for point processes in \eqn{R^2}{R^2}.  Hence elements
-  of this help page have been taken from \code{\link[spatstat]{intensity}}
+  of this help page have been taken from \code{\link[spatstat.geom]{intensity}}
   with the 
   permission of A. J. Baddeley.  This enables the information on this help
-  page to be consistent with that for \code{\link[spatstat]{intensity}}.  It is
+  page to be consistent with that for \code{\link[spatstat.geom]{intensity}}.  It is
   hoped that this will minimise or remove any confusion for users of both
   \pkg{spatstat} and \pkg{spherstat}. 
 }

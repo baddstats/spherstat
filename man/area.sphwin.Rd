@@ -23,11 +23,11 @@ Tom Lawrence <email:tjlawrence@bigpond.com>
 }
 \note{
   This function is the analogue for point processes on the sphere of the
-  function \code{\link[spatstat]{area.owin}} in \pkg{spatstat}, which is
+  function \code{\link[spatstat.geom]{area.owin}} in \pkg{spatstat}, which is
   the corresponding function for point processes in \eqn{R^2}. 
 }
 \seealso{
-  \code{\link{eroded.areas.sphwin}}, \code{\link[spatstat]{area.owin}}
+  \code{\link{eroded.areas.sphwin}}, \code{\link[spatstat.geom]{area.owin}}
 }
 \examples{
 sph <- sphwin(type="sphere")
